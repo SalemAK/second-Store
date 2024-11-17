@@ -7,7 +7,7 @@ const BannerEighteen = ({ spaceTopClass, spaceBottomClass }) => {
     return (
         <div
             className={clsx(
-                "banner-area banner-area-2",
+                "banner-area banner-area-2 container mt-2",
                 spaceTopClass,
                 spaceBottomClass
             )}

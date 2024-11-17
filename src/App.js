@@ -104,6 +104,8 @@ const Checkout = lazy(() => import("./pages/other/Checkout"));
 
 const NotFound = lazy(() => import("./pages/other/NotFound"));
 
+const CategoryPage = lazy(() => import("./pages/check/CategoryPage"));
+const BannersPage = lazy(() => import("./pages/check/BannersPage"));
 const App = () => {
     return (
         <Router>
@@ -122,6 +124,14 @@ const App = () => {
                         <Route
                             path={process.env.PUBLIC_URL + "/"}
                             element={<HomeFashion />}
+                        />
+                        <Route
+                            path={process.env.PUBLIC_URL + "/bannerspage"}
+                            element={<BannersPage />}
+                        />
+                        <Route
+                            path={process.env.PUBLIC_URL + "/categorypage"}
+                            element={<CategoryPage />}
                         />
 
                         {/* Homepages */}
@@ -317,7 +327,6 @@ const App = () => {
                             }
                             element={<HomeValentinesDay />}
                         />
-
                         {/* Shop pages */}
                         <Route
                             path={
@@ -325,40 +334,54 @@ const App = () => {
                             }
                             element={<ShopGridStandard />}
                         />
-                        {/*  
-              <Route
-                path={process.env.PUBLIC_URL + "/shop-grid-filter"}
-                element={<ShopGridFilter/>}
-              />
-              <Route
-                path={process.env.PUBLIC_URL + "/shop-grid-two-column"}
-                element={<ShopGridTwoColumn/>}
-              />
-              <Route
-                path={process.env.PUBLIC_URL + "/shop-grid-no-sidebar"}
-                element={<ShopGridNoSidebar/>}
-              />
-              <Route
-                path={process.env.PUBLIC_URL + "/shop-grid-full-width"}
-                element={<ShopGridFullWidth/>}
-              />
-              <Route
-                path={process.env.PUBLIC_URL + "/shop-grid-right-sidebar"}
-                element={<ShopGridRightSidebar/>}
-              />
-              <Route
-                path={process.env.PUBLIC_URL + "/shop-list-standard"}
-                element={<ShopListStandard/>}
-              />
-              <Route
-                path={process.env.PUBLIC_URL + "/shop-list-full-width"}
-                element={<ShopListFullWidth/>}
-              />
-              <Route
-                path={process.env.PUBLIC_URL + "/shop-list-two-column"}
-                element={<ShopListTwoColumn/>}
-              />*/}
 
+                        <Route
+                            path={process.env.PUBLIC_URL + "/shop-grid-filter"}
+                            element={<ShopGridFilter />}
+                        />
+                        <Route
+                            path={
+                                process.env.PUBLIC_URL + "/shop-grid-two-column"
+                            }
+                            element={<ShopGridTwoColumn />}
+                        />
+                        <Route
+                            path={
+                                process.env.PUBLIC_URL + "/shop-grid-no-sidebar"
+                            }
+                            element={<ShopGridNoSidebar />}
+                        />
+                        <Route
+                            path={
+                                process.env.PUBLIC_URL + "/shop-grid-full-width"
+                            }
+                            element={<ShopGridFullWidth />}
+                        />
+                        <Route
+                            path={
+                                process.env.PUBLIC_URL +
+                                "/shop-grid-right-sidebar"
+                            }
+                            element={<ShopGridRightSidebar />}
+                        />
+                        <Route
+                            path={
+                                process.env.PUBLIC_URL + "/shop-list-standard"
+                            }
+                            element={<ShopListStandard />}
+                        />
+                        <Route
+                            path={
+                                process.env.PUBLIC_URL + "/shop-list-full-width"
+                            }
+                            element={<ShopListFullWidth />}
+                        />
+                        <Route
+                            path={
+                                process.env.PUBLIC_URL + "/shop-list-two-column"
+                            }
+                            element={<ShopListTwoColumn />}
+                        />
                         {/* Shop product pages */}
                         <Route
                             path={process.env.PUBLIC_URL + "/product/:id"}
@@ -396,7 +419,6 @@ const App = () => {
                             }
                             element={<ProductFixedImage />}
                         />
-
                         {/* Blog pages */}
                         <Route
                             path={process.env.PUBLIC_URL + "/blog-standard"}
@@ -419,7 +441,6 @@ const App = () => {
                             }
                             element={<BlogDetailsStandard />}
                         />
-
                         {/* Other pages */}
                         <Route
                             path={process.env.PUBLIC_URL + "/about"}
@@ -437,7 +458,6 @@ const App = () => {
                             path={process.env.PUBLIC_URL + "/login-register"}
                             element={<LoginRegister />}
                         />
-
                         <Route
                             path={process.env.PUBLIC_URL + "/cart"}
                             element={<Cart />}
@@ -454,7 +474,6 @@ const App = () => {
                             path={process.env.PUBLIC_URL + "/checkout"}
                             element={<Checkout />}
                         />
-
                         <Route path="*" element={<NotFound />} />
                     </Routes>
                 </Suspense>

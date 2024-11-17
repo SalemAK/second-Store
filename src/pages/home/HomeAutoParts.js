@@ -7,6 +7,7 @@ import BannerEighteen from "../../wrappers/banner/BannerEighteen";
 import CountDownThree from "../../wrappers/countdown/CountDownThree";
 import FeatureIconFour from "../../wrappers/feature-icon/FeatureIconFour";
 import NewsletterThree from "../../wrappers/newsletter/NewsletterThree";
+import Category from "../../wrappers/category/Category";
 
 const HomeAutoParts = () => {
     return (
@@ -19,14 +20,14 @@ const HomeAutoParts = () => {
                 {/* banner */}
                 <BannerEighteen spaceBottomClass="pb-85" />
                 {/* hero slider */}
-                <HeroSliderTwentyOne />
+                {/* <HeroSliderTwentyOne /> */}
+                <Category spaceBottomClass="pb-85" />
                 {/* tab product */}
                 <TabProductThirteen
                     spaceBottomClass="pb-60"
                     spaceTopClass="pt-100"
                     category="auto parts"
                 />
-
                 {/* countdown */}
                 <CountDownThree
                     spaceBottomClass="pb-100"
