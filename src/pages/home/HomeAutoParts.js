@@ -8,6 +8,8 @@ import CountDownThree from "../../wrappers/countdown/CountDownThree";
 import FeatureIconFour from "../../wrappers/feature-icon/FeatureIconFour";
 import NewsletterThree from "../../wrappers/newsletter/NewsletterThree";
 import Category from "../../wrappers/category/Category";
+import BrandLogoSliderThree from "../../wrappers/brand-logo/BrandLogoSliderThree";
+import CategoryProductsHome from "../../wrappers/category/CategoryProductsHome";
 
 const HomeAutoParts = () => {
     return (
@@ -19,9 +21,14 @@ const HomeAutoParts = () => {
             <LayoutOne headerTop="visible">
                 {/* banner */}
                 <BannerEighteen spaceBottomClass="pb-85" />
-                {/* hero slider */}
-                {/* <HeroSliderTwentyOne /> */}
+                {/* <Categories /> */}
                 <Category spaceBottomClass="pb-85" />
+                {/* OUR Clients */}
+                <BrandLogoSliderThree spaceBottomClass="pb-85" />
+                <CategoryProductsHome
+                    spaceBottomClass="pb-85"
+                    categoryName="Electronics"
+                />
                 {/* tab product */}
                 <TabProductThirteen
                     spaceBottomClass="pb-60"

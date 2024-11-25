@@ -17,8 +17,8 @@
     }
     .banner-content {
         position: absolute;
-        top: 40px;
-        left: 36px;
+        top: 20px;
+        left: 16px;
 
         content: "";
         @media #{$lg-layout} {
@@ -30,7 +30,7 @@
             left: 15px;
         }
         @media #{$xs-layout} {
-            top: 50%;
+            top: 20%;
             left: 15px;
 
             transform: translateY(-50%);
@@ -55,7 +55,7 @@
             font-size: 18px;
             font-weight: 600;
 
-            margin: 3px 0 58px;
+            margin: 3px 0 18px;
 
             color: #010101;
             @media #{$lg-layout} {
@@ -107,7 +107,7 @@
         }
         &.banner-pink {
             a {
-                color: #ed59a0;
+                color: #7d64ee;
                 border: 2px solid #ed59a0;
                 &:hover {
                     color: $theme-color;
@@ -121,8 +121,8 @@
                 color: #1c1c1c;
             }
             a {
-                color: #c61a32;
-                border-color: #c61a32;
+                color: #1ac628;
+                border-color: #1127f0;
             }
         }
     }

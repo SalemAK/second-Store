@@ -1,0 +1,114 @@
+[
+    {
+        "id": 1,
+        "name": "Smartphone XYZ Pro",
+        "category": "Electronics",
+        "description": "A high-performance smartphone with the latest features.",
+        "image": "https://youmats-media.s3.me-central-1.amazonaws.com/52988/conversions/Heba-Pump-size_150_150.webp",
+        "link": "/home"
+    },
+    {
+        "id": 2,
+        "name": "Wireless Earbuds Alpha",
+        "category": "Electronics",
+        "description": "Compact and powerful wireless earbuds with noise cancellation.",
+        "image": "https://youmats-media.s3.me-central-1.amazonaws.com/52988/conversions/Heba-Pump-size_150_150.webp",
+        "link": "/home"
+    },
+    {
+        "id": 3,
+        "name": "4K Smart TV MegaView",
+        "category": "Electronics",
+        "description": "Experience ultra-high-definition viewing with smart connectivity.",
+        "image": "https://youmats-media.s3.me-central-1.amazonaws.com/97766/conversions/fire-pump-size_150_150.webp",
+        "link": "/home"
+    },
+    {
+        "id": 4,
+        "name": "Gaming Laptop Titan",
+        "category": "Electronics",
+        "description": "A powerful gaming laptop with advanced graphics and cooling.",
+        "image": "https://youmats-media.s3.me-central-1.amazonaws.com/97773/conversions/fire-pump-size_150_150.webp",
+        "link": "/home"
+    },
+    {
+        "id": 5,
+        "name": "Bluetooth Speaker BoomBass",
+        "category": "Electronics",
+        "description": "Portable Bluetooth speaker with deep bass and rich sound.",
+        "image": "https://youmats-media.s3.me-central-1.amazonaws.com/52945/conversions/HEBA15-size_150_150.webp",
+        "link": "/home"
+    },
+    {
+        "id": 6,
+        "name": "Digital Camera SnapPro",
+        "category": "Electronics",
+        "description": "High-resolution camera for capturing stunning photos.",
+        "image": "https://youmats-media.s3.me-central-1.amazonaws.com/52945/conversions/HEBA15-size_150_150.webp",
+        "link": "/home"
+    },
+    {
+        "id": 7,
+        "name": "Smartwatch TimeFlex",
+        "category": "Electronics",
+        "description": "A sleek smartwatch with fitness tracking and notifications.",
+        "image": "https://example.com/images/smartwatch_timeflex.jpg",
+        "link": "/home"
+    },
+    {
+        "id": 8,
+        "name": "Men's Leather Jacket",
+        "category": "Fashion",
+        "description": "Stylish leather jacket for men, perfect for any occasion.",
+        "image": "https://example.com/images/leather_jacket_men.jpg",
+        "link": "/home"
+    },
+    {
+        "id": 9,
+        "name": "Women's Summer Dress",
+        "category": "Fashion",
+        "description": "A light and breezy summer dress for women.",
+        "image": "https://example.com/images/summer_dress_women.jpg",
+        "link": "/home"
+    },
+    {
+        "id": 10,
+        "name": "Kids' Running Shoes",
+        "category": "Fashion",
+        "description": "Comfortable and durable running shoes for kids.",
+        "image": "https://example.com/images/kids_running_shoes.jpg",
+        "link": "/home"
+    },
+    {
+        "id": 11,
+        "name": "Unisex Sunglasses Trendy",
+        "category": "Fashion",
+        "description": "Trendy sunglasses suitable for everyone.",
+        "image": "https://example.com/images/sunglasses_trendy.jpg",
+        "link": "/home"
+    },
+    {
+        "id": 12,
+        "name": "Formal Shirt ClassicFit",
+        "category": "Fashion",
+        "description": "A classic-fit formal shirt for a sharp look.",
+        "image": "https://example.com/images/formal_shirt_classicfit.jpg",
+        "link": "/home"
+    },
+    {
+        "id": 13,
+        "name": "Casual Sneakers StreetVibe",
+        "category": "Fashion",
+        "description": "Casual sneakers with a stylish street vibe.",
+        "image": "https://example.com/images/casual_sneakers_streetvibe.jpg",
+        "link": "/home"
+    },
+    {
+        "id": 14,
+        "name": "Elegant Handbag LuxeStyle",
+        "category": "Fashion",
+        "description": "A luxurious handbag to complete your look.",
+        "image": "https://example.com/images/handbag_luxestyle.jpg",
+        "link": "/home"
+    }
+]

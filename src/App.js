@@ -103,9 +103,8 @@ const Compare = lazy(() => import("./pages/other/Compare"));
 const Checkout = lazy(() => import("./pages/other/Checkout"));
 
 const NotFound = lazy(() => import("./pages/other/NotFound"));
-
-const CategoryPage = lazy(() => import("./pages/check/CategoryPage"));
 const BannersPage = lazy(() => import("./pages/check/BannersPage"));
+
 const App = () => {
     return (
         <Router>
@@ -128,10 +127,6 @@ const App = () => {
                         <Route
                             path={process.env.PUBLIC_URL + "/bannerspage"}
                             element={<BannersPage />}
-                        />
-                        <Route
-                            path={process.env.PUBLIC_URL + "/categorypage"}
-                            element={<CategoryPage />}
                         />
 
                         {/* Homepages */}
