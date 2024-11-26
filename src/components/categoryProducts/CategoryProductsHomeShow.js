@@ -14,23 +14,23 @@ const CategoryProductsHomeShow = ({ data }) => {
                             {data.category}
                         </Link>
                     </div>
-                    <h5 className="mb-1 product-item__title">
+                    <h3 className="mb-1 product-item__title">
                         <Link
                             href={process.env.PUBLIC_URL + data.link}
                             className="text-primary fw-bold"
                         >
                             {data.name}
                         </Link>
-                    </h5>
+                    </h3>
                     <div className="mb-2">
                         <Link
                             to={process.env.PUBLIC_URL + data.link}
-                            className="d-block text-center"
+                            className="d-block"
                         >
                             <img
                                 src={process.env.PUBLIC_URL + data.image}
-                                alt=""
-                                className="img-fluid"
+                                alt={data.name}
+                                className="img-fluid my rounded"
                             />
                         </Link>
                     </div>

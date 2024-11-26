@@ -8,10 +8,10 @@ const CategoryPage = ({ data }) => {
             <img
                 src={process.env.PUBLIC_URL + data.image}
                 className="card-img"
-                alt={process.env.PUBLIC_URL + data.title}
+                alt={process.env.PUBLIC_URL + data.name}
             />
             <div className="content d-flex">
-                <h5 className="title">{process.env.PUBLIC_URL + data.title}</h5>
+                <h2 className="title">{process.env.PUBLIC_URL + data.name}</h2>
             </div>
         </Link>
     );

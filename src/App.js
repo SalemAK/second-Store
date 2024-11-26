@@ -42,7 +42,7 @@ const HomeOrganicFoodTwo = lazy(() =>
 );
 const HomeOnepageScroll = lazy(() => import("./pages/home/HomeOnepageScroll"));
 const HomeGridBanner = lazy(() => import("./pages/home/HomeGridBanner"));
-const HomeAutoParts = lazy(() => import("./pages/home/HomeAutoParts"));
+const HomePage = lazy(() => import("./pages/home/HomePage"));
 const HomeCakeShop = lazy(() => import("./pages/home/HomeCakeShop"));
 const HomeHandmade = lazy(() => import("./pages/home/HomeHandmade"));
 const HomePetFood = lazy(() => import("./pages/home/HomePetFood"));
@@ -122,7 +122,7 @@ const App = () => {
                     <Routes>
                         <Route
                             path={process.env.PUBLIC_URL + "/"}
-                            element={<HomeFashion />}
+                            element={<HomePage />}
                         />
                         <Route
                             path={process.env.PUBLIC_URL + "/bannerspage"}
@@ -279,8 +279,8 @@ const App = () => {
                             element={<HomeGridBanner />}
                         />
                         <Route
-                            path={process.env.PUBLIC_URL + "/home-auto-parts"}
-                            element={<HomeAutoParts />}
+                            path={process.env.PUBLIC_URL + "/home"}
+                            element={<HomePage />}
                         />
                         <Route
                             path={process.env.PUBLIC_URL + "/home-cake-shop"}

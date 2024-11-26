@@ -1,0 +1,65 @@
+[
+    {
+        "id": 1,
+        "name": "Electronics",
+        "description": "Innovative gadgets and devices to enhance your daily life.",
+        "image": "/assets/img/electronices.jpg",
+        "show": true
+    },
+    {
+        "id": 2,
+        "name": "Home Appliances",
+        "description": "Modern and efficient appliances for a smarter home.",
+        "image": "/assets/img/Home Appliances.jpg",
+        "show": true
+    },
+    {
+        "id": 3,
+        "name": "Fashion",
+        "description": "Trendy clothing and accessories to match your style.",
+        "image": "/assets/img/Fashion.jpg",
+        "show": true
+    },
+    {
+        "id": 4,
+        "name": "Outdoor Gear",
+        "description": "Essential equipment for your outdoor adventures.",
+        "image": "/assets/img/Outdoor Gear.jpg",
+        "show": false
+    },
+    {
+        "id": 5,
+        "name": "Beauty & Personal Care",
+        "description": "Premium products to keep you looking and feeling your best.",
+        "image": "/assets/img/Beauty & Personal Care.jpg",
+        "show": false
+    },
+    {
+        "id": 6,
+        "name": "KITCHEN",
+        "description": "Premium products to keep you looking and feeling your best.",
+        "image": "/assets/img/KITCHEN.jpg",
+        "show": false
+    },
+    {
+        "id": 7,
+        "name": "PAINTS",
+        "description": "Premium products to keep you looking and feeling your best.",
+        "image": "/assets/img/PAINTS.jpg",
+        "show": false
+    },
+    {
+        "id": 8,
+        "name": "BATHROOM",
+        "description": "Premium products to keep you looking and feeling your best.",
+        "image": "/assets/img/BATHROOM.jpg",
+        "show": false
+    },
+    {
+        "id": 9,
+        "name": "HARDWARE",
+        "description": "Premium products to keep you looking and feeling your best.",
+        "image": "/assets/img/HARDWARE.jpg",
+        "show": false
+    }
+]
