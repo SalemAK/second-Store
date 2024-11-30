@@ -1,21 +1,21 @@
-import { Fragment, useState, useEffect } from 'react';
-import Paginator from 'react-hooks-paginator';
+import { Fragment, useState, useEffect } from "react";
+import Paginator from "react-hooks-paginator";
 import { useSelector } from "react-redux";
-import { useLocation } from "react-router-dom"
-import { getSortedProducts } from '../../helpers/product';
+import { useLocation } from "react-router-dom";
+import { getSortedProducts } from "../../helpers/product";
 import SEO from "../../components/seo";
-import LayoutOne from '../../layouts/LayoutOne';
-import Breadcrumb from '../../wrappers/breadcrumb/Breadcrumb';
-import ShopSidebar from '../../wrappers/product/ShopSidebar';
-import ShopTopbar from '../../wrappers/product/ShopTopbar';
-import ShopProducts from '../../wrappers/product/ShopProducts';
+import LayoutOne from "../../layouts/LayoutOne";
+import Breadcrumb from "../../wrappers/breadcrumb/Breadcrumb";
+import ShopSidebar from "../../wrappers/product/ShopSidebar";
+import ShopTopbar from "../../wrappers/product/ShopTopbar";
+import ShopProducts from "../../wrappers/product/ShopProducts";
 
 const ShopGridStandard = () => {
-    const [layout, setLayout] = useState('grid three-column');
-    const [sortType, setSortType] = useState('');
-    const [sortValue, setSortValue] = useState('');
-    const [filterSortType, setFilterSortType] = useState('');
-    const [filterSortValue, setFilterSortValue] = useState('');
+    const [layout, setLayout] = useState("grid three-column");
+    const [sortType, setSortType] = useState("");
+    const [sortValue, setSortValue] = useState("");
+    const [filterSortType, setFilterSortType] = useState("");
+    const [filterSortValue, setFilterSortValue] = useState("");
     const [offset, setOffset] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const [currentData, setCurrentData] = useState([]);
@@ -26,26 +26,37 @@ const ShopGridStandard = () => {
     let { pathname } = useLocation();
 
     const getLayout = (layout) => {
-        setLayout(layout)
-    }
+        setLayout(layout);
+    };
 
     const getSortParams = (sortType, sortValue) => {
         setSortType(sortType);
         setSortValue(sortValue);
-    }
+    };
 
     const getFilterSortParams = (sortType, sortValue) => {
         setFilterSortType(sortType);
         setFilterSortValue(sortValue);
-    }
+    };
 
     useEffect(() => {
         let sortedProducts = getSortedProducts(products, sortType, sortValue);
-        const filterSortedProducts = getSortedProducts(sortedProducts, filterSortType, filterSortValue);
+        const filterSortedProducts = getSortedProducts(
+            sortedProducts,
+            filterSortType,
+            filterSortValue
+        );
         sortedProducts = filterSortedProducts;
         setSortedProducts(sortedProducts);
         setCurrentData(sortedProducts.slice(offset, offset + pageLimit));
-    }, [offset, products, sortType, sortValue, filterSortType, filterSortValue ]);
+    }, [
+        offset,
+        products,
+        sortType,
+        sortValue,
+        filterSortType,
+        filterSortValue,
+    ]);
 
     return (
         <Fragment>
@@ -56,11 +67,14 @@ const ShopGridStandard = () => {
 
             <LayoutOne headerTop="visible">
                 {/* breadcrumb */}
-                <Breadcrumb 
+                <Breadcrumb
                     pages={[
-                        {label: "Home", path: process.env.PUBLIC_URL + "/" },
-                        {label: "Shop", path: process.env.PUBLIC_URL + pathname }
-                    ]} 
+                        { label: "Home", path: process.env.PUBLIC_URL + "/" },
+                        {
+                            label: "Shop",
+                            path: process.env.PUBLIC_URL + pathname,
+                        },
+                    ]}
                 />
 
                 <div className="shop-area pt-95 pb-100">
@@ -68,14 +82,26 @@ const ShopGridStandard = () => {
                         <div className="row">
                             <div className="col-lg-3 order-2 order-lg-1">
                                 {/* shop sidebar */}
-                                <ShopSidebar products={products} getSortParams={getSortParams} sideSpaceClass="mr-30"/>
+                                <ShopSidebar
+                                    products={products}
+                                    getSortParams={getSortParams}
+                                    sideSpaceClass="mr-30"
+                                />
                             </div>
                             <div className="col-lg-9 order-1 order-lg-2">
                                 {/* shop topbar default */}
-                                <ShopTopbar getLayout={getLayout} getFilterSortParams={getFilterSortParams} productCount={products.length} sortedProductCount={currentData.length} />
+                                <ShopTopbar
+                                    getLayout={getLayout}
+                                    getFilterSortParams={getFilterSortParams}
+                                    productCount={products.length}
+                                    sortedProductCount={currentData.length}
+                                />
 
                                 {/* shop page content default */}
-                                <ShopProducts layout={layout} products={currentData} />
+                                <ShopProducts
+                                    layout={layout}
+                                    products={currentData}
+                                />
 
                                 {/* shop product pagination */}
                                 <div className="pro-pagination-style text-center mt-30">
@@ -97,8 +123,7 @@ const ShopGridStandard = () => {
                 </div>
             </LayoutOne>
         </Fragment>
-    )
-}
-
+    );
+};
 
 export default ShopGridStandard;
