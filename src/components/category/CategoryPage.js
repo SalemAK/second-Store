@@ -4,7 +4,10 @@ import { Link } from "react-router-dom";
 
 const CategoryPage = ({ data }) => {
     return (
-        <Link href={process.env.PUBLIC_URL + data.link} className="st_block">
+        <Link
+            to={`/shop-grid-standard?category=${data.name}`}
+            className="st_block"
+        >
             <img
                 src={process.env.PUBLIC_URL + data.image}
                 className="card-img"

@@ -13,7 +13,7 @@ const CategoryProductsHome = ({ spaceBottomClass }) => {
             {categoryData.map((category) => {
                 if (category.show) {
                     const filteredItems = itemsData
-                        .filter((item) => item.category === category.name)
+                        .filter((item) => item.category[0] === category.name)
                         .slice(0, 5);
                     return (
                         <div
@@ -25,7 +25,7 @@ const CategoryProductsHome = ({ spaceBottomClass }) => {
                                     {category.name}
                                 </h3>
                                 <Link
-                                    to={`/products/${category.id}`}
+                                    to={`/shop-grid-standard?category=${category.name}`}
                                     className="d-block text-gray-16"
                                 >
                                     Go To ALL PRODUCTS
@@ -35,7 +35,7 @@ const CategoryProductsHome = ({ spaceBottomClass }) => {
                             <div className="row rtl">
                                 <div className="col-12 col-md-2 ">
                                     <Link
-                                        to={`/products/${category.id}`}
+                                        to={`/shop-grid-standard?category=${category.name}`}
                                         className="d-block "
                                     >
                                         <img

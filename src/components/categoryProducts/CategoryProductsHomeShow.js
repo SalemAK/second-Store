@@ -8,15 +8,15 @@ const CategoryProductsHomeShow = ({ data }) => {
                 <div className="product-item__body pb-xl-2">
                     <div className="mb-2">
                         <Link
-                            to={process.env.PUBLIC_URL + data.link}
+                            to={`/shop-grid-standard?category=${data.category[0]}`}
                             className="h6 text-muted font-weight-bold"
                         >
-                            {data.category}
+                            {data.category[0]}
                         </Link>
                     </div>
                     <h3 className="mb-1 product-item__title">
                         <Link
-                            href={process.env.PUBLIC_URL + data.link}
+                            to={process.env.PUBLIC_URL + "/product/" + data.id}
                             className="text-primary fw-bold"
                         >
                             {data.name}
@@ -24,11 +24,11 @@ const CategoryProductsHomeShow = ({ data }) => {
                     </h3>
                     <div className="mb-2">
                         <Link
-                            to={process.env.PUBLIC_URL + data.link}
+                            to={process.env.PUBLIC_URL + "/product/" + data.id}
                             className="d-block"
                         >
                             <img
-                                src={process.env.PUBLIC_URL + data.image}
+                                src={process.env.PUBLIC_URL + data.image[0]}
                                 alt={data.name}
                                 className="img-fluid my rounded"
                             />

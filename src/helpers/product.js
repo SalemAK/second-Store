@@ -226,7 +226,14 @@ export const setActiveSort = (e, getSortParams) => {
 
     // If the clicked button is "All Categories" and already active, do nothing
     if (e.currentTarget.classList.contains("all-categories")) {
-        return; // Prevent unchecking "All Categories"
+        if (!e.currentTarget.classList.contains("active")) {
+            filterButtons.forEach((item) => {
+                item.classList.remove("active");
+            });
+            allCategoriesButton.classList.add("active");
+            getSortParams("category", ""); // Reset the category filter to show all products
+            return;
+        } // Prevent unchecking "All Categories"
     }
 
     // If the clicked button already has the "active" class, remove it

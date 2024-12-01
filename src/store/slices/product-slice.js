@@ -1,14 +1,14 @@
-const { createSlice } = require('@reduxjs/toolkit');
+const { createSlice } = require("@reduxjs/toolkit");
 
 const productSlice = createSlice({
-    name: 'product',
+    name: "product",
     initialState: {
         products: [],
     },
     reducers: {
         setProducts(state, action) {
             state.products = action.payload;
-        }
+        },
     },
 });
 

@@ -1,7 +1,13 @@
 import PropTypes from "prop-types";
 import { setActiveSort } from "../../helpers/product";
+import { useLocation } from "react-router-dom";
+import clsx from "clsx";
 
 const ShopCategories = ({ categories = [], getSortParams }) => {
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
+    const activeCategory = searchParams.get("category");
+
     return (
         <div className="sidebar-widget">
             <h4 className="pro-sidebar-title">Categories</h4>
@@ -11,9 +17,11 @@ const ShopCategories = ({ categories = [], getSortParams }) => {
                         <li>
                             <div className="sidebar-widget-list-left">
                                 <button
-                                    className="all-categories active"
+                                    className={clsx("all-categories", {
+                                        active: !activeCategory,
+                                    })}
                                     onClick={(e) => {
-                                        setActiveSort(e, getSortParams); // Pass getSortParams here
+                                        setActiveSort(e, getSortParams);
                                     }}
                                 >
                                     <span className="checkmark" />
@@ -25,8 +33,11 @@ const ShopCategories = ({ categories = [], getSortParams }) => {
                             <li key={key}>
                                 <div className="sidebar-widget-list-left">
                                     <button
+                                        className={clsx({
+                                            active: activeCategory === category,
+                                        })}
                                         onClick={(e) => {
-                                            setActiveSort(e, getSortParams); // Pass getSortParams here
+                                            setActiveSort(e, getSortParams);
                                         }}
                                     >
                                         <span className="checkmark" />

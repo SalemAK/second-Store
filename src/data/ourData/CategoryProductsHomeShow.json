@@ -1,182 +1,486 @@
 [
     {
         "id": 101,
+        "sku": "asdf123",
         "name": "Smartwatch X1",
-        "description": "A stylish smartwatch with health tracking and notifications.",
-        "category": "Electronics",
         "price": 199.99,
-        "color": "Black",
-        "image": "/assets/img/smartwatchX1.jpg",
-        "link": "/home"
+        "discount": 10,
+        "offerEnd": "October 5, 2024 12:11:00",
+        "new": false,
+        "rating": 4,
+        "saleCount": 54,
+        "category": ["Electronics", "Gadgets"],
+        "tag": ["electronics", "smartwatch", "health", "notifications"],
+        "variation": [
+            {
+                "color": "black",
+                "image": "/assets/img/smartwatchX1.jpg",
+                "size": [
+                    { "name": "S", "stock": 5 },
+                    { "name": "M", "stock": 3 },
+                    { "name": "L", "stock": 10 }
+                ]
+            }
+        ],
+        "image": [
+            "/assets/img/smartwatchX1.jpg",
+            "/assets/img/smartwatchX1_alt1.jpg",
+            "/assets/img/smartwatchX1_alt2.jpg"
+        ],
+        "shortDescription": "A stylish smartwatch with health tracking and notifications.",
+        "fullDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
     },
     {
         "id": 102,
+        "sku": "fakeSKU456",
         "name": "Wireless Earbuds Pro",
-        "description": "Noise-canceling earbuds with superior sound quality.",
-        "category": "Electronics",
         "price": 129.99,
-        "color": "White",
-        "image": "/assets/img/Wireless Earbuds Pro.jpg",
-        "link": "/home"
+        "discount": 5,
+        "offerEnd": "October 15, 2024 18:00:00",
+        "new": true,
+        "rating": 4.5,
+        "saleCount": 100,
+        "category": ["Electronics", "Audio"],
+        "tag": ["electronics", "audio", "earbuds", "noise-canceling"],
+        "variation": [
+            {
+                "color": "white",
+                "image": "/assets/img/Wireless Earbuds Pro.jpg",
+                "size": [
+                    { "name": "S", "stock": 8 },
+                    { "name": "M", "stock": 5 }
+                ]
+            }
+        ],
+        "image": [
+            "/assets/img/Wireless Earbuds Pro.jpg",
+            "/assets/img/Wireless Earbuds Pro_alt1.jpg"
+        ],
+        "shortDescription": "Noise-canceling earbuds with superior sound quality.",
+        "fullDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi."
     },
     {
         "id": 103,
+        "sku": "xyz789",
         "name": "Portable Charger 10k",
-        "description": "Compact power bank with fast charging capabilities.",
-        "category": "Electronics",
         "price": 39.99,
-        "color": "Gray",
-        "image": "/assets/img/Portable Charger.jpg",
-        "link": "/home"
+        "discount": 15,
+        "offerEnd": "November 1, 2024 12:00:00",
+        "new": true,
+        "rating": 4.2,
+        "saleCount": 150,
+        "category": ["Electronics", "Accessories"],
+        "tag": ["electronics", "portable charger", "power bank"],
+        "variation": [
+            {
+                "color": "gray",
+                "image": "/assets/img/Portable Charger.jpg",
+                "size": [{ "name": "M", "stock": 20 }]
+            }
+        ],
+        "image": [
+            "/assets/img/Portable Charger.jpg",
+            "/assets/img/Portable Charger_alt1.jpg"
+        ],
+        "shortDescription": "Compact power bank with fast charging capabilities.",
+        "fullDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam."
     },
     {
         "id": 104,
+        "sku": "bluetooth123",
         "name": "Bluetooth Speaker Z",
-        "description": "Waterproof speaker with exceptional bass.",
-        "category": "Electronics",
         "price": 89.99,
-        "color": "Blue",
-        "image": "/assets/img/Bluetooth Speaker .jpg",
-        "link": "/home"
+        "discount": 20,
+        "offerEnd": "October 20, 2024 15:00:00",
+        "new": false,
+        "rating": 4.7,
+        "saleCount": 300,
+        "category": ["Electronics", "Audio"],
+        "tag": ["electronics", "speaker", "bass", "waterproof"],
+        "variation": [
+            {
+                "color": "blue",
+                "image": "/assets/img/Bluetooth Speaker .jpg",
+                "size": [{ "name": "L", "stock": 10 }]
+            }
+        ],
+        "image": [
+            "/assets/img/Bluetooth Speaker .jpg",
+            "/assets/img/Bluetooth Speaker_alt1.jpg"
+        ],
+        "shortDescription": "Waterproof speaker with exceptional bass.",
+        "fullDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ut massa sit amet nulla venenatis elementum non in purus."
     },
     {
         "id": 105,
+        "sku": "actionCam321",
         "name": "4K Action Camera",
-        "description": "Capture adventures in stunning 4K resolution.",
-        "category": "Electronics",
         "price": 149.99,
-        "color": "Black",
-        "image": "/assets/img/4K Action Camera.jpg",
-        "link": "/home"
+        "discount": 0,
+        "offerEnd": "December 1, 2024 09:00:00",
+        "new": true,
+        "rating": 4.3,
+        "saleCount": 75,
+        "category": ["Electronics", "Cameras"],
+        "tag": ["electronics", "camera", "4K", "action camera"],
+        "variation": [
+            {
+                "color": "black",
+                "image": "/assets/img/4K Action Camera.jpg",
+                "size": [{ "name": "M", "stock": 12 }]
+            }
+        ],
+        "image": [
+            "/assets/img/4K Action Camera.jpg",
+            "/assets/img/4K Action Camera_alt1.jpg"
+        ],
+        "shortDescription": "Capture adventures in stunning 4K resolution.",
+        "fullDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus faucibus quam ac risus gravida fermentum."
     },
     {
         "id": 106,
+        "sku": "vrHeadset567",
         "name": "VR Headset Elite",
-        "description": "Immersive virtual reality headset with high-resolution display.",
-        "category": "Electronics",
         "price": 299.99,
-        "color": "White",
-        "image": "https://via.placeholder.com/600x800",
-        "link": "/home"
+        "discount": 25,
+        "offerEnd": "November 30, 2024 17:00:00",
+        "new": true,
+        "rating": 5,
+        "saleCount": 30,
+        "category": ["Electronics", "VR"],
+        "tag": ["electronics", "vr headset", "virtual reality"],
+        "variation": [
+            {
+                "color": "white",
+                "image": "https://via.placeholder.com/600x800",
+                "size": [{ "name": "M", "stock": 10 }]
+            }
+        ],
+        "image": [
+            "https://via.placeholder.com/600x800",
+            "https://via.placeholder.com/600x801"
+        ],
+        "shortDescription": "Immersive virtual reality headset with high-resolution display.",
+        "fullDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque volutpat augue ac lectus dapibus, vitae laoreet ex interdum."
     },
     {
         "id": 201,
+        "sku": "apCleanAir",
         "name": "Air Purifier Plus",
-        "description": "Advanced filtration system for cleaner air.",
-        "category": "Home Appliances",
         "price": 179.99,
-        "color": "White",
-        "image": "/assets/img/Air Purifier Plus.jpg",
-        "link": "/home"
+        "discount": 5,
+        "offerEnd": "October 1, 2024 18:00:00",
+        "new": true,
+        "rating": 4.6,
+        "saleCount": 250,
+        "category": ["Home Appliances", "Air Purifiers"],
+        "tag": ["home appliances", "air purifier", "clean air"],
+        "variation": [
+            {
+                "color": "white",
+                "image": "/assets/img/Air Purifier Plus.jpg",
+                "size": [{ "name": "L", "stock": 15 }]
+            }
+        ],
+        "image": [
+            "/assets/img/Air Purifier Plus.jpg",
+            "/assets/img/Air Purifier Plus_alt1.jpg"
+        ],
+        "shortDescription": "Advanced filtration system for cleaner air.",
+        "fullDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras gravida fermentum massa sit amet cursus."
     },
     {
         "id": 202,
+        "sku": "coffeeMaker202",
         "name": "Smart Coffee Maker",
-        "description": "Brews coffee with app control and scheduling.",
-        "category": "Home Appliances",
         "price": 129.99,
-        "color": "Black",
-        "image": "/assets/img/Smart Coffee Maker.jpg",
-        "link": "/home"
+        "discount": 0,
+        "offerEnd": "December 15, 2024 12:00:00",
+        "new": true,
+        "rating": 4.5,
+        "saleCount": 25,
+        "category": ["Home Appliances"],
+        "tag": ["coffee", "smart", "appliances", "kitchen"],
+        "variation": [
+            {
+                "color": "Black",
+                "image": "/assets/img/Smart Coffee Maker.jpg",
+                "size": [{ "name": "One Size", "stock": 10 }]
+            }
+        ],
+        "image": [
+            "/assets/img/Smart Coffee Maker.jpg",
+            "/assets/img/Smart Coffee Maker_alt1.jpg"
+        ],
+        "shortDescription": "Brews coffee with app control and scheduling.",
+        "fullDescription": "This coffee maker allows you to brew coffee remotely through an app and set up schedules for brewing times. Perfect for busy mornings or coffee lovers who want convenience at their fingertips."
     },
     {
         "id": 203,
+        "sku": "vacuumX203",
         "name": "Cordless Vacuum X",
-        "description": "Lightweight vacuum with powerful suction.",
-        "category": "Home Appliances",
         "price": 249.99,
-        "color": "Red",
-        "image": "/assets/img/Cordless Vacuum X.jpg",
-        "link": "/home"
+        "discount": 10,
+        "offerEnd": "November 30, 2024 18:00:00",
+        "new": false,
+        "rating": 4.7,
+        "saleCount": 150,
+        "category": ["Home Appliances"],
+        "tag": ["vacuum", "cordless", "suction", "cleaning"],
+        "variation": [
+            {
+                "color": "Red",
+                "image": "/assets/img/Cordless Vacuum X.jpg",
+                "size": [{ "name": "One Size", "stock": 30 }]
+            }
+        ],
+        "image": [
+            "/assets/img/Cordless Vacuum X.jpg",
+            "/assets/img/Cordless Vacuum X_alt1.jpg"
+        ],
+        "shortDescription": "Lightweight vacuum with powerful suction.",
+        "fullDescription": "This powerful cordless vacuum cleaner is designed for effortless cleaning with strong suction, long battery life, and a lightweight build perfect for daily use."
     },
     {
         "id": 204,
+        "sku": "kettlePrime204",
         "name": "Electric Kettle Prime",
-        "description": "Quick heating kettle with temperature settings.",
-        "category": "Home Appliances",
         "price": 59.99,
-        "color": "Silver",
-        "image": "/assets/img/Electric Kettle Prime.jpg",
-        "link": "/home"
+        "discount": 0,
+        "offerEnd": "December 1, 2024 09:00:00",
+        "new": true,
+        "rating": 4.2,
+        "saleCount": 75,
+        "category": ["Home Appliances"],
+        "tag": ["kettle", "electric", "kitchen", "temperature"],
+        "variation": [
+            {
+                "color": "Silver",
+                "image": "/assets/img/Electric Kettle Prime.jpg",
+                "size": [{ "name": "One Size", "stock": 50 }]
+            }
+        ],
+        "image": [
+            "/assets/img/Electric Kettle Prime.jpg",
+            "/assets/img/Electric Kettle Prime_alt1.jpg"
+        ],
+        "shortDescription": "Quick heating kettle with temperature settings.",
+        "fullDescription": "This electric kettle offers fast boiling with adjustable temperature settings, perfect for your tea, coffee, or other beverages."
     },
     {
         "id": 205,
+        "sku": "robotVacuum205",
         "name": "Smart Robot Vacuum",
-        "description": "Automatic vacuum cleaner with mapping feature.",
-        "category": "Home Appliances",
         "price": 399.99,
-        "color": "Gray",
-        "image": "/assets/img/Smart Robot Vacuum.jpg",
-        "link": "/home"
+        "discount": 20,
+        "offerEnd": "November 25, 2024 10:00:00",
+        "new": true,
+        "rating": 4.8,
+        "saleCount": 200,
+        "category": ["Home Appliances"],
+        "tag": ["vacuum", "robot", "smart", "cleaning"],
+        "variation": [
+            {
+                "color": "Gray",
+                "image": "/assets/img/Smart Robot Vacuum.jpg",
+                "size": [{ "name": "One Size", "stock": 40 }]
+            }
+        ],
+        "image": [
+            "/assets/img/Smart Robot Vacuum.jpg",
+            "/assets/img/Smart Robot Vacuum_alt1.jpg"
+        ],
+        "shortDescription": "Automatic vacuum cleaner with mapping feature.",
+        "fullDescription": "This smart robot vacuum uses advanced mapping and sensor technology to automatically clean your floors with minimal intervention, making it perfect for busy households."
     },
     {
         "id": 206,
+        "sku": "fanDeluxe206",
         "name": "Portable Fan Deluxe",
-        "description": "Rechargeable fan with adjustable speed settings.",
-        "category": "Home Appliances",
         "price": 49.99,
-        "color": "Blue",
-        "image": "https://via.placeholder.com/600x800",
-        "link": "/home"
+        "discount": 0,
+        "offerEnd": "December 31, 2024 23:59:59",
+        "new": true,
+        "rating": 4.3,
+        "saleCount": 100,
+        "category": ["Home Appliances"],
+        "tag": ["fan", "portable", "cooling", "summer"],
+        "variation": [
+            {
+                "color": "Blue",
+                "image": "https://via.placeholder.com/600x800",
+                "size": [{ "name": "One Size", "stock": 80 }]
+            }
+        ],
+        "image": [
+            "https://via.placeholder.com/600x800",
+            "https://via.placeholder.com/600x801"
+        ],
+        "shortDescription": "Rechargeable fan with adjustable speed settings.",
+        "fullDescription": "Stay cool wherever you go with this portable fan. It comes with adjustable speed settings and a rechargeable battery, perfect for both indoor and outdoor use."
     },
     {
         "id": 301,
+        "sku": "leatherJacket301",
         "name": "Leather Jacket Supreme",
-        "description": "Premium leather jacket with stylish design.",
-        "category": "Fashion",
         "price": 249.99,
-        "color": "Brown",
-        "image": "/assets/img/Leather Jacket Supreme.jpg",
-        "link": "/home"
+        "discount": 15,
+        "offerEnd": "November 15, 2024 17:00:00",
+        "new": false,
+        "rating": 4.9,
+        "saleCount": 120,
+        "category": ["Fashion"],
+        "tag": ["jacket", "leather", "fashion", "premium"],
+        "variation": [
+            {
+                "color": "Brown",
+                "image": "/assets/img/Leather Jacket Supreme.jpg",
+                "size": [
+                    { "name": "M", "stock": 15 },
+                    { "name": "L", "stock": 10 },
+                    { "name": "XL", "stock": 5 }
+                ]
+            }
+        ],
+        "image": [
+            "/assets/img/Leather Jacket Supreme.jpg",
+            "/assets/img/Leather Jacket Supreme_alt1.jpg"
+        ],
+        "shortDescription": "Premium leather jacket with stylish design.",
+        "fullDescription": "A high-quality leather jacket with a stylish design that combines fashion and durability, making it a timeless piece in any wardrobe."
     },
     {
         "id": 302,
+        "sku": "shoesFlex302",
         "name": "Running Shoes Flex",
-        "description": "Lightweight and durable running shoes.",
-        "category": "Fashion",
         "price": 119.99,
-        "color": "Black",
-        "image": "/assets/img/Running Shoes Flex.jpg",
-        "link": "/home"
+        "discount": 5,
+        "offerEnd": "December 1, 2024 12:00:00",
+        "new": true,
+        "rating": 4.6,
+        "saleCount": 200,
+        "category": ["Fashion"],
+        "tag": ["shoes", "running", "fitness", "sport"],
+        "variation": [
+            {
+                "color": "Black",
+                "image": "/assets/img/Running Shoes Flex.jpg",
+                "size": [
+                    { "name": "S", "stock": 20 },
+                    { "name": "M", "stock": 25 },
+                    { "name": "L", "stock": 30 }
+                ]
+            }
+        ],
+        "image": [
+            "/assets/img/Running Shoes Flex.jpg",
+            "/assets/img/Running Shoes Flex_alt1.jpg"
+        ],
+        "shortDescription": "Lightweight and durable running shoes.",
+        "fullDescription": "These running shoes are designed for comfort, durability, and support, making them perfect for both professional athletes and casual runners."
     },
     {
         "id": 303,
+        "sku": "aviatorSunglasses303",
         "name": "Sunglasses Aviator",
-        "description": "Classic aviator sunglasses with UV protection.",
-        "category": "Fashion",
         "price": 79.99,
-        "color": "Gold",
-        "image": "/assets/img/Sunglasses Aviator.jpg",
-        "link": "/home"
+        "discount": 0,
+        "offerEnd": "December 10, 2024 09:00:00",
+        "new": true,
+        "rating": 4.8,
+        "saleCount": 50,
+        "category": ["Fashion"],
+        "tag": ["sunglasses", "aviator", "fashion", "protection"],
+        "variation": [
+            {
+                "color": "Gold",
+                "image": "/assets/img/Sunglasses Aviator.jpg",
+                "size": [{ "name": "One Size", "stock": 100 }]
+            }
+        ],
+        "image": [
+            "/assets/img/Sunglasses Aviator.jpg",
+            "/assets/img/Sunglasses Aviator_alt1.jpg"
+        ],
+        "shortDescription": "Classic aviator sunglasses with UV protection.",
+        "fullDescription": "A timeless style in sunglasses, these aviator glasses offer UV protection and a sleek look that pairs well with any outfit."
     },
     {
         "id": 304,
+        "sku": "luxuryWatch304",
         "name": "Luxury Watch Diamond",
-        "description": "Elegant watch with diamond accents.",
-        "category": "Fashion",
         "price": 499.99,
-        "color": "Silver",
-        "image": "/assets/img/Luxury Watch Diamond.jpg",
-        "link": "/home"
+        "discount": 10,
+        "offerEnd": "December 31, 2024 23:59:59",
+        "new": true,
+        "rating": 5.0,
+        "saleCount": 50,
+        "category": ["Fashion", "Accessories"],
+        "tag": ["watch", "luxury", "diamond", "elegant"],
+        "variation": [
+            {
+                "color": "Silver",
+                "image": "/assets/img/Luxury Watch Diamond.jpg",
+                "size": [{ "name": "One Size", "stock": 20 }]
+            }
+        ],
+        "image": [
+            "/assets/img/Luxury Watch Diamond.jpg",
+            "/assets/img/Luxury Watch Diamond_alt1.jpg"
+        ],
+        "shortDescription": "Elegant watch with diamond accents.",
+        "fullDescription": "This luxury watch features dazzling diamond accents and a classic, timeless design, making it the perfect accessory for any elegant occasion."
     },
     {
         "id": 305,
+        "sku": "backpackPro305",
         "name": "Backpack Pro",
-        "description": "Spacious and ergonomic backpack for all occasions.",
-        "category": "Fashion",
         "price": 89.99,
-        "color": "Green",
-        "image": "/assets/img/Backpack Pro.jpg",
-        "link": "/home"
+        "discount": 5,
+        "offerEnd": "December 15, 2024 12:00:00",
+        "new": false,
+        "rating": 4.6,
+        "saleCount": 120,
+        "category": ["Fashion", "Bags"],
+        "tag": ["backpack", "fashion", "ergonomic", "spacious"],
+        "variation": [
+            {
+                "color": "Green",
+                "image": "/assets/img/Backpack Pro.jpg",
+                "size": [{ "name": "One Size", "stock": 35 }]
+            }
+        ],
+        "image": [
+            "/assets/img/Backpack Pro.jpg",
+            "/assets/img/Backpack Pro_alt1.jpg"
+        ],
+        "shortDescription": "Spacious and ergonomic backpack for all occasions.",
+        "fullDescription": "Designed for both functionality and style, this backpack is spacious, ergonomic, and perfect for all your daily needs, whether for work, school, or travel."
     },
     {
         "id": 306,
+        "sku": "woolScarf306",
         "name": "Wool Scarf Premium",
-        "description": "Warm and cozy wool scarf.",
-        "category": "Fashion",
         "price": 39.99,
-        "color": "Gray",
-        "image": "https://via.placeholder.com/600x800",
-        "link": "/home"
+        "discount": 0,
+        "offerEnd": "December 10, 2024 10:00:00",
+        "new": true,
+        "rating": 4.4,
+        "saleCount": 80,
+        "category": ["Fashion", "Accessories"],
+        "tag": ["scarf", "wool", "fashion", "premium"],
+        "variation": [
+            {
+                "color": "Gray",
+                "image": "https://via.placeholder.com/600x800",
+                "size": [{ "name": "One Size", "stock": 50 }]
+            }
+        ],
+        "image": [
+            "https://via.placeholder.com/600x800",
+            "https://via.placeholder.com/600x801"
+        ],
+        "shortDescription": "Warm and cozy wool scarf.",
+        "fullDescription": "Made from premium wool, this scarf offers unmatched warmth and comfort, making it the perfect accessory for cold weather."
     }
 ]
