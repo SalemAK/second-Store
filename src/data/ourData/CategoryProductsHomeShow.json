@@ -3,7 +3,7 @@
         "id": 101,
         "sku": "asdf123",
         "name": "Smartwatch X1",
-        "price": 199.99,
+        "price": 0,
         "discount": 10,
         "offerEnd": "October 5, 2024 12:11:00",
         "new": false,
@@ -16,9 +16,9 @@
                 "color": "black",
                 "image": "/assets/img/smartwatchX1.jpg",
                 "size": [
-                    { "name": "S", "stock": 5 },
-                    { "name": "M", "stock": 3 },
-                    { "name": "L", "stock": 10 }
+                    { "name": "S", "stock": 5, "price": 20 },
+                    { "name": "M", "stock": 3, "price": 50 },
+                    { "name": "L", "stock": 10, "price": 100 }
                 ]
             }
         ],
@@ -47,8 +47,8 @@
                 "color": "white",
                 "image": "/assets/img/Wireless Earbuds Pro.jpg",
                 "size": [
-                    { "name": "S", "stock": 8 },
-                    { "name": "M", "stock": 5 }
+                    { "name": "S", "stock": 8, "price": 20 },
+                    { "name": "M", "stock": 5, "price": 30 }
                 ]
             }
         ],
@@ -75,7 +75,7 @@
             {
                 "color": "gray",
                 "image": "/assets/img/Portable Charger.jpg",
-                "size": [{ "name": "M", "stock": 20 }]
+                "size": [{ "name": "2000AM", "stock": 20 }]
             }
         ],
         "image": [

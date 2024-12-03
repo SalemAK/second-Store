@@ -1,0 +1,19 @@
+{
+    "riyadh": { "shippingCost": 10, "taxRate": 0.15 },
+    "mecca": { "shippingCost": 12, "taxRate": 0.15 },
+    "medina": { "shippingCost": 11, "taxRate": 0.15 },
+    "eastern_province": { "shippingCost": 15, "taxRate": 0.15 },
+    "asir": { "shippingCost": 14, "taxRate": 0.15 },
+    "tabuk": { "shippingCost": 13, "taxRate": 0.15 },
+    "al_bahah": { "shippingCost": 16, "taxRate": 0.15 },
+    "jouf": { "shippingCost": 17, "taxRate": 0.15 },
+    "najran": { "shippingCost": 18, "taxRate": 0.15 },
+    "hail": { "shippingCost": 13, "taxRate": 0.15 },
+    "qassim": { "shippingCost": 14, "taxRate": 0.15 },
+    "northern_border": { "shippingCost": 20, "taxRate": 0.15 },
+    "jizan": { "shippingCost": 19, "taxRate": 0.15 },
+    "wayel": { "shippingCost": 15, "taxRate": 0.15 },
+    "al_qassim": { "shippingCost": 14, "taxRate": 0.15 },
+    "makkah": { "shippingCost": 16, "taxRate": 0.15 },
+    "madinah": { "shippingCost": 14, "taxRate": 0.15 }
+}
