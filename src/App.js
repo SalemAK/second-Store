@@ -85,53 +85,6 @@ const App = () => {
                             element={<ShopGridStandard />}
                         />
 
-                        <Route
-                            path={process.env.PUBLIC_URL + "/shop-grid-filter"}
-                            element={<ShopGridFilter />}
-                        />
-                        <Route
-                            path={
-                                process.env.PUBLIC_URL + "/shop-grid-two-column"
-                            }
-                            element={<ShopGridTwoColumn />}
-                        />
-                        <Route
-                            path={
-                                process.env.PUBLIC_URL + "/shop-grid-no-sidebar"
-                            }
-                            element={<ShopGridNoSidebar />}
-                        />
-                        <Route
-                            path={
-                                process.env.PUBLIC_URL + "/shop-grid-full-width"
-                            }
-                            element={<ShopGridFullWidth />}
-                        />
-                        <Route
-                            path={
-                                process.env.PUBLIC_URL +
-                                "/shop-grid-right-sidebar"
-                            }
-                            element={<ShopGridRightSidebar />}
-                        />
-                        <Route
-                            path={
-                                process.env.PUBLIC_URL + "/shop-list-standard"
-                            }
-                            element={<ShopListStandard />}
-                        />
-                        <Route
-                            path={
-                                process.env.PUBLIC_URL + "/shop-list-full-width"
-                            }
-                            element={<ShopListFullWidth />}
-                        />
-                        <Route
-                            path={
-                                process.env.PUBLIC_URL + "/shop-list-two-column"
-                            }
-                            element={<ShopListTwoColumn />}
-                        />
                         {/* Shop product pages */}
                         <Route
                             path={process.env.PUBLIC_URL + "/product/:id"}
