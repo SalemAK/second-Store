@@ -8,6 +8,9 @@ import { addToCart } from "../../store/slices/cart-slice";
 import { addToWishlist } from "../../store/slices/wishlist-slice";
 import { addToCompare } from "../../store/slices/compare-slice";
 import { getDiscountPrice } from "../../helpers/product";
+import { FaCodeCompare } from "react-icons/fa6";
+import { FaHeart } from "react-icons/fa";
+
 const ProductDescriptionInfo = ({
     product,
     // discountedPrice,
@@ -60,14 +63,19 @@ const ProductDescriptionInfo = ({
                 {discountedPrice !== null ? (
                     <Fragment>
                         <span>
-                            {currency.currencySymbol + finalDiscountedPrice}
-                        </span>{" "}
+                            {currency.currencySymbol +
+                                " " +
+                                finalDiscountedPrice}
+                        </span>
+                        <span className="fw-bold">{"-"}</span>
                         <span className="old">
-                            {currency.currencySymbol + finalProductPrice}
+                            {currency.currencySymbol + " " + finalProductPrice}
                         </span>
                     </Fragment>
                 ) : (
-                    <span>{currency.currencySymbol + finalProductPrice} </span>
+                    <span>
+                        {currency.currencySymbol + " " + finalProductPrice}{" "}
+                    </span>
                 )}
             </div>
             {/* {product.rating && product.rating > 0 ? (
@@ -266,7 +274,6 @@ const ProductDescriptionInfo = ({
                             className={
                                 wishlistItem !== undefined ? "active" : ""
                             }
-                            disabled={wishlistItem !== undefined}
                             title={
                                 wishlistItem !== undefined
                                     ? "Added to wishlist"
@@ -274,7 +281,7 @@ const ProductDescriptionInfo = ({
                             }
                             onClick={() => dispatch(addToWishlist(product))}
                         >
-                            <i className="pe-7s-like" />
+                            <FaHeart />
                         </button>
                     </div>
                     <div className="pro-details-compare">
@@ -282,7 +289,6 @@ const ProductDescriptionInfo = ({
                             className={
                                 compareItem !== undefined ? "active" : ""
                             }
-                            disabled={compareItem !== undefined}
                             title={
                                 compareItem !== undefined
                                     ? "Added to compare"
@@ -290,7 +296,7 @@ const ProductDescriptionInfo = ({
                             }
                             onClick={() => dispatch(addToCompare(product))}
                         >
-                            <i className="pe-7s-shuffle" />
+                            <FaCodeCompare />
                         </button>
                     </div>
                 </div>
@@ -318,7 +324,7 @@ const ProductDescriptionInfo = ({
             ) : (
                 ""
             )}
-            {product.tag ? (
+            {/* {product.tag ? (
                 <div className="pro-details-meta">
                     <span>Tags :</span>
                     <ul>
@@ -340,9 +346,9 @@ const ProductDescriptionInfo = ({
                 </div>
             ) : (
                 ""
-            )}
+            )} */}
 
-            <div className="pro-details-social">
+            {/* <div className="pro-details-social">
                 <ul>
                     <li>
                         <a href="//facebook.com">
@@ -370,7 +376,7 @@ const ProductDescriptionInfo = ({
                         </a>
                     </li>
                 </ul>
-            </div>
+            </div> */}
         </div>
     );
 };

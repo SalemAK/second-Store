@@ -10,7 +10,10 @@ import { addToCart } from "../../store/slices/cart-slice";
 import { addToWishlist } from "../../store/slices/wishlist-slice";
 import { addToCompare } from "../../store/slices/compare-slice";
 import { getDiscountPrice } from "../../helpers/product";
-
+import { FaCodeCompare } from "react-icons/fa6";
+import { FaHeart } from "react-icons/fa";
+<FaHeart />;
+<FaCodeCompare />;
 function ProductModal({
     product,
     currency,
@@ -151,16 +154,20 @@ function ProductModal({
                                     <Fragment>
                                         <span>
                                             {currency.currencySymbol +
+                                                " " +
                                                 finalDiscountedPrice}
-                                        </span>{" "}
+                                        </span>
+                                        <span className="fw-bold">{"-"}</span>
                                         <span className="old">
                                             {currency.currencySymbol +
+                                                " " +
                                                 finalProductPrice}
                                         </span>
                                     </Fragment>
                                 ) : (
                                     <span>
                                         {currency.currencySymbol +
+                                            " " +
                                             finalProductPrice}{" "}
                                     </span>
                                 )}
@@ -390,19 +397,16 @@ function ProductModal({
                                                     ? "active"
                                                     : ""
                                             }
-                                            disabled={
-                                                wishlistItem !== undefined
-                                            }
                                             title={
                                                 wishlistItem !== undefined
-                                                    ? "Added to wishlist"
+                                                    ? "Remove from wishlist"
                                                     : "Add to wishlist"
                                             }
                                             onClick={() =>
                                                 dispatch(addToWishlist(product))
                                             }
                                         >
-                                            <i className="pe-7s-like" />
+                                            <FaHeart />
                                         </button>
                                     </div>
                                     <div className="pro-details-compare">
@@ -412,17 +416,16 @@ function ProductModal({
                                                     ? "active"
                                                     : ""
                                             }
-                                            disabled={compareItem !== undefined}
                                             title={
                                                 compareItem !== undefined
-                                                    ? "Added to compare"
+                                                    ? "Remove from compare"
                                                     : "Add to compare"
                                             }
                                             onClick={() =>
                                                 dispatch(addToCompare(product))
                                             }
                                         >
-                                            <i className="pe-7s-shuffle" />
+                                            <FaCodeCompare />
                                         </button>
                                     </div>
                                 </div>

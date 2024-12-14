@@ -1,12 +1,31 @@
 import PropTypes from "prop-types";
 import { setActiveSort } from "../../helpers/product";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom"; // Import useNavigate
 import clsx from "clsx";
 
 const ShopCategories = ({ categories = [], getSortParams }) => {
     const location = useLocation();
+    const navigate = useNavigate(); // Initialize navigate
     const searchParams = new URLSearchParams(location.search);
     const activeCategory = searchParams.get("category");
+
+    const handleCategoryClick = (category, e) => {
+        const newSearchParams = new URLSearchParams(location.search);
+
+        if (category) {
+            // Set the category filter in the query string
+            newSearchParams.set("category", category);
+        } else {
+            // Remove the category filter if "All Categories" is clicked
+            newSearchParams.delete("category");
+        }
+
+        // Update the URL with the new query string
+        navigate({ search: newSearchParams.toString() });
+
+        // Call setActiveSort function (handle active state for buttons)
+        setActiveSort(e, getSortParams, newSearchParams, navigate);
+    };
 
     return (
         <div className="sidebar-widget">
@@ -18,11 +37,9 @@ const ShopCategories = ({ categories = [], getSortParams }) => {
                             <div className="sidebar-widget-list-left">
                                 <button
                                     className={clsx("all-categories", {
-                                        active: !activeCategory,
+                                        active: !activeCategory, // Active if no category is selected
                                     })}
-                                    onClick={(e) => {
-                                        setActiveSort(e, getSortParams);
-                                    }}
+                                    onClick={(e) => handleCategoryClick("", e)} // Handle All Categories click
                                 >
                                     <span className="checkmark" />
                                     All Categories
@@ -34,11 +51,11 @@ const ShopCategories = ({ categories = [], getSortParams }) => {
                                 <div className="sidebar-widget-list-left">
                                     <button
                                         className={clsx({
-                                            active: activeCategory === category,
+                                            active: activeCategory === category, // Mark the active category
                                         })}
-                                        onClick={(e) => {
-                                            setActiveSort(e, getSortParams);
-                                        }}
+                                        onClick={(e) =>
+                                            handleCategoryClick(category, e)
+                                        } // Handle individual category click
                                     >
                                         <span className="checkmark" />
                                         {category}
@@ -56,8 +73,8 @@ const ShopCategories = ({ categories = [], getSortParams }) => {
 };
 
 ShopCategories.propTypes = {
-    categories: PropTypes.array.isRequired, // Make categories required
-    getSortParams: PropTypes.func.isRequired, // Ensure getSortParams is required
+    categories: PropTypes.array.isRequired,
+    getSortParams: PropTypes.func.isRequired,
 };
 
 export default ShopCategories;

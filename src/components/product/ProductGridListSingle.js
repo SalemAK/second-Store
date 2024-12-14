@@ -9,6 +9,8 @@ import ProductModal from "./ProductModal";
 import { addToCart } from "../../store/slices/cart-slice";
 import { addToWishlist } from "../../store/slices/wishlist-slice";
 import { addToCompare } from "../../store/slices/compare-slice";
+import { FaCodeCompare } from "react-icons/fa6";
+import { FaHeart } from "react-icons/fa";
 
 const ProductGridListSingle = ({
     product,
@@ -83,7 +85,6 @@ const ProductGridListSingle = ({
                                 className={
                                     wishlistItem !== undefined ? "active" : ""
                                 }
-                                disabled={wishlistItem !== undefined}
                                 title={
                                     wishlistItem !== undefined
                                         ? "Added to wishlist"
@@ -197,6 +198,7 @@ const ProductGridListSingle = ({
                     </div>
                 </div>
             </div>
+            {/* filter 3rd product + price + small description */}
             <div className="shop-list-wrap mb-30">
                 <div className="row">
                     <div className="col-xl-4 col-md-5 col-sm-6">
@@ -269,21 +271,25 @@ const ProductGridListSingle = ({
                                     <Fragment>
                                         <span>
                                             {currency.currencySymbol +
+                                                " " +
                                                 finalDiscountedPrice}
-                                        </span>{" "}
+                                        </span>
+                                        <span className="fw-bold">{"-"}</span>
                                         <span className="old">
                                             {currency.currencySymbol +
+                                                " " +
                                                 finalProductPrice}
                                         </span>
                                     </Fragment>
                                 ) : (
                                     <span>
                                         {currency.currencySymbol +
+                                            " " +
                                             finalProductPrice}{" "}
                                     </span>
                                 )}
                             </div>
-                            {product.rating && product.rating > 0 ? (
+                            {/* {product.rating && product.rating > 0 ? (
                                 <div className="rating-review">
                                     <div className="product-list-rating">
                                         <Rating ratingValue={product.rating} />
@@ -291,7 +297,7 @@ const ProductGridListSingle = ({
                                 </div>
                             ) : (
                                 ""
-                            )}
+                            )} */}
                             {product.shortDescription ? (
                                 <p>{product.shortDescription}</p>
                             ) : (
@@ -358,7 +364,6 @@ const ProductGridListSingle = ({
                                                 ? "active"
                                                 : ""
                                         }
-                                        disabled={wishlistItem !== undefined}
                                         title={
                                             wishlistItem !== undefined
                                                 ? "Added to wishlist"
@@ -368,7 +373,7 @@ const ProductGridListSingle = ({
                                             dispatch(addToWishlist(product))
                                         }
                                     >
-                                        <i className="pe-7s-like" />
+                                        <FaHeart />
                                     </button>
                                 </div>
                                 <div className="shop-list-compare ml-10">
@@ -378,7 +383,6 @@ const ProductGridListSingle = ({
                                                 ? "active"
                                                 : ""
                                         }
-                                        disabled={compareItem !== undefined}
                                         title={
                                             compareItem !== undefined
                                                 ? "Added to compare"
@@ -388,7 +392,7 @@ const ProductGridListSingle = ({
                                             dispatch(addToCompare(product))
                                         }
                                     >
-                                        <i className="pe-7s-shuffle" />
+                                        <FaCodeCompare />
                                     </button>
                                 </div>
                             </div>

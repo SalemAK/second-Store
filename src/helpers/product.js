@@ -218,7 +218,7 @@ export const getIndividualSizes = (product) => {
     return individualSizes;
 };
 
-export const setActiveSort = (e, getSortParams) => {
+export const setActiveSort = (e, getSortParams, newSearchParams, navigate) => {
     const allCategoriesButton = document.querySelector(".all-categories");
     const filterButtons = document.querySelectorAll(
         ".sidebar-widget-list-left button, .sidebar-widget-tag button, .product-filter button"
@@ -232,6 +232,7 @@ export const setActiveSort = (e, getSortParams) => {
             });
             allCategoriesButton.classList.add("active");
             getSortParams("category", ""); // Reset the category filter to show all products
+
             return;
         } // Prevent unchecking "All Categories"
     }
@@ -241,6 +242,9 @@ export const setActiveSort = (e, getSortParams) => {
         e.currentTarget.classList.remove("active");
         // Trigger the reset to "All Categories"
         allCategoriesButton.classList.add("active");
+        newSearchParams.delete("category");
+        navigate({ search: newSearchParams.toString() });
+
         getSortParams("category", ""); // Reset the category filter to show all products
     } else {
         // Remove "active" class from all buttons

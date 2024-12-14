@@ -1,10 +1,11 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { getDiscountPrice } from "../../helpers/product";
 import SEO from "../../components/seo";
 import LayoutOne from "../../layouts/LayoutOne";
 import Breadcrumb from "../../wrappers/breadcrumb/Breadcrumb";
+import regionsData from "../../data/ourData/regionsData.json";
 
 const Checkout = () => {
     let cartTotalPrice = 0;
@@ -12,13 +13,35 @@ const Checkout = () => {
     let { pathname } = useLocation();
     const currency = useSelector((state) => state.currency);
     const { cartItems } = useSelector((state) => state.cart);
+
     const [selectedOption, setSelectedOption] = useState("Delivery");
+    const [selectedRegion, setSelectedRegion] = useState("riyadh");
+    const handleRegionChange = (event) => {
+        setSelectedRegion(event.target.value); // Update selected region
+    };
 
     // Handle change event
     const handleOptionChange = (event) => {
         setSelectedOption(event.target.value);
     };
-
+    const [shippingCost, setShippingCost] = useState(0);
+    const [taxAmount, setTaxAmount] = useState(0);
+    const [estimatedTotal, setEstimatedTotal] = useState(cartTotalPrice);
+    useEffect(() => {
+        let total = 0;
+        const regionData = regionsData[selectedRegion];
+        const tax = cartTotalPrice * regionData.taxRate;
+        if (selectedOption === "Pick up") {
+            total = cartTotalPrice + tax;
+            setTaxAmount(tax);
+            setEstimatedTotal(total); // Recalculate estimated total
+        } else {
+            total = cartTotalPrice + regionData.shippingCost + tax;
+            setShippingCost(regionData.shippingCost);
+            setTaxAmount(tax);
+            setEstimatedTotal(total); // Recalculate estimated total
+        }
+    }, [selectedRegion, cartTotalPrice, selectedOption]); // Recalculate when either selectedRegion or cartTotalPrice changes
     return (
         <Fragment>
             <SEO
@@ -112,26 +135,55 @@ const Checkout = () => {
                                                 </div>
                                                 <div className="col-lg-12">
                                                     <div className="billing-select mb-20">
-                                                        <label>Country</label>
+                                                        <label>* Country</label>
                                                         <select>
-                                                            <option>
-                                                                Select a country
+                                                            <option selected>
+                                                                Saudi Arabia
                                                             </option>
-                                                            <option>
-                                                                Azerbaijan
-                                                            </option>
-                                                            <option>
-                                                                Bahamas
-                                                            </option>
-                                                            <option>
-                                                                Bahrain
-                                                            </option>
-                                                            <option>
-                                                                Bangladesh
-                                                            </option>
-                                                            <option>
-                                                                Barbados
-                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div className="col-lg-12">
+                                                    <div className="billing-select mb-20">
+                                                        <label>
+                                                            * Region / State
+                                                        </label>
+                                                        <select
+                                                            value={
+                                                                selectedRegion
+                                                            }
+                                                            onChange={
+                                                                handleRegionChange
+                                                            }
+                                                        >
+                                                            {Object.keys(
+                                                                regionsData
+                                                            ).map(
+                                                                (regionKey) => (
+                                                                    <option
+                                                                        key={
+                                                                            regionKey
+                                                                        }
+                                                                        value={
+                                                                            regionKey
+                                                                        }
+                                                                    >
+                                                                        {regionKey
+                                                                            .charAt(
+                                                                                0
+                                                                            )
+                                                                            .toUpperCase() +
+                                                                            regionKey
+                                                                                .slice(
+                                                                                    1
+                                                                                )
+                                                                                .replace(
+                                                                                    "_",
+                                                                                    " "
+                                                                                )}
+                                                                    </option>
+                                                                )
+                                                            )}
                                                         </select>
                                                     </div>
                                                 </div>
@@ -151,22 +203,22 @@ const Checkout = () => {
                                                         />
                                                     </div>
                                                 </div>
-                                                <div className="col-lg-12">
+                                                {/* <div className="col-lg-12">
                                                     <div className="billing-info mb-20">
                                                         <label>
                                                             Town / City
                                                         </label>
                                                         <input type="text" />
                                                     </div>
-                                                </div>
-                                                <div className="col-lg-6 col-md-6">
+                                                </div> */}
+                                                {/* <div className="col-lg-6 col-md-6">
                                                     <div className="billing-info mb-20">
                                                         <label>
                                                             State / County
                                                         </label>
                                                         <input type="text" />
                                                     </div>
-                                                </div>
+                                                </div> */}
                                                 <div className="col-lg-6 col-md-6">
                                                     <div className="billing-info mb-20">
                                                         <label>
@@ -236,22 +288,22 @@ const Checkout = () => {
                                                         <label>Branch</label>
                                                         <select>
                                                             <option>
-                                                                Select a country
+                                                                Select a Branch
                                                             </option>
                                                             <option>
-                                                                Azerbaijan
+                                                                riyadh
                                                             </option>
                                                             <option>
-                                                                Bahamas
+                                                                mecca
                                                             </option>
                                                             <option>
-                                                                Bahrain
+                                                                tabuk
                                                             </option>
                                                             <option>
-                                                                Bangladesh
+                                                                jizan
                                                             </option>
                                                             <option>
-                                                                Barbados
+                                                                makkah
                                                             </option>
                                                         </select>
                                                     </div>
@@ -305,12 +357,12 @@ const Checkout = () => {
                                                             (cartItem, key) => {
                                                                 const discountedPrice =
                                                                     getDiscountPrice(
-                                                                        cartItem.price,
+                                                                        cartItem.selectedProductPrice,
                                                                         cartItem.discount
                                                                     );
                                                                 const finalProductPrice =
                                                                     (
-                                                                        cartItem.price *
+                                                                        cartItem.selectedProductPrice *
                                                                         currency.currencyRate
                                                                     ).toFixed(
                                                                         2
@@ -350,6 +402,7 @@ const Checkout = () => {
                                                                             {discountedPrice !==
                                                                             null
                                                                                 ? currency.currencySymbol +
+                                                                                  " " +
                                                                                   (
                                                                                       finalDiscountedPrice *
                                                                                       cartItem.quantity
@@ -357,6 +410,7 @@ const Checkout = () => {
                                                                                       2
                                                                                   )
                                                                                 : currency.currencySymbol +
+                                                                                  " " +
                                                                                   (
                                                                                       finalProductPrice *
                                                                                       cartItem.quantity
@@ -370,14 +424,38 @@ const Checkout = () => {
                                                         )}
                                                     </ul>
                                                 </div>
-                                                <div className="your-order-bottom">
+                                                <div className="your-order-bottom mb-2">
                                                     <ul>
                                                         <li className="your-order-shipping">
-                                                            Shipping
+                                                            Tax
                                                         </li>
-                                                        <li>Free shipping</li>
+                                                        <li>
+                                                            {currency.currencySymbol +
+                                                                " " +
+                                                                taxAmount.toFixed(
+                                                                    2
+                                                                )}
+                                                        </li>
                                                     </ul>
                                                 </div>
+                                                {selectedOption ===
+                                                "Delivery" ? (
+                                                    <div className="your-order-bottom">
+                                                        <ul>
+                                                            <li className="your-order-shipping">
+                                                                Shipping Cost
+                                                            </li>
+                                                            <li>
+                                                                {currency.currencySymbol +
+                                                                    " " +
+                                                                    shippingCost.toFixed(
+                                                                        2
+                                                                    )}
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                ) : null}
+
                                                 <div className="your-order-total">
                                                     <ul>
                                                         <li className="order-total">
@@ -385,7 +463,8 @@ const Checkout = () => {
                                                         </li>
                                                         <li>
                                                             {currency.currencySymbol +
-                                                                cartTotalPrice.toFixed(
+                                                                " " +
+                                                                estimatedTotal.toFixed(
                                                                     2
                                                                 )}
                                                         </li>

@@ -13,7 +13,8 @@ const wishlistSlice = createSlice({
             );
 
             if (isInWishlist > -1) {
-                cogoToast.info("Product already in wishlist", {
+                state.wishlistItems.splice(isInWishlist, 1);
+                cogoToast.error("Removed From Wishlist", {
                     position: "bottom-left",
                 });
             } else {
