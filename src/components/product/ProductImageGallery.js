@@ -37,8 +37,6 @@ const ProductImageGallery = ({ product }) => {
         slideToClickedSlide: true,
         navigation: true,
     };
-    console.log(product.image);
-    console.log(process.env.PUBLIC_URL);
 
     return (
         <Fragment>

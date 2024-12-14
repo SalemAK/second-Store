@@ -12,8 +12,7 @@ import { addToCompare } from "../../store/slices/compare-slice";
 import { getDiscountPrice } from "../../helpers/product";
 import { FaCodeCompare } from "react-icons/fa6";
 import { FaHeart } from "react-icons/fa";
-<FaHeart />;
-<FaCodeCompare />;
+
 function ProductModal({
     product,
     currency,
