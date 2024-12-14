@@ -4,7 +4,11 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getProductCartQuantity } from "../../helpers/product";
 import Rating from "./sub-components/ProductRating";
-import { addToCart } from "../../store/slices/cart-slice";
+import {
+    addToCart,
+    deleteFromCart,
+    removeFromCart,
+} from "../../store/slices/cart-slice";
 import { addToWishlist } from "../../store/slices/wishlist-slice";
 import { addToCompare } from "../../store/slices/compare-slice";
 import { getDiscountPrice } from "../../helpers/product";
@@ -21,6 +25,17 @@ const ProductDescriptionInfo = ({
     wishlistItem,
     compareItem,
 }) => {
+    const [addToCartButton, setAddToCartButton] = useState(false);
+    console.log(addToCartButton);
+    const handdleChageButton = () => {
+        const cartCheck = cartItems.find((item) => item.id === product.id);
+        if (cartCheck) {
+            setAddToCartButton(true);
+            console.log(addToCartButton);
+        } else {
+            setAddToCartButton(false);
+        }
+    };
     const dispatch = useDispatch();
     const [selectedProductPrice, setSelectedProductPrice] = useState(
         product.variation ? product.variation[0].size[0].price : ""
@@ -90,7 +105,6 @@ const ProductDescriptionInfo = ({
             <div className="pro-details-list">
                 <p>{product.shortDescription}</p>
             </div>
-
             {product.variation ? (
                 <div className="pro-details-size-color">
                     <div className="pro-details-color-wrap">
@@ -186,7 +200,7 @@ const ProductDescriptionInfo = ({
             ) : (
                 ""
             )}
-            {product.affiliateLink ? (
+            {/* {product.affiliateLink ? (
                 <div className="pro-details-quality">
                     <div className="pro-details-cart btn-hover ml-0">
                         <a
@@ -198,109 +212,140 @@ const ProductDescriptionInfo = ({
                         </a>
                     </div>
                 </div>
-            ) : (
-                <div className="pro-details-quality">
-                    <div className="cart-plus-minus">
+            ) : ( */}
+            <div className="pro-details-quality">
+                {cartItems.find((item) => item.id === product.id) ? (
+                    <div className="pro-details-cart btn-hover ">
                         <button
+                            className="bg-danger rounded"
                             onClick={() =>
-                                setQuantityCount(
-                                    quantityCount > 1 ? quantityCount - 1 : 1
+                                dispatch(
+                                    removeFromCart({
+                                        id: product.id,
+                                        selectedProductColor,
+                                        selectedProductSize,
+                                    })
                                 )
                             }
-                            className="dec qtybutton"
                         >
-                            -
+                            Remove from Cart
                         </button>
-                        <input
-                            className="cart-plus-minus-box"
-                            type="text"
-                            value={quantityCount}
-                            readOnly
-                        />
+
                         <button
-                            onClick={() =>
-                                setQuantityCount(
-                                    quantityCount <
-                                        productStock - productCartQty
-                                        ? quantityCount + 1
-                                        : quantityCount
-                                )
-                            }
-                            className="inc qtybutton"
+                            className="bg-success rounded"
+                            onClick={() => {
+                                window.location.href =
+                                    process.env.PUBLIC_URL + "/cart";
+                            }}
                         >
-                            +
+                            Go to Cart
                         </button>
                     </div>
-                    <div className="pro-details-cart btn-hover">
-                        {productStock && productStock > 0 ? (
+                ) : (
+                    <>
+                        <div className="cart-plus-minus">
                             <button
                                 onClick={() =>
-                                    dispatch(
-                                        addToCart({
-                                            ...product,
-                                            quantity: quantityCount,
-                                            selectedProductColor:
-                                                selectedProductColor
-                                                    ? selectedProductColor
-                                                    : product.selectedProductColor
-                                                    ? product.selectedProductColor
-                                                    : null,
-                                            selectedProductSize:
-                                                selectedProductSize
-                                                    ? selectedProductSize
-                                                    : product.selectedProductSize
-                                                    ? product.selectedProductSize
-                                                    : null,
-                                            selectedProductPrice:
-                                                selectedProductPrice
-                                                    ? selectedProductPrice
-                                                    : product.selectedProductPrice
-                                                    ? product.selectedProductPrice
-                                                    : null,
-                                        })
+                                    setQuantityCount(
+                                        quantityCount > 1
+                                            ? quantityCount - 1
+                                            : 1
                                     )
                                 }
-                                disabled={productCartQty >= productStock}
+                                className="dec qtybutton"
                             >
-                                {" "}
-                                Add To Cart{" "}
+                                -
                             </button>
-                        ) : (
-                            <button disabled>Out of Stock</button>
-                        )}
-                    </div>
-                    <div className="pro-details-wishlist">
-                        <button
-                            className={
-                                wishlistItem !== undefined ? "active" : ""
-                            }
-                            title={
-                                wishlistItem !== undefined
-                                    ? "Added to wishlist"
-                                    : "Add to wishlist"
-                            }
-                            onClick={() => dispatch(addToWishlist(product))}
-                        >
-                            <FaHeart />
-                        </button>
-                    </div>
-                    <div className="pro-details-compare">
-                        <button
-                            className={
-                                compareItem !== undefined ? "active" : ""
-                            }
-                            title={
-                                compareItem !== undefined
-                                    ? "Added to compare"
-                                    : "Add to compare"
-                            }
-                            onClick={() => dispatch(addToCompare(product))}
-                        >
-                            <FaCodeCompare />
-                        </button>
-                    </div>
+                            <input
+                                className="cart-plus-minus-box"
+                                type="text"
+                                value={quantityCount}
+                                readOnly
+                            />
+                            <button
+                                onClick={() =>
+                                    setQuantityCount(
+                                        quantityCount <
+                                            productStock - productCartQty
+                                            ? quantityCount + 1
+                                            : quantityCount
+                                    )
+                                }
+                                className="inc qtybutton"
+                            >
+                                +
+                            </button>
+                        </div>
+                        <div className="pro-details-cart btn-hover">
+                            {productStock && productStock > 0 ? (
+                                <button
+                                    className="bg-dark rounded"
+                                    onClick={() => {
+                                        dispatch(
+                                            addToCart({
+                                                ...product,
+                                                quantity: quantityCount,
+                                                selectedProductColor:
+                                                    selectedProductColor
+                                                        ? selectedProductColor
+                                                        : product.selectedProductColor
+                                                        ? product.selectedProductColor
+                                                        : null,
+                                                selectedProductSize:
+                                                    selectedProductSize
+                                                        ? selectedProductSize
+                                                        : product.selectedProductSize
+                                                        ? product.selectedProductSize
+                                                        : null,
+                                                selectedProductPrice:
+                                                    selectedProductPrice
+                                                        ? selectedProductPrice
+                                                        : product.selectedProductPrice
+                                                        ? product.selectedProductPrice
+                                                        : null,
+                                            })
+                                        );
+                                        handdleChageButton();
+                                    }}
+                                    disabled={productCartQty >= productStock}
+                                >
+                                    {" "}
+                                    Add To Cart{" "}
+                                </button>
+                            ) : (
+                                <button disabled>Out of Stock</button>
+                            )}
+                        </div>
+                    </>
+                )}
+                <div className="pro-details-wishlist">
+                    <button
+                        className={wishlistItem !== undefined ? "active" : ""}
+                        title={
+                            wishlistItem !== undefined
+                                ? "Remove from wishlist"
+                                : "Add to wishlist"
+                        }
+                        onClick={() => dispatch(addToWishlist(product))}
+                    >
+                        <FaHeart />
+                    </button>
                 </div>
-            )}
+                <div className="pro-details-compare">
+                    <button
+                        className={compareItem !== undefined ? "active" : ""}
+                        title={
+                            compareItem !== undefined
+                                ? "Remove from compare"
+                                : "Add to compare"
+                        }
+                        onClick={() => dispatch(addToCompare(product))}
+                    >
+                        <FaCodeCompare />
+                    </button>
+                </div>
+            </div>
+            {/* )} */}
             {product.category ? (
                 <div className="pro-details-meta">
                     <span>Categories :</span>
@@ -347,7 +392,6 @@ const ProductDescriptionInfo = ({
             ) : (
                 ""
             )} */}
-
             {/* <div className="pro-details-social">
                 <ul>
                     <li>

@@ -922,7 +922,7 @@
             button {
                 font-weight: bold;
                 line-height: 1;
-
+                margin-right: 8px;
                 z-index: 99;
 
                 display: inline-block;
@@ -934,7 +934,7 @@
                 color: #fff;
                 border: none;
                 background: none;
-                background-color: #343538;
+
                 @media #{$xs-layout} {
                     padding: 23px 12px 23px;
                 }
@@ -1193,7 +1193,50 @@
         }
     }
 }
+.tow-details-cart {
+    margin: 0 25px 0 10px;
+    @media #{$xs-layout} {
+        margin: 0 10px 0 10px;
+    }
+    @media #{$md-layout} {
+        margin: 0 17px 0 10px;
+    }
+    a,
+    button {
+        font-weight: bold;
+        line-height: 1;
+        margin-right: 5px;
+        z-index: 99;
 
+        display: inline-block;
+
+        padding: 23px 38px 23px;
+
+        text-transform: uppercase;
+
+        color: #fff;
+        border: none;
+        background: none;
+
+        @media #{$xs-layout} {
+            padding: 23px 12px 23px;
+        }
+        @media #{$md-layout} {
+            padding: 22px 22px 22px;
+        }
+        &:hover {
+            border: none;
+        }
+
+        &:disabled {
+            cursor: not-allowed;
+            &:before,
+            &:after {
+                display: none;
+            }
+        }
+    }
+}
 .filter-active {
     position: relative;
     a,

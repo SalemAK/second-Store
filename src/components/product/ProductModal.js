@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Rating from "./sub-components/ProductRating";
 import Swiper, { SwiperSlide } from "../../components/swiper";
 import { getProductCartQuantity } from "../../helpers/product";
-import { addToCart } from "../../store/slices/cart-slice";
+import { addToCart, removeFromCart } from "../../store/slices/cart-slice";
 import { addToWishlist } from "../../store/slices/wishlist-slice";
 import { addToCompare } from "../../store/slices/compare-slice";
 import { getDiscountPrice } from "../../helpers/product";
@@ -303,7 +303,7 @@ function ProductModal({
                             ) : (
                                 ""
                             )}
-                            {product.affiliateLink ? (
+                            {/* {product.affiliateLink ? (
                                 <div className="pro-details-quality">
                                     <div className="pro-details-cart btn-hover">
                                         <a
@@ -315,120 +315,162 @@ function ProductModal({
                                         </a>
                                     </div>
                                 </div>
-                            ) : (
-                                <div className="pro-details-quality">
-                                    <div className="cart-plus-minus">
+                            ) : ( */}
+                            <div className="pro-details-quality">
+                                {cartItems.find(
+                                    (item) => item.id === product.id
+                                ) ? (
+                                    <div className="pro-details-cart btn-hover ">
                                         <button
+                                            className="bg-danger rounded"
                                             onClick={() =>
-                                                setQuantityCount(
-                                                    quantityCount > 1
-                                                        ? quantityCount - 1
-                                                        : 1
+                                                dispatch(
+                                                    removeFromCart({
+                                                        id: product.id,
+                                                        selectedProductColor,
+                                                        selectedProductSize,
+                                                    })
                                                 )
                                             }
-                                            className="dec qtybutton"
                                         >
-                                            -
+                                            Remove from Cart
                                         </button>
-                                        <input
-                                            className="cart-plus-minus-box"
-                                            type="text"
-                                            value={quantityCount}
-                                            readOnly
-                                        />
+
                                         <button
-                                            onClick={() =>
-                                                setQuantityCount(
-                                                    quantityCount <
-                                                        productStock -
-                                                            productCartQty
-                                                        ? quantityCount + 1
-                                                        : quantityCount
-                                                )
-                                            }
-                                            className="inc qtybutton"
+                                            className="bg-success rounded"
+                                            onClick={() => {
+                                                window.location.href =
+                                                    process.env.PUBLIC_URL +
+                                                    "/cart";
+                                            }}
                                         >
-                                            +
+                                            Go to Cart
                                         </button>
                                     </div>
-                                    <div className="pro-details-cart btn-hover">
-                                        {productStock && productStock > 0 ? (
+                                ) : (
+                                    <>
+                                        <div className="cart-plus-minus">
                                             <button
                                                 onClick={() =>
-                                                    dispatch(
-                                                        addToCart({
-                                                            ...product,
-                                                            quantity:
-                                                                quantityCount,
-                                                            selectedProductColor:
-                                                                selectedProductColor
-                                                                    ? selectedProductColor
-                                                                    : product.selectedProductColor
-                                                                    ? product.selectedProductColor
-                                                                    : null,
-                                                            selectedProductSize:
-                                                                selectedProductSize
-                                                                    ? selectedProductSize
-                                                                    : product.selectedProductSize
-                                                                    ? product.selectedProductSize
-                                                                    : null,
-                                                        })
+                                                    setQuantityCount(
+                                                        quantityCount > 1
+                                                            ? quantityCount - 1
+                                                            : 1
                                                     )
                                                 }
-                                                disabled={
-                                                    productCartQty >=
-                                                    productStock
-                                                }
+                                                className="dec qtybutton"
                                             >
-                                                {" "}
-                                                Add To Cart{" "}
+                                                -
                                             </button>
-                                        ) : (
-                                            <button disabled>
-                                                Out of Stock
+                                            <input
+                                                className="cart-plus-minus-box"
+                                                type="text"
+                                                value={quantityCount}
+                                                readOnly
+                                            />
+                                            <button
+                                                onClick={() =>
+                                                    setQuantityCount(
+                                                        quantityCount <
+                                                            productStock -
+                                                                productCartQty
+                                                            ? quantityCount + 1
+                                                            : quantityCount
+                                                    )
+                                                }
+                                                className="inc qtybutton"
+                                            >
+                                                +
                                             </button>
-                                        )}
-                                    </div>
-                                    <div className="pro-details-wishlist">
-                                        <button
-                                            className={
-                                                wishlistItem !== undefined
-                                                    ? "active"
-                                                    : ""
-                                            }
-                                            title={
-                                                wishlistItem !== undefined
-                                                    ? "Remove from wishlist"
-                                                    : "Add to wishlist"
-                                            }
-                                            onClick={() =>
-                                                dispatch(addToWishlist(product))
-                                            }
-                                        >
-                                            <FaHeart />
-                                        </button>
-                                    </div>
-                                    <div className="pro-details-compare">
-                                        <button
-                                            className={
-                                                compareItem !== undefined
-                                                    ? "active"
-                                                    : ""
-                                            }
-                                            title={
-                                                compareItem !== undefined
-                                                    ? "Remove from compare"
-                                                    : "Add to compare"
-                                            }
-                                            onClick={() =>
-                                                dispatch(addToCompare(product))
-                                            }
-                                        >
-                                            <FaCodeCompare />
-                                        </button>
-                                    </div>
+                                        </div>
+                                        <div className="pro-details-cart btn-hover">
+                                            {productStock &&
+                                            productStock > 0 ? (
+                                                <button
+                                                    className="bg-dark rounded"
+                                                    onClick={() => {
+                                                        dispatch(
+                                                            addToCart({
+                                                                ...product,
+                                                                quantity:
+                                                                    quantityCount,
+                                                                selectedProductColor:
+                                                                    selectedProductColor
+                                                                        ? selectedProductColor
+                                                                        : product.selectedProductColor
+                                                                        ? product.selectedProductColor
+                                                                        : null,
+                                                                selectedProductSize:
+                                                                    selectedProductSize
+                                                                        ? selectedProductSize
+                                                                        : product.selectedProductSize
+                                                                        ? product.selectedProductSize
+                                                                        : null,
+                                                                selectedProductPrice:
+                                                                    selectedProductPrice
+                                                                        ? selectedProductPrice
+                                                                        : product.selectedProductPrice
+                                                                        ? product.selectedProductPrice
+                                                                        : null,
+                                                            })
+                                                        );
+                                                    }}
+                                                    disabled={
+                                                        productCartQty >=
+                                                        productStock
+                                                    }
+                                                >
+                                                    {" "}
+                                                    Add To Cart{" "}
+                                                </button>
+                                            ) : (
+                                                <button disabled>
+                                                    Out of Stock
+                                                </button>
+                                            )}
+                                        </div>
+                                    </>
+                                )}
+                                <div className="pro-details-wishlist">
+                                    <button
+                                        className={
+                                            wishlistItem !== undefined
+                                                ? "active"
+                                                : ""
+                                        }
+                                        title={
+                                            wishlistItem !== undefined
+                                                ? "Remove from wishlist"
+                                                : "Add to wishlist"
+                                        }
+                                        onClick={() =>
+                                            dispatch(addToWishlist(product))
+                                        }
+                                    >
+                                        <FaHeart />
+                                    </button>
                                 </div>
-                            )}
+                                <div className="pro-details-compare">
+                                    <button
+                                        className={
+                                            compareItem !== undefined
+                                                ? "active"
+                                                : ""
+                                        }
+                                        title={
+                                            compareItem !== undefined
+                                                ? "Remove from compare"
+                                                : "Add to compare"
+                                        }
+                                        onClick={() =>
+                                            dispatch(addToCompare(product))
+                                        }
+                                    >
+                                        <FaCodeCompare />
+                                    </button>
+                                </div>
+                            </div>
+                            {/* )} */}
                         </div>
                     </div>
                 </div>

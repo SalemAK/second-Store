@@ -102,6 +102,25 @@ const cartSlice = createSlice({
             );
             cogoToast.error("Removed From Cart", { position: "bottom-left" });
         },
+        removeFromCart(state, action) {
+            const { id, selectedProductColor, selectedProductSize } =
+                action.payload;
+
+            // Filter out the matching product
+            state.cartItems = state.cartItems.filter(
+                (item) =>
+                    !(
+                        item.id === id &&
+                        item.selectedProductColor === selectedProductColor &&
+                        item.selectedProductSize === selectedProductSize
+                    )
+            );
+
+            // Optional: Show toast notification
+            cogoToast.error("Removed From Cart", {
+                position: "bottom-left",
+            });
+        },
         decreaseQuantity(state, action) {
             const product = action.payload;
             if (product.quantity === 1) {
@@ -133,5 +152,6 @@ export const {
     deleteFromCart,
     decreaseQuantity,
     deleteAllFromCart,
+    removeFromCart,
 } = cartSlice.actions;
 export default cartSlice.reducer;
