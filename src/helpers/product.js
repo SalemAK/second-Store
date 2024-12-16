@@ -123,6 +123,15 @@ export const getSortedProducts = (products, sortType, sortValue) => {
                 });
             }
         }
+        if (sortType === "search") {
+            return products.filter(
+                (product) =>
+                    product.name.toLowerCase().includes(sortValue) ||
+                    product.category.some((cat) =>
+                        cat.toLowerCase().includes(sortValue)
+                    )
+            );
+        }
     }
     return products;
 };

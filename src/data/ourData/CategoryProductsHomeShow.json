@@ -28,7 +28,8 @@
             "/assets/img/smartwatchX1_alt2.jpg"
         ],
         "shortDescription": "A stylish smartwatch with health tracking and notifications.",
-        "fullDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+        "fullDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+        "createdDate": "2024-12-16"
     },
     {
         "id": 102,
@@ -57,7 +58,8 @@
             "/assets/img/Wireless Earbuds Pro_alt1.jpg"
         ],
         "shortDescription": "Noise-canceling earbuds with superior sound quality.",
-        "fullDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi."
+        "fullDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi.",
+        "createdDate": "2024-12-15"
     },
     {
         "id": 103,
@@ -83,7 +85,8 @@
             "/assets/img/Portable Charger_alt1.jpg"
         ],
         "shortDescription": "Compact power bank with fast charging capabilities.",
-        "fullDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam."
+        "fullDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.",
+        "createdDate": "2024-12-1"
     },
     {
         "id": 104,

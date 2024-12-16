@@ -22,7 +22,7 @@ const ShopSidebar = ({ products, getSortParams, sideSpaceClass }) => {
     return (
         <div className={clsx("sidebar-style", sideSpaceClass)}>
             {/* shop search */}
-            <ShopSearch />
+            <ShopSearch getSortParams={getSortParams} />
 
             {/* filter by categories */}
             <ShopCategories
