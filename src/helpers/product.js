@@ -122,6 +122,11 @@ export const getSortedProducts = (products, sortType, sortValue) => {
                     return a.price - b.price;
                 });
             }
+            if (sortValue === "NewestArrivals") {
+                return sortProducts.sort((a, b) => {
+                    return new Date(b.createdDate) - new Date(a.createdDate);
+                });
+            }
         }
         if (sortType === "search") {
             return products.filter(
