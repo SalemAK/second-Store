@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
-
 import { setActiveLayout } from "../../helpers/product";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const ShopTopAction = ({
     getLayout,
@@ -8,14 +8,29 @@ const ShopTopAction = ({
     productCount,
     sortedProductCount,
 }) => {
+    const location = useLocation();
+    const navigate = useNavigate();
+    const searchParams = new URLSearchParams(location.search);
+    const activeFilter = searchParams.get("filter") || "default";
+
+    const handleFilter = (value) => {
+        const newSearchParams = new URLSearchParams(location.search);
+        if (value && value !== "default") {
+            newSearchParams.set("filter", value);
+        } else {
+            newSearchParams.delete("filter");
+        }
+        navigate({ search: newSearchParams.toString() });
+        getFilterSortParams("filterSort", value);
+    };
+
     return (
         <div className="shop-top-bar mb-35">
             <div className="select-shoing-wrap">
                 <div className="shop-select">
                     <select
-                        onChange={(e) =>
-                            getFilterSortParams("filterSort", e.target.value)
-                        }
+                        value={activeFilter}
+                        onChange={(e) => handleFilter(e.target.value)}
                     >
                         <option value="default">Default</option>
                         <option value="priceHighToLow">

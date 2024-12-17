@@ -12,8 +12,15 @@ import ShopColor from "../../components/product/ShopColor";
 import ShopSize from "../../components/product/ShopSize";
 
 import ShopTag from "../../components/product/ShopTag";
+import ProductPriceFilter from "../../components/product/ProductPriceFilter";
 
-const ShopSidebar = ({ products, getSortParams, sideSpaceClass }) => {
+const ShopSidebar = ({
+    products,
+    getSortParams,
+    sideSpaceClass,
+    getSortPrice,
+    getSearchSortParams,
+}) => {
     const uniqueCategories = getIndividualCategories(products);
     const uniqueColors = getIndividualColors(products);
     const uniqueSizes = getProductsIndividualSizes(products);
@@ -22,13 +29,15 @@ const ShopSidebar = ({ products, getSortParams, sideSpaceClass }) => {
     return (
         <div className={clsx("sidebar-style", sideSpaceClass)}>
             {/* shop search */}
-            <ShopSearch getSortParams={getSortParams} />
+            <ShopSearch getSearchSortParams={getSearchSortParams} />
 
             {/* filter by categories */}
             <ShopCategories
                 categories={uniqueCategories}
                 getSortParams={getSortParams}
             />
+            {/* filter by price */}
+            <ProductPriceFilter getSortPrice={getSortPrice} />
 
             {/* filter by color */}
             {/* <ShopColor colors={uniqueColors} getSortParams={getSortParams} /> */}

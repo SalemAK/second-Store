@@ -3,7 +3,7 @@
         "id": 101,
         "sku": "asdf123",
         "name": "Smartwatch X1",
-        "price": 0,
+
         "discount": 10,
         "offerEnd": "October 5, 2024 12:11:00",
         "new": false,
@@ -35,7 +35,6 @@
         "id": 102,
         "sku": "fakeSKU456",
         "name": "Wireless Earbuds Pro",
-        "price": 129.99,
         "discount": 5,
         "offerEnd": "October 15, 2024 18:00:00",
         "new": true,
@@ -77,7 +76,7 @@
             {
                 "color": "gray",
                 "image": "/assets/img/Portable Charger.jpg",
-                "size": [{ "name": "2000AM", "stock": 20 }]
+                "size": [{ "name": "2000AM", "stock": 20, "price": 50 }]
             }
         ],
         "image": [

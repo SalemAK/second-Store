@@ -72,72 +72,100 @@ export const cartItemStock = (item, color, size) => {
 };
 
 //get products based on category
-export const getSortedProducts = (products, sortType, sortValue) => {
-    if (products && sortType && sortValue) {
-        if (sortType === "category") {
-            return products.filter(
-                (product) =>
-                    product.category.filter((single) => single === sortValue)[0]
+export const getSortedProducts = (products, sortType, sortValue, max) => {
+    if (!products || !sortType || sortValue == null) return products; // Early exit if invalid inputs
+
+    const getEffectivePrice = (product) => {
+        const basePrice = product?.variation?.[0]?.size?.[0]?.price ?? 0;
+        const discount = product?.discount ?? 0;
+        return discount > 0
+            ? basePrice - (basePrice * discount) / 100
+            : basePrice;
+    };
+
+    // Filter by Category
+    if (sortType === "category" && sortValue) {
+        return products.filter((product) =>
+            product.category.includes(sortValue)
+        );
+    }
+
+    // Filter by Tag
+    if (sortType === "tag" && sortValue) {
+        return products.filter((product) => product.tag.includes(sortValue));
+    }
+
+    // Filter by Color
+    if (sortType === "color" && sortValue) {
+        return products.filter((product) =>
+            product.variation?.some(
+                (variation) => variation.color === sortValue
+            )
+        );
+    }
+
+    // Filter by Size
+    if (sortType === "size" && sortValue) {
+        return products.filter((product) =>
+            product.variation?.some((variation) =>
+                variation.size?.some((size) => size.name === sortValue)
+            )
+        );
+    }
+
+    // Sorting Products based on price or new arrivals
+    if (sortType === "filterSort") {
+        let sortedProducts = [...products]; // Copy to avoid mutation
+
+        if (sortValue === "default") {
+            return sortedProducts; // Return unsorted
+        }
+
+        if (sortValue === "priceHighToLow") {
+            return sortedProducts.sort(
+                (a, b) => getEffectivePrice(b) - getEffectivePrice(a)
             );
         }
-        if (sortType === "tag") {
-            return products.filter(
-                (product) =>
-                    product.tag.filter((single) => single === sortValue)[0]
+
+        if (sortValue === "priceLowToHigh") {
+            return sortedProducts.sort(
+                (a, b) => getEffectivePrice(a) - getEffectivePrice(b)
             );
         }
-        if (sortType === "color") {
-            return products.filter(
-                (product) =>
-                    product.variation &&
-                    product.variation.filter(
-                        (single) => single.color === sortValue
-                    )[0]
-            );
-        }
-        if (sortType === "size") {
-            return products.filter(
-                (product) =>
-                    product.variation &&
-                    product.variation.filter(
-                        (single) =>
-                            single.size.filter(
-                                (single) => single.name === sortValue
-                            )[0]
-                    )[0]
-            );
-        }
-        if (sortType === "filterSort") {
-            let sortProducts = [...products];
-            if (sortValue === "default") {
-                return sortProducts;
-            }
-            if (sortValue === "priceHighToLow") {
-                return sortProducts.sort((a, b) => {
-                    return b.price - a.price;
-                });
-            }
-            if (sortValue === "priceLowToHigh") {
-                return sortProducts.sort((a, b) => {
-                    return a.price - b.price;
-                });
-            }
-            if (sortValue === "NewestArrivals") {
-                return sortProducts.sort((a, b) => {
-                    return new Date(b.createdDate) - new Date(a.createdDate);
-                });
-            }
-        }
-        if (sortType === "search") {
-            return products.filter(
-                (product) =>
-                    product.name.toLowerCase().includes(sortValue) ||
-                    product.category.some((cat) =>
-                        cat.toLowerCase().includes(sortValue)
-                    )
+
+        if (sortValue === "NewestArrivals") {
+            return sortedProducts.sort(
+                (a, b) => new Date(b.createdDate) - new Date(a.createdDate)
             );
         }
     }
+
+    // Search Filter
+    if (sortType === "search" && sortValue) {
+        return products.filter(
+            (product) =>
+                product.name.toLowerCase().includes(sortValue.toLowerCase()) ||
+                product.category.some((cat) =>
+                    cat.toLowerCase().includes(sortValue.toLowerCase())
+                )
+        );
+    }
+
+    // Price Range Filter
+    if (sortType === "price" && sortValue != null && max != null) {
+        return products.filter((product) => {
+            // Safely access price with optional chaining
+            const price = product?.variation?.[0]?.size?.[0]?.price;
+
+            // Exclude products with missing, null, or invalid prices
+            if (price == null) return false;
+
+            // Filter products strictly within the price range
+            return price >= sortValue && price <= max;
+        });
+    }
+
+    // Default return - if no filters applied
     return products;
 };
 

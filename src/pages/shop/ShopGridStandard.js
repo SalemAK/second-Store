@@ -14,8 +14,13 @@ const ShopGridStandard = () => {
     const [layout, setLayout] = useState("grid three-column");
     const [sortType, setSortType] = useState("");
     const [sortValue, setSortValue] = useState("");
+    const [sortMax, setSortMax] = useState("");
+    const [priceSortType, setPriceSortType] = useState("");
+    const [priceSortValue, setPriceSortValue] = useState("");
     const [filterSortType, setFilterSortType] = useState("");
     const [filterSortValue, setFilterSortValue] = useState("");
+    const [searchSortType, setSearchSortType] = useState("");
+    const [searchSortValue, setSearchSortValue] = useState("");
     const [offset, setOffset] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const [currentData, setCurrentData] = useState([]);
@@ -29,35 +34,85 @@ const ShopGridStandard = () => {
         setLayout(layout);
     };
 
-    const getSortParams = (sortType, sortValue) => {
+    const getSortPrice = (sortType, sortValue, sortMax) => {
+        setPriceSortType(sortType);
+        setPriceSortValue(sortValue);
+        setSortMax(sortMax);
+    };
+
+    const getSortParams = (sortType, sortValue, sortMax) => {
         setSortType(sortType);
         setSortValue(sortValue);
+        setSortMax(sortMax);
     };
 
-    const getFilterSortParams = (sortType, sortValue) => {
+    const getFilterSortParams = (sortType, sortValue, sortMax) => {
         setFilterSortType(sortType);
         setFilterSortValue(sortValue);
+        setSortMax(sortMax);
     };
 
+    const getSearchSortParams = (sortType, sortValue) => {
+        setSearchSortType(sortType);
+        setSearchSortValue(sortValue);
+        setSortMax(sortMax);
+    };
     useEffect(() => {
-        let sortedProducts = getSortedProducts(products, sortType, sortValue);
-        const filterSortedProducts = getSortedProducts(
-            sortedProducts,
-            filterSortType,
-            filterSortValue
+        let updatedProducts = [...products]; // Start with all products
+        // Step 1: Sort by the selected type and value
+        updatedProducts = getSortedProducts(
+            products,
+            sortType,
+            sortValue,
+            sortMax
         );
-        sortedProducts = filterSortedProducts;
-        setSortedProducts(sortedProducts);
-        setCurrentData(sortedProducts.slice(offset, offset + pageLimit));
+
+        // Step 2: Sort by price if a price filter is applied
+        updatedProducts = getSortedProducts(
+            updatedProducts,
+            priceSortType,
+            priceSortValue,
+            sortMax
+        );
+
+        // Step 3: Apply additional filter sorting if necessary
+        updatedProducts = getSortedProducts(
+            updatedProducts,
+            filterSortType,
+            filterSortValue,
+            sortMax
+        );
+        updatedProducts = getSortedProducts(
+            updatedProducts,
+            searchSortType,
+            searchSortValue,
+            sortMax
+        );
+
+        // Step 4: Update the sorted products and current data
+        setSortedProducts(updatedProducts);
+        setCurrentData(updatedProducts.slice(offset, offset + pageLimit));
     }, [
         offset,
         products,
         sortType,
         sortValue,
+        sortMax,
         filterSortType,
         filterSortValue,
+        priceSortType,
+        priceSortValue,
+        searchSortType,
+        searchSortValue,
     ]);
+    const location = useLocation();
 
+    useEffect(() => {
+        if (!location.search) {
+            setSortedProducts(products); // Reset to all products if no filters are present
+            setCurrentData(products.slice(offset, offset + pageLimit));
+        }
+    }, [location.search, products]); // Depend on location.search and products
     return (
         <Fragment>
             <SEO
@@ -85,6 +140,8 @@ const ShopGridStandard = () => {
                                 <ShopSidebar
                                     products={products}
                                     getSortParams={getSortParams}
+                                    getSortPrice={getSortPrice}
+                                    getSearchSortParams={getSearchSortParams}
                                     sideSpaceClass="mr-30"
                                 />
                             </div>
