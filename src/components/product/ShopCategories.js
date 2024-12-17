@@ -7,7 +7,7 @@ const ShopCategories = ({ categories = [], getSortParams }) => {
     const location = useLocation();
     const navigate = useNavigate(); // Initialize navigate
     const searchParams = new URLSearchParams(location.search);
-    const activeCategory = searchParams.get("category") || "";
+    const activeCategory = searchParams.get("category");
 
     const handleCategoryClick = (category, e) => {
         const newSearchParams = new URLSearchParams(location.search);
@@ -17,7 +17,6 @@ const ShopCategories = ({ categories = [], getSortParams }) => {
             newSearchParams.set("category", category);
         } else {
             // Remove the category filter if "All Categories" is clicked
-            getSortParams("category", "");
             newSearchParams.delete("category");
         }
 
