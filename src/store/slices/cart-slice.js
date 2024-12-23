@@ -123,13 +123,17 @@ const cartSlice = createSlice({
         },
         decreaseQuantity(state, action) {
             const product = action.payload;
-            if (product.quantity === 1) {
-                state.cartItems = state.cartItems.filter(
-                    (item) => item.cartItemId !== product.cartItemId
-                );
-                cogoToast.error("Removed From Cart", {
+            if (product.quantity <= 1) {
+                cogoToast.warn("Quantity cannot be less than 1", {
                     position: "bottom-left",
                 });
+                return;
+                // state.cartItems = state.cartItems.filter(
+                //     (item) => item.cartItemId !== product.cartItemId
+                // );
+                // cogoToast.error("Removed From Cart", {
+                //     position: "bottom-left",
+                // });
             } else {
                 state.cartItems = state.cartItems.map((item) =>
                     item.cartItemId === product.cartItemId

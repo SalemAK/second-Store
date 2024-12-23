@@ -354,10 +354,7 @@ const ProductDescriptionInfo = ({
                             return (
                                 <li key={key}>
                                     <Link
-                                        to={
-                                            process.env.PUBLIC_URL +
-                                            "/shop-grid-standard"
-                                        }
+                                        to={`/shop-grid-standard?category=${single}`}
                                     >
                                         {single}
                                     </Link>

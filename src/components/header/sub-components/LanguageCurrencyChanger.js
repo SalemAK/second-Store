@@ -24,8 +24,6 @@ const LanguageCurrencyChanger = ({ currency }) => {
                         ? "English"
                         : i18n.resolvedLanguage === "ar"
                         ? "Arabic"
-                        : i18n.resolvedLanguage === "de"
-                        ? "Germany"
                         : ""}{" "}
                     <i className="fa fa-angle-down" />
                 </span>
@@ -45,14 +43,6 @@ const LanguageCurrencyChanger = ({ currency }) => {
                                 onClick={(e) => changeLanguageTrigger(e)}
                             >
                                 Arabic
-                            </button>
-                        </li>
-                        <li>
-                            <button
-                                value="de"
-                                onClick={(e) => changeLanguageTrigger(e)}
-                            >
-                                Germany
                             </button>
                         </li>
                     </ul>
@@ -78,14 +68,6 @@ const LanguageCurrencyChanger = ({ currency }) => {
                                 onClick={(e) => setCurrencyTrigger(e)}
                             >
                                 SAR
-                            </button>
-                        </li>
-                        <li>
-                            <button
-                                value="GBP"
-                                onClick={(e) => setCurrencyTrigger(e)}
-                            >
-                                GBP
                             </button>
                         </li>
                     </ul>
