@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { EffectFade, Thumbs } from "swiper";
 import { Modal } from "react-bootstrap";
@@ -88,6 +88,18 @@ function ProductModal({
         setThumbsSwiper(null);
         onHide();
     };
+
+    const [addToCartButton, setAddToCartButton] = useState(false);
+
+    useEffect(() => {
+        const isInCart = cartItems.some(
+            (item) =>
+                item.id === product.id &&
+                item.selectedProductColor === selectedProductColor &&
+                item.selectedProductSize === selectedProductSize
+        );
+        setAddToCartButton(isInCart);
+    }, [cartItems, selectedProductColor, selectedProductSize, product.id]);
 
     return (
         <Modal
@@ -316,10 +328,9 @@ function ProductModal({
                                     </div>
                                 </div>
                             ) : ( */}
+
                             <div className="pro-details-quality">
-                                {cartItems.find(
-                                    (item) => item.id === product.id
-                                ) ? (
+                                {addToCartButton ? (
                                     <div className="pro-details-cart btn-hover ">
                                         <button
                                             className="bg-danger rounded"
@@ -424,7 +435,10 @@ function ProductModal({
                                                     Add To Cart{" "}
                                                 </button>
                                             ) : (
-                                                <button disabled>
+                                                <button
+                                                    className="bg-secondary"
+                                                    disabled
+                                                >
                                                     Out of Stock
                                                 </button>
                                             )}

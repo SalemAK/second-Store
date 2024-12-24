@@ -26,14 +26,6 @@ const ProductDescriptionInfo = ({
     compareItem,
 }) => {
     const [addToCartButton, setAddToCartButton] = useState(false);
-    const handdleChageButton = () => {
-        const cartCheck = cartItems.find((item) => item.id === product.id);
-        if (cartCheck) {
-            setAddToCartButton(true);
-        } else {
-            setAddToCartButton(false);
-        }
-    };
     const dispatch = useDispatch();
     const [selectedProductPrice, setSelectedProductPrice] = useState(
         product.variation ? product.variation[0].size[0].price : ""
@@ -337,7 +329,12 @@ const ProductDescriptionInfo = ({
                                     Add To Cart{" "}
                                 </button>
                             ) : (
-                                <button disabled>Out of Stock</button>
+                                <button
+                                    className="bg-secondary rounded"
+                                    disabled
+                                >
+                                    Out of Stock
+                                </button>
                             )}
                         </div>
                     </>
