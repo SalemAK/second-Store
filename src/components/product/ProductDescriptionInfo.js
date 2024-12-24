@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getProductCartQuantity } from "../../helpers/product";
@@ -26,12 +26,10 @@ const ProductDescriptionInfo = ({
     compareItem,
 }) => {
     const [addToCartButton, setAddToCartButton] = useState(false);
-    console.log(addToCartButton);
     const handdleChageButton = () => {
         const cartCheck = cartItems.find((item) => item.id === product.id);
         if (cartCheck) {
             setAddToCartButton(true);
-            console.log(addToCartButton);
         } else {
             setAddToCartButton(false);
         }
@@ -70,6 +68,16 @@ const ProductDescriptionInfo = ({
         selectedProductColor,
         selectedProductSize
     );
+
+    useEffect(() => {
+        const isInCart = cartItems.some(
+            (item) =>
+                item.id === product.id &&
+                item.selectedProductColor === selectedProductColor &&
+                item.selectedProductSize === selectedProductSize
+        );
+        setAddToCartButton(isInCart);
+    }, [cartItems, selectedProductColor, selectedProductSize, product.id]);
 
     return (
         <div className="product-details-content ml-70">
@@ -214,7 +222,7 @@ const ProductDescriptionInfo = ({
                 </div>
             ) : ( */}
             <div className="pro-details-quality">
-                {cartItems.find((item) => item.id === product.id) ? (
+                {addToCartButton ? (
                     <div className="pro-details-cart btn-hover ">
                         <button
                             className="bg-danger rounded"
@@ -284,28 +292,44 @@ const ProductDescriptionInfo = ({
                                         dispatch(
                                             addToCart({
                                                 ...product,
-                                                quantity: quantityCount,
-                                                selectedProductColor:
-                                                    selectedProductColor
-                                                        ? selectedProductColor
-                                                        : product.selectedProductColor
-                                                        ? product.selectedProductColor
-                                                        : null,
-                                                selectedProductSize:
-                                                    selectedProductSize
-                                                        ? selectedProductSize
-                                                        : product.selectedProductSize
-                                                        ? product.selectedProductSize
-                                                        : null,
+                                                // quantity: quantityCount,
+                                                // selectedProductColor:
+                                                //     selectedProductColor
+                                                //         ? selectedProductColor
+                                                //         : product.selectedProductColor
+                                                //         ? product.selectedProductColor
+                                                //         : null,
+                                                // selectedProductSize:
+                                                //     selectedProductSize
+                                                //         ? selectedProductSize
+                                                //         : product.selectedProductSize
+                                                //         ? product.selectedProductSize
+                                                //         : null,
+                                                // selectedProductPrice:
+                                                //     selectedProductPrice
+                                                //         ? selectedProductPrice
+                                                //         : product.selectedProductPrice
+                                                //         ? product.selectedProductPrice
+                                                //         : null,
+                                                quantity: 1,
+                                                selectedProductColor,
+                                                selectedProductSize,
                                                 selectedProductPrice:
-                                                    selectedProductPrice
-                                                        ? selectedProductPrice
-                                                        : product.selectedProductPrice
-                                                        ? product.selectedProductPrice
-                                                        : null,
+                                                    product.variation
+                                                        ? product.variation
+                                                              .find(
+                                                                  (v) =>
+                                                                      v.color ===
+                                                                      selectedProductColor
+                                                              )
+                                                              .size.find(
+                                                                  (s) =>
+                                                                      s.name ===
+                                                                      selectedProductSize
+                                                              ).price
+                                                        : product.price,
                                             })
                                         );
-                                        handdleChageButton();
                                     }}
                                     disabled={productCartQty >= productStock}
                                 >
