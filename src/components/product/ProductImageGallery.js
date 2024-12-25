@@ -66,7 +66,7 @@ const ProductImageGallery = ({ product }) => {
                                 </button>
                                 <img
                                     src={process.env.PUBLIC_URL + single}
-                                    className=" img-fluid x"
+                                    className=" img-fluid "
                                     alt=""
                                 />
                                 <div className="single-image"></div>
