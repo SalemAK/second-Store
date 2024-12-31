@@ -1,8 +1,9 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getDiscountPrice } from "../../../helpers/product";
 import { deleteFromCart } from "../../../store/slices/cart-slice";
+import ConfirmationPopup from "../../ConfirmationPopup";
 
 const MenuCart = () => {
     const dispatch = useDispatch();
@@ -10,6 +11,23 @@ const MenuCart = () => {
     const { cartItems } = useSelector((state) => state.cart);
     let cartTotalPrice = 0;
 
+    const [showPopup, setShowPopup] = useState(false);
+    const [itemToDelete, setItemToDelete] = useState(null);
+
+    const handleDeleteClick = (cartItemId) => {
+        setItemToDelete(cartItemId);
+        setShowPopup(true);
+    };
+
+    const confirmDelete = () => {
+        dispatch(deleteFromCart(itemToDelete));
+        setShowPopup(false);
+        setItemToDelete(null);
+    };
+    const cancelDelete = () => {
+        setShowPopup(false);
+        setItemToDelete(null);
+    };
     return (
         <div className="shopping-cart-content">
             {cartItems && cartItems.length > 0 ? (
@@ -99,10 +117,8 @@ const MenuCart = () => {
                                     <div className="shopping-cart-delete">
                                         <button
                                             onClick={() =>
-                                                dispatch(
-                                                    deleteFromCart(
-                                                        item.cartItemId
-                                                    )
+                                                handleDeleteClick(
+                                                    item.cartItemId
                                                 )
                                             }
                                         >
@@ -140,6 +156,13 @@ const MenuCart = () => {
                 </Fragment>
             ) : (
                 <p className="text-center">No items added to cart</p>
+            )}
+            {showPopup && (
+                <ConfirmationPopup
+                    message="Are you sure you want to remove this item ?"
+                    onConfirm={confirmDelete}
+                    onCancel={cancelDelete}
+                />
             )}
         </div>
     );

@@ -12,6 +12,7 @@ import { addToCompare } from "../../store/slices/compare-slice";
 import { getDiscountPrice } from "../../helpers/product";
 import { FaCodeCompare } from "react-icons/fa6";
 import { FaHeart } from "react-icons/fa";
+import ConfirmationPopup from "../ConfirmationPopup";
 
 function ProductModal({
     product,
@@ -101,6 +102,27 @@ function ProductModal({
         setAddToCartButton(isInCart);
     }, [cartItems, selectedProductColor, selectedProductSize, product.id]);
 
+    const [showPopup, setShowPopup] = useState(false);
+    const [productToRemove, setProductToRemove] = useState(null);
+
+    const handleRemoveClick = () => {
+        setProductToRemove({
+            id: product.id,
+            selectedProductColor,
+            selectedProductSize,
+        });
+        setShowPopup(true);
+    };
+
+    const confirmDelete = () => {
+        dispatch(removeFromCart(productToRemove));
+        setShowPopup(false);
+        setProductToRemove(null);
+    };
+    const cancelDelete = () => {
+        setShowPopup(false);
+        setProductToRemove(null);
+    };
     return (
         <Modal
             show={show}
@@ -334,15 +356,7 @@ function ProductModal({
                                     <div className="pro-details-cart btn-hover ">
                                         <button
                                             className="bg-danger rounded"
-                                            onClick={() =>
-                                                dispatch(
-                                                    removeFromCart({
-                                                        id: product.id,
-                                                        selectedProductColor,
-                                                        selectedProductSize,
-                                                    })
-                                                )
-                                            }
+                                            onClick={handleRemoveClick}
                                         >
                                             Remove from Cart
                                         </button>
@@ -489,6 +503,13 @@ function ProductModal({
                     </div>
                 </div>
             </div>
+            {showPopup && (
+                <ConfirmationPopup
+                    message="Are you sure you want to remove this item from cart ?"
+                    onConfirm={confirmDelete}
+                    onCancel={cancelDelete}
+                />
+            )}
         </Modal>
     );
 }

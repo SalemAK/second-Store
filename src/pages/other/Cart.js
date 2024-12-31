@@ -13,6 +13,8 @@ import {
 } from "../../store/slices/cart-slice";
 import { cartItemStock } from "../../helpers/product";
 import regionsData from "../../data/ourData/regionsData.json";
+import ConfirmationPopup from "../../components/ConfirmationPopup";
+import { CgProductHunt } from "react-icons/cg";
 
 const Cart = () => {
     // let cartTotalPrice = 0;
@@ -68,6 +70,23 @@ const Cart = () => {
         setEstimatedTotal(total); // Recalculate estimated total
     }, [selectedRegion, cartTotalPrice]); // Recalculate when either selectedRegion or cartTotalPrice changes
 
+    const [showPopup, setShowPopup] = useState(false);
+    const [itemToDelete, setItemToDelete] = useState(null);
+
+    const handleDeleteClick = (cartItemId) => {
+        setItemToDelete(cartItemId);
+        setShowPopup(true);
+    };
+
+    const confirmDelete = () => {
+        dispatch(deleteFromCart(itemToDelete));
+        setShowPopup(false);
+        setItemToDelete(null);
+    };
+    const cancelDelete = () => {
+        setShowPopup(false);
+        setItemToDelete(null);
+    };
     return (
         <Fragment>
             <SEO
@@ -290,10 +309,8 @@ const Cart = () => {
                                                                     <td className="product-remove">
                                                                         <button
                                                                             onClick={() =>
-                                                                                dispatch(
-                                                                                    deleteFromCart(
-                                                                                        cartItem.cartItemId
-                                                                                    )
+                                                                                handleDeleteClick(
+                                                                                    cartItem.cartItemId
                                                                                 )
                                                                             }
                                                                         >
@@ -526,6 +543,13 @@ const Cart = () => {
                                     </div>
                                 </div>
                             </div>
+                        )}
+                        {showPopup && (
+                            <ConfirmationPopup
+                                message="Are you sure you want to remove this item ?"
+                                onConfirm={confirmDelete}
+                                onCancel={cancelDelete}
+                            />
                         )}
                     </div>
                 </div>

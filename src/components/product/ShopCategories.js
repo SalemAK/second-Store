@@ -1,30 +1,41 @@
 import PropTypes from "prop-types";
-import { setActiveSort } from "../../helpers/product";
-import { useLocation, useNavigate } from "react-router-dom"; // Import useNavigate
+import { useLocation, useNavigate } from "react-router-dom";
 import clsx from "clsx";
 
 const ShopCategories = ({ categories = [], getSortParams }) => {
     const location = useLocation();
-    const navigate = useNavigate(); // Initialize navigate
-    const searchParams = new URLSearchParams(location.search);
-    const activeCategory = searchParams.get("category");
+    const navigate = useNavigate();
 
+    // Parse the URL query to get selected categories as an array
+    const searchParams = new URLSearchParams(location.search);
+    const activeCategories = searchParams.get("category")
+        ? searchParams.get("category").split(",")
+        : [];
+
+    // Handle category toggle (add/remove categories)
     const handleCategoryClick = (category, e) => {
         const newSearchParams = new URLSearchParams(location.search);
+        let updatedCategories;
 
-        if (category) {
-            // Set the category filter in the query string
-            newSearchParams.set("category", category);
+        if (activeCategories.includes(category)) {
+            // Remove category if already selected
+            updatedCategories = activeCategories.filter((c) => c !== category);
         } else {
-            // Remove the category filter if "All Categories" is clicked
+            // Add category if not selected
+            updatedCategories = [...activeCategories, category];
+        }
+
+        // Update the URL query string with the new categories
+        if (updatedCategories.length > 0) {
+            newSearchParams.set("category", updatedCategories.join(","));
+        } else {
             newSearchParams.delete("category");
         }
 
-        // Update the URL with the new query string
         navigate({ search: newSearchParams.toString() });
 
-        // Call setActiveSort function (handle active state for buttons)
-        setActiveSort(e, getSortParams, newSearchParams, navigate);
+        // Update sort params (for product filtering)
+        getSortParams("category", updatedCategories);
     };
 
     return (
@@ -33,29 +44,18 @@ const ShopCategories = ({ categories = [], getSortParams }) => {
             <div className="sidebar-widget-list mt-30">
                 {categories.length > 0 ? (
                     <ul>
-                        <li>
-                            <div className="sidebar-widget-list-left">
-                                <button
-                                    className={clsx("all-categories", {
-                                        active: !activeCategory, // Active if no category is selected
-                                    })}
-                                    onClick={(e) => handleCategoryClick("", e)} // Handle All Categories click
-                                >
-                                    <span className="checkmark" />
-                                    All Categories
-                                </button>
-                            </div>
-                        </li>
                         {categories.map((category, key) => (
                             <li key={key}>
                                 <div className="sidebar-widget-list-left">
                                     <button
                                         className={clsx({
-                                            active: activeCategory === category, // Mark the active category
+                                            active: activeCategories.includes(
+                                                category
+                                            ),
                                         })}
                                         onClick={(e) =>
                                             handleCategoryClick(category, e)
-                                        } // Handle individual category click
+                                        }
                                     >
                                         <span className="checkmark" />
                                         {category}

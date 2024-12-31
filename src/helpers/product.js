@@ -85,8 +85,13 @@ export const getSortedProducts = (products, sortType, sortValue, max) => {
 
     // Filter by Category
     if (sortType === "category" && sortValue) {
+        const selectedCategories = Array.isArray(sortValue)
+            ? sortValue
+            : sortValue.split(","); // Handle array or string
         return products.filter((product) =>
-            product.category.includes(sortValue)
+            selectedCategories.some((category) =>
+                product.category.includes(category)
+            )
         );
     }
 
