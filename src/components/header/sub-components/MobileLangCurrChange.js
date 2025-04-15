@@ -20,9 +20,7 @@ const MobileLangCurrChange = () => {
     };
 
     const closeMobileMenu = () => {
-        const offcanvasMobileMenu = document.querySelector(
-            "#offcanvas-mobile-menu"
-        );
+        const offcanvasMobileMenu = document.querySelector("#offcanvas-mobile-menu");
         offcanvasMobileMenu.classList.remove("active");
     };
 
@@ -30,15 +28,12 @@ const MobileLangCurrChange = () => {
         <div className="mobile-menu-middle">
             <div className="lang-curr-style">
                 <span className="title mb-2">Choose Language </span>
-                <select
-                    value={i18n.resolvedLanguage}
-                    onChange={changeLanguageTrigger}
-                >
+                <select value={i18n.resolvedLanguage} onChange={changeLanguageTrigger}>
                     <option value="en">English</option>
-                    <option value="ar">French</option>
+                    <option value="ar">Arabic</option>
                 </select>
             </div>
-            <div className="lang-curr-style">
+            {/* <div className="lang-curr-style">
                 <span className="title mb-2">Choose Currency</span>
                 <select
                     value={currency.currencyName}
@@ -47,7 +42,7 @@ const MobileLangCurrChange = () => {
                     <option value="USD">USD</option>
                     <option value="SAR">EUR</option>
                 </select>
-            </div>
+            </div> */}
         </div>
     );
 };

@@ -16,10 +16,7 @@ const Product = () => {
 
     return (
         <Fragment>
-            <SEO
-                titleTemplate="Product Page"
-                description="Product Page of flone react minimalist eCommerce template."
-            />
+            <SEO titleTemplate="Product Page" description="Product Page of flone react minimalist eCommerce template." />
 
             <LayoutOne headerTop="visible">
                 {/* breadcrumb */}
@@ -27,30 +24,21 @@ const Product = () => {
                     pages={[
                         { label: "Home", path: process.env.PUBLIC_URL + "/" },
                         {
+                            label: "Collection",
+                            path: process.env.PUBLIC_URL + "/shop-grid-standard",
+                        },
+                        {
                             label: "Shop Product",
                             path: process.env.PUBLIC_URL + pathname,
                         },
                     ]}
                 />
-
                 {/* product description with image */}
-                <ProductImageDescription
-                    spaceTopClass="pt-100"
-                    spaceBottomClass="pb-100"
-                    product={product}
-                />
-
+                <ProductImageDescription spaceTopClass="pt-100" spaceBottomClass="pb-100" product={product} />
                 {/* product description tab */}
-                <ProductDescriptionTab
-                    spaceBottomClass="pb-90"
-                    productFullDesc={product.fullDescription}
-                />
-
+                <ProductDescriptionTab spaceBottomClass="pb-90" productFullDesc={product.fullDescription} product={product} />
                 {/* related product slider */}
-                <RelatedProductSlider
-                    spaceBottomClass="pb-95"
-                    category={product.category[0]}
-                />
+                <RelatedProductSlider spaceBottomClass="pb-95" category={product.category[0]} />
             </LayoutOne>
         </Fragment>
     );

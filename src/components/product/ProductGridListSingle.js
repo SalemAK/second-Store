@@ -40,122 +40,15 @@ const ProductGridListSingle = ({
 
     return (
         <Fragment>
-            <div className={clsx("product-wrap ", spaceBottomClass)}>
-                <div className="product-img">
-                    <Link
-                        to={process.env.PUBLIC_URL + "/product/" + product.id}
-                    >
-                        <img
-                            className="default-img"
-                            src={process.env.PUBLIC_URL + product.image[0]}
-                            alt=""
-                        />
-                        {product.image.length > 1 ? (
-                            <img
-                                className="hover-img"
-                                src={process.env.PUBLIC_URL + product.image[1]}
-                                alt={product.name}
-                            />
-                        ) : (
-                            ""
-                        )}
-                    </Link>
-                    {product.discount || product.new ? (
-                        <div className="product-img-badges">
-                            {product.discount ? (
-                                <span className="pink">
-                                    -{product.discount}%
-                                </span>
-                            ) : (
-                                ""
-                            )}
-                            {product.new ? (
-                                <span className="purple">New</span>
-                            ) : (
-                                ""
-                            )}
-                        </div>
-                    ) : (
-                        ""
-                    )}
-
-                    <div className="product-action">
-                        <div className="pro-same-action pro-wishlist">
-                            <button
-                                className={
-                                    wishlistItem !== undefined ? "active" : ""
-                                }
-                                title={
-                                    wishlistItem !== undefined
-                                        ? "Added to wishlist"
-                                        : "Add to wishlist"
-                                }
-                                onClick={() => dispatch(addToWishlist(product))}
-                            >
-                                <i className="pe-7s-like" />
-                            </button>
-                        </div>
-                        <div className="pro-same-action pro-cart">
-                            {product.affiliateLink ? (
-                                <a
-                                    href={product.affiliateLink}
-                                    rel="noopener noreferrer"
-                                    target="_blank"
-                                >
-                                    {" "}
-                                    Buy now{" "}
-                                </a>
-                            ) : product.variation &&
-                              product.variation.length >= 1 ? (
-                                <Link
-                                    to={`${process.env.PUBLIC_URL}/product/${product.id}`}
-                                >
-                                    Select Option
-                                </Link>
-                            ) : product.stock && product.stock > 0 ? (
-                                <button
-                                    onClick={() => dispatch(addToCart(product))}
-                                    className={
-                                        cartItem !== undefined &&
-                                        cartItem.quantity > 0
-                                            ? "active"
-                                            : ""
-                                    }
-                                    disabled={
-                                        cartItem !== undefined &&
-                                        cartItem.quantity > 0
-                                    }
-                                    title={
-                                        cartItem !== undefined
-                                            ? "Added to cart"
-                                            : "Add to cart"
-                                    }
-                                >
-                                    {" "}
-                                    <i className="pe-7s-cart"></i>{" "}
-                                    {cartItem !== undefined &&
-                                    cartItem.quantity > 0
-                                        ? "Added"
-                                        : "Add to cart"}
-                                </button>
-                            ) : (
-                                <button disabled className="active">
-                                    Out of Stock
-                                </button>
-                            )}
-                        </div>
-                        <div className="pro-same-action pro-quickview">
-                            <button
-                                onClick={() => setModalShow(true)}
-                                title="Quick View"
-                            >
-                                <i className="pe-7s-look" />
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div className="product-content text-center">
-                    <h3>
+            {/* Product Card */}
+            <div
+                className={clsx(
+                    "product-wrap h-100 card p-3 shadow-sm  ",
+                    spaceBottomClass
+                )}
+            >
+                <div className="">
+                    <div className="product-img position-relative">
                         <Link
                             to={
                                 process.env.PUBLIC_URL +
@@ -163,47 +56,157 @@ const ProductGridListSingle = ({
                                 product.id
                             }
                         >
-                            {product.name}
+                            <img
+                                className="default-img rounded"
+                                src={process.env.PUBLIC_URL + product.image[0]}
+                                alt=""
+                            />
+                            {product.image.length > 1 ? (
+                                <img
+                                    className="hover-img img-fluid rounded position-absolute  w-100 h-100 hover-opacity"
+                                    src={
+                                        process.env.PUBLIC_URL +
+                                        product.image[1]
+                                    }
+                                    alt={product.name}
+                                />
+                            ) : (
+                                ""
+                            )}
                         </Link>
-                    </h3>
-                    {/* {product.rating && product.rating > 0 ? (
+                        {/* Badges */}
+                        {product.discount || product.new ? (
+                            <div className="product-img-badges">
+                                {product.discount ? (
+                                    <span className="pink">
+                                        -{product.discount}%
+                                    </span>
+                                ) : (
+                                    ""
+                                )}
+                                {product.new ? (
+                                    <span className="purple">New</span>
+                                ) : (
+                                    ""
+                                )}
+                            </div>
+                        ) : (
+                            ""
+                        )}
+                        {/* Actions */}
+                        <div className="position-absolute bottom-0 start-0 m-2 d-flex gap-2">
+                            <button
+                                className={`btn btn-sm ${
+                                    wishlistItem
+                                        ? "btn-danger"
+                                        : "btn-outline-secondary"
+                                }`}
+                                onClick={() => dispatch(addToWishlist(product))}
+                            >
+                                <FaHeart />
+                            </button>
+                            <button
+                                className="btn btn-sm btn-outline-secondary"
+                                onClick={() => setModalShow(true)}
+                            >
+                                Quick View
+                            </button>
+                            <button
+                                className={`btn btn-sm ${
+                                    compareItem
+                                        ? "btn-primary"
+                                        : "btn-outline-secondary"
+                                }`}
+                                onClick={() => dispatch(addToCompare(product))}
+                            >
+                                <FaCodeCompare />
+                            </button>
+                        </div>
+                        <div className="pro-same-action pro-cart"></div>
+                    </div>
+                    <div className="product-content text-top ">
+                        <h3 className="fw-bold product-title">
+                            <Link
+                                to={
+                                    process.env.PUBLIC_URL +
+                                    "/product/" +
+                                    product.id
+                                }
+                            >
+                                {product.name}
+                            </Link>
+                        </h3>
+
+                        {/* {product.rating && product.rating > 0 ? (
                         <div className="product-rating">
                             <Rating ratingValue={product.rating} />
                         </div>
                     ) : (
                         ""
                     )} */}
-                    <div className="product-price">
-                        {discountedPrice !== null ? (
-                            <Fragment>
+                        <div className="product-price">
+                            {discountedPrice !== null ? (
+                                <Fragment>
+                                    <span className="fw-bold text-primary me-1">
+                                        <h4 className="fs-6 text-muted">
+                                            {" "}
+                                            From{" "}
+                                        </h4>
+                                        <img
+                                            src={currency.currencySymbol}
+                                            className="img-fluid "
+                                            alt="Saudi Riyal"
+                                            width={15}
+                                            style={{ pointerEvents: "auto" }}
+                                        />
+                                        {" " + finalDiscountedPrice}
+                                    </span>
+                                    {/* <span className="fw-bold">{"-"}</span> */}
+                                    <span className="old">
+                                        {" " + finalProductPrice}
+                                    </span>
+                                </Fragment>
+                            ) : (
                                 <span>
-                                    {currency.currencySymbol +
-                                        " " +
-                                        finalDiscountedPrice}
+                                    <h4 className="fs-6 text-muted"> From </h4>
+                                    <img
+                                        src={currency.currencySymbol}
+                                        className="img-fluid  item"
+                                        alt="Saudi Riyal"
+                                        width={15}
+                                        style={{ pointerEvents: "auto" }}
+                                    />
+                                    {" " + finalProductPrice}
                                 </span>
-                                <span className="fw-bold">{"-"}</span>
-                                <span className="old">
-                                    {currency.currencySymbol +
-                                        " " +
-                                        finalProductPrice}
-                                </span>
-                            </Fragment>
+                            )}
+                        </div>
+                        {/* Add to Cart */}
+                        {product.variation[0].size.some((s) => s.stock > 0) ? (
+                            <button className="btn btn-primary w-100 mt-1">
+                                <Link
+                                    to={`${process.env.PUBLIC_URL}/product/${product.id}`}
+                                >
+                                    Select Option
+                                </Link>
+                            </button>
                         ) : (
-                            <span>
-                                {currency.currencySymbol +
-                                    " " +
-                                    finalProductPrice}{" "}
-                            </span>
+                            <button className="btn btn-secondary w-100 mt-1">
+                                <Link
+                                    to={`${process.env.PUBLIC_URL}/product/${product.id}`}
+                                >
+                                    Out of Stock
+                                </Link>
+                            </button>
                         )}
                     </div>
                 </div>
             </div>
             {/* filter 3rd product + price + small description */}
-            <div className="shop-list-wrap mb-30">
-                <div className="row">
-                    <div className="col-xl-4 col-md-5 col-sm-6">
+            <div className="shop-list-wrap  card shadow-sm p-1">
+                <div className="row px-2 px-md-0">
+                    <div className="col-lg-4 col-md-5 col-sm-6 col-12 ">
                         <div className="product-list-image-wrap">
-                            <div className="product-img">
+                            <div className="product-img position-relative">
                                 <Link
                                     to={
                                         process.env.PUBLIC_URL +
@@ -212,7 +215,7 @@ const ProductGridListSingle = ({
                                     }
                                 >
                                     <img
-                                        className="default-img img-fluid"
+                                        className="default-img img-fluid  rounded"
                                         src={
                                             process.env.PUBLIC_URL +
                                             product.image[0]
@@ -221,7 +224,7 @@ const ProductGridListSingle = ({
                                     />
                                     {product.image.length > 1 ? (
                                         <img
-                                            className="hover-img img-fluid"
+                                            className="hover-img img-fluid w-100 position-absolute rounded"
                                             src={
                                                 process.env.PUBLIC_URL +
                                                 product.image[1]
@@ -233,7 +236,7 @@ const ProductGridListSingle = ({
                                     )}
                                 </Link>
                                 {product.discount || product.new ? (
-                                    <div className="product-img-badges">
+                                    <div className="product-img-badges position-absolute">
                                         {product.discount ? (
                                             <span className="pink">
                                                 -{product.discount}%
@@ -253,7 +256,7 @@ const ProductGridListSingle = ({
                             </div>
                         </div>
                     </div>
-                    <div className="col-xl-8 col-md-7 col-sm-6">
+                    <div className="col-lg-8 col-md-7 col-sm-6 col-12">
                         <div className="shop-list-content">
                             <h3>
                                 <Link
@@ -269,23 +272,43 @@ const ProductGridListSingle = ({
                             <div className="product-list-price">
                                 {discountedPrice !== null ? (
                                     <Fragment>
-                                        <span>
-                                            {currency.currencySymbol +
-                                                " " +
-                                                finalDiscountedPrice}
+                                        <span className="fw-bold">
+                                            <h4 className="fs-6 text-muted">
+                                                {" "}
+                                                From{" "}
+                                            </h4>
+                                            <img
+                                                src={currency.currencySymbol}
+                                                className="img-fluid  item"
+                                                alt="Saudi Riyal"
+                                                width={15}
+                                                style={{
+                                                    pointerEvents: "auto",
+                                                }}
+                                            />
+                                            {" " + finalDiscountedPrice}
                                         </span>
-                                        <span className="fw-bold">{"-"}</span>
+                                        {/* <span className="fw-bold">{"-"}</span> */}
                                         <span className="old">
-                                            {currency.currencySymbol +
-                                                " " +
-                                                finalProductPrice}
+                                            {" " + finalProductPrice}
                                         </span>
                                     </Fragment>
                                 ) : (
                                     <span>
-                                        {currency.currencySymbol +
-                                            " " +
-                                            finalProductPrice}{" "}
+                                        <h4 className="fs-6 text-muted">
+                                            {" "}
+                                            From{" "}
+                                        </h4>
+                                        <img
+                                            src={currency.currencySymbol}
+                                            className="img-fluid  item"
+                                            alt="Saudi Riyal"
+                                            width={15}
+                                            style={{
+                                                pointerEvents: "auto",
+                                            }}
+                                        />
+                                        {" " + finalProductPrice}{" "}
                                     </span>
                                 )}
                             </div>
@@ -304,97 +327,64 @@ const ProductGridListSingle = ({
                                 ""
                             )}
 
-                            <div className="shop-list-actions d-flex align-items-center">
-                                <div className="shop-list-btn btn-hover">
-                                    {product.affiliateLink ? (
-                                        <a
-                                            href={product.affiliateLink}
-                                            rel="noopener noreferrer"
-                                            target="_blank"
-                                        >
-                                            {" "}
-                                            Buy now{" "}
-                                        </a>
-                                    ) : product.variation &&
-                                      product.variation.length >= 1 ? (
-                                        <Link
-                                            to={`${process.env.PUBLIC_URL}/product/${product.id}`}
-                                        >
-                                            Select Option
-                                        </Link>
-                                    ) : product.stock && product.stock > 0 ? (
-                                        <button
-                                            onClick={() =>
-                                                dispatch(addToCart(product))
-                                            }
-                                            className={
-                                                cartItem !== undefined &&
-                                                cartItem.quantity > 0
-                                                    ? "active"
-                                                    : ""
-                                            }
-                                            disabled={
-                                                cartItem !== undefined &&
-                                                cartItem.quantity > 0
-                                            }
-                                            title={
-                                                cartItem !== undefined
-                                                    ? "Added to cart"
-                                                    : "Add to cart"
-                                            }
-                                        >
-                                            {" "}
-                                            <i className="pe-7s-cart"></i>{" "}
-                                            {cartItem !== undefined &&
-                                            cartItem.quantity > 0
-                                                ? "Added"
-                                                : "Add to cart"}
+                            <div className="shop-list-actions d-flex flex-wrap align-items-center gap-1 mt-3">
+                                <div className=" btn-hover">
+                                    {product.variation[0].size.some(
+                                        (s) => s.stock > 0
+                                    ) ? (
+                                        <button className="btn btn-primary btn-block">
+                                            <Link
+                                                to={`${process.env.PUBLIC_URL}/product/${product.id}`}
+                                            >
+                                                Select Option
+                                            </Link>
                                         </button>
                                     ) : (
-                                        <button disabled className="active">
-                                            Out of Stock
+                                        <button className="btn btn-secondary btn-block ">
+                                            <Link
+                                                to={`${process.env.PUBLIC_URL}/product/${product.id}`}
+                                            >
+                                                Out of Stock
+                                            </Link>
                                         </button>
                                     )}
                                 </div>
 
-                                <div className="shop-list-wishlist ml-10">
-                                    <button
-                                        className={
-                                            wishlistItem !== undefined
-                                                ? "active"
-                                                : ""
-                                        }
-                                        title={
-                                            wishlistItem !== undefined
-                                                ? "Added to wishlist"
-                                                : "Add to wishlist"
-                                        }
-                                        onClick={() =>
-                                            dispatch(addToWishlist(product))
-                                        }
-                                    >
-                                        <FaHeart />
-                                    </button>
-                                </div>
-                                <div className="shop-list-compare ml-10">
-                                    <button
-                                        className={
-                                            compareItem !== undefined
-                                                ? "active"
-                                                : ""
-                                        }
-                                        title={
-                                            compareItem !== undefined
-                                                ? "Added to compare"
-                                                : "Add to compare"
-                                        }
-                                        onClick={() =>
-                                            dispatch(addToCompare(product))
-                                        }
-                                    >
-                                        <FaCodeCompare />
-                                    </button>
-                                </div>
+                                <button
+                                    className={`btn btn-sm ${
+                                        wishlistItem
+                                            ? "btn-danger"
+                                            : "btn-outline-danger"
+                                    }`}
+                                    title={
+                                        wishlistItem !== undefined
+                                            ? "Added to wishlist"
+                                            : "Add to wishlist"
+                                    }
+                                    onClick={() =>
+                                        dispatch(addToWishlist(product))
+                                    }
+                                >
+                                    <FaHeart />
+                                </button>
+
+                                <button
+                                    className={`btn btn-sm ${
+                                        compareItem
+                                            ? "btn-warning"
+                                            : "btn-outline-warning"
+                                    }`}
+                                    title={
+                                        compareItem !== undefined
+                                            ? "Added to compare"
+                                            : "Add to compare"
+                                    }
+                                    onClick={() =>
+                                        dispatch(addToCompare(product))
+                                    }
+                                >
+                                    <FaCodeCompare />
+                                </button>
                             </div>
                         </div>
                     </div>

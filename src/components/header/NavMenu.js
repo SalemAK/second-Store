@@ -7,19 +7,11 @@ const NavMenu = ({ menuWhiteClass, sidebarMenu }) => {
     const { t } = useTranslation();
 
     return (
-        <div
-            className={clsx(
-                sidebarMenu
-                    ? "sidebar-menu"
-                    : `main-menu ${menuWhiteClass ? menuWhiteClass : ""}`
-            )}
-        >
+        <div className={clsx(sidebarMenu ? "sidebar-menu" : `main-menu ${menuWhiteClass ? menuWhiteClass : ""}`)}>
             <nav>
                 <ul>
                     <li>
-                        <Link to={process.env.PUBLIC_URL + "/"}>
-                            {t("Home")}
-                        </Link>
+                        <Link to={process.env.PUBLIC_URL + "/"}>{t("Home")}</Link>
                     </li>
 
                     {/* <li>
@@ -268,13 +260,12 @@ const NavMenu = ({ menuWhiteClass, sidebarMenu }) => {
                         </ul>
                     </li> */}
                     <li>
-                        <Link
-                            to={process.env.PUBLIC_URL + "/shop-grid-standard"}
-                        >
-                            {t("collection")}
-                        </Link>
+                        <Link to={process.env.PUBLIC_URL + "/shop-grid-standard"}>{t("collection")}</Link>
                     </li>
                     <li>
+                        <Link to={process.env.PUBLIC_URL + "/about"}>{t("about_us")}</Link>
+                    </li>
+                    {/* <li>
                         <Link to={process.env.PUBLIC_URL + "/"}>
                             {t("pages")}
                             {sidebarMenu ? (
@@ -395,11 +386,9 @@ const NavMenu = ({ menuWhiteClass, sidebarMenu }) => {
                                 </Link>
                             </li>
                         </ul>
-                    </li>
+                    </li> */}
                     <li>
-                        <Link to={process.env.PUBLIC_URL + "/contact"}>
-                            {t("contact_us")}
-                        </Link>
+                        <Link to={process.env.PUBLIC_URL + "/contact"}>{t("contact_us")}</Link>
                     </li>
                 </ul>
             </nav>

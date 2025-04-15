@@ -1,11 +1,14 @@
 import { Fragment, useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { getDiscountPrice } from "../../helpers/product";
 import SEO from "../../components/seo";
 import LayoutOne from "../../layouts/LayoutOne";
 import Breadcrumb from "../../wrappers/breadcrumb/Breadcrumb";
 import regionsData from "../../data/ourData/regionsData.json";
+// import { convertToWords } from "../../utils/numberToWords";
+import CompanyForm from "../../components/forms/companyForm";
+import PersonalForm from "../../components/forms/PersonalForm";
 
 const Checkout = () => {
     let cartTotalPrice = 0;
@@ -14,18 +17,46 @@ const Checkout = () => {
     const currency = useSelector((state) => state.currency);
     const { cartItems } = useSelector((state) => state.cart);
 
-    const [selectedOption, setSelectedOption] = useState("Delivery");
+    const [selectedOption, setSelectedOption] = useState("Company");
     const [selectedRegion, setSelectedRegion] = useState("riyadh");
     const handleRegionChange = (event) => {
         setSelectedRegion(event.target.value); // Update selected region
     };
+    //saving customer info
+    const navigate = useNavigate();
+    const [personalInfo, setPersonalInfo] = useState({
+        firstName: "",
+        lastName: "",
+        address: "",
+        street: "",
+        building: "",
+        postcode: "",
+        phone: "",
+        email: "",
+    });
+
+    const [companyInfo, setCompanyInfo] = useState({
+        firstName: "",
+        lastName: "",
+        companyName: "",
+        vat: "",
+        address: "",
+        street: "",
+        building: "",
+        postcode: "",
+        idType: "",
+        idNumber: "",
+        Branch: "",
+        phone: "",
+        email: "",
+    });
 
     // Handle change event
     const handleOptionChange = (event) => {
         setSelectedOption(event.target.value);
     };
     const [shippingCost, setShippingCost] = useState(0);
-    const [taxAmount, setTaxAmount] = useState(0);
+    const [taxAmount, setTaxAmount] = useState(0.15);
     const [estimatedTotal, setEstimatedTotal] = useState(cartTotalPrice);
     useEffect(() => {
         let total = 0;
@@ -42,17 +73,133 @@ const Checkout = () => {
             setEstimatedTotal(total); // Recalculate estimated total
         }
     }, [selectedRegion, cartTotalPrice, selectedOption]); // Recalculate when either selectedRegion or cartTotalPrice changes
+
+    // const handlePlaceOrder = () => {
+    //     const buyerType = selectedOption;
+    //     const customer = buyerType === "Company" ? companyInfo : personalInfo;
+
+    //     const orderData = {
+    //         buyerType,
+    //         customer,
+    //         cartItems,
+    //         taxAmount: taxAmount,
+    //         estimatedTotal,
+    //         shippingCost: 0,
+    //         invoiceNumber: "INV-" + Math.floor(Math.random() * 100000),
+    //         date: new Date().toLocaleDateString(),
+    //     };
+
+    //     navigate("/invoice", { state: orderData });
+    // };
+
+    const validateCompanyForm = () => {
+        const fields = {
+            firstName: "First Name",
+            lastName: "Last Name",
+            companyName: "Company Name",
+            vat: "VAT Number",
+            address: "Address",
+            street: "Street",
+            building: "Building",
+            postcode: "Postal Code",
+            idType: "ID Type",
+            idNumber: "ID Number",
+            Branch: "Branch",
+            phone: "Phone Number",
+            email: "Email",
+        };
+
+        for (let key in fields) {
+            if (!companyInfo[key] || companyInfo[key].trim() === "") {
+                alert(`Please fill in the "${fields[key]}" field.`);
+                return false;
+            }
+        }
+
+        return true;
+    };
+
+    const validatePersonalForm = () => {
+        const fields = {
+            firstName: "First Name",
+            lastName: "Last Name",
+            idType: "ID Type",
+            idNumber: "ID Number",
+            phone: "Phone Number",
+            email: "Email",
+            address: "Address",
+        };
+
+        for (let key in fields) {
+            if (!personalInfo[key] || personalInfo[key].trim() === "") {
+                alert(`Please fill in the "${fields[key]}" field.`);
+                return false;
+            }
+        }
+
+        return true;
+    };
+
+    const handlePlaceOrder = () => {
+        const buyerType = selectedOption;
+
+        if (buyerType === "Company" && !validateCompanyForm()) {
+            return; // Stop if validation fails
+        }
+        if (buyerType === "Personal" && !validatePersonalForm()) {
+            return; // Stop if validation fails
+        }
+        const customer = buyerType === "Company" ? companyInfo : personalInfo;
+
+        // Calculate cart totals
+        const subtotal = cartItems.reduce((sum, item) => {
+            const discountedPrice = getDiscountPrice(item.selectedProductPrice, item.discount);
+            return sum + (discountedPrice !== null ? discountedPrice * item.quantity : item.selectedProductPrice * item.quantity);
+        }, 0);
+
+        const orderData = {
+            buyerType,
+            customer,
+            items: cartItems.map((item) => {
+                const discountedPrice = getDiscountPrice(item.selectedProductPrice, item.discount);
+                const price = discountedPrice !== null ? discountedPrice : item.selectedProductPrice;
+                const beforeTax = price * item.quantity;
+                const vat = beforeTax * 0.15;
+
+                return {
+                    code: item.id || "N/A",
+                    name: item.name,
+                    unit: "PCS", // or get from product data
+                    qty: item.quantity,
+                    price: item.selectedProductPrice,
+                    discount: discountedPrice || 0, // or calculate if you have discounts
+                    beforeTax: beforeTax.toFixed(2),
+                    vat: vat.toFixed(2),
+                    total: (beforeTax + vat).toFixed(2),
+                };
+            }),
+            invoiceNumber: "INV-" + Math.floor(Math.random() * 100000),
+            date: new Date().toLocaleDateString(),
+            subtotal: subtotal.toFixed(2),
+            discount: 0, // add if you have discounts
+            vat: taxAmount.toFixed(2),
+            netTotal: estimatedTotal.toFixed(2),
+            // amountInWords: convertToWords(estimatedTotal), // implement this function
+            salesman: "Online Store", // or get from system
+        };
+        console.log(orderData);
+
+        navigate("/placeOrder", { state: orderData });
+    };
     return (
         <Fragment>
-            <SEO
-                titleTemplate="Checkout"
-                description="Checkout page of flone react minimalist eCommerce template."
-            />
+            <SEO titleTemplate="Checkout" description="Checkout page of flone react minimalist eCommerce template." />
             <LayoutOne headerTop="visible">
                 {/* breadcrumb */}
                 <Breadcrumb
                     pages={[
                         { label: "Home", path: process.env.PUBLIC_URL + "/" },
+                        { label: "Cart", path: process.env.PUBLIC_URL + "/cart" },
                         {
                             label: "Checkout",
                             path: process.env.PUBLIC_URL + pathname,
@@ -61,279 +208,66 @@ const Checkout = () => {
                 />
                 <div className="checkout-area pt-95 pb-100">
                     <div className="container">
-                        <div className="col-lg-12 d-flex justify-content-center mb-4">
-                            <div className="row">
-                                <div className="col-lg-6 col-md-6 ">
-                                    <h3 className="mt-2">
-                                        Pickup / delivery :
-                                    </h3>
-                                </div>
-                                <div className="col-lg-4 col-md-4 ">
-                                    <div class="radio-input">
-                                        <label>
-                                            <input
-                                                value="Delivery"
-                                                name="value-radio"
-                                                id="value-2"
-                                                type="radio"
-                                                checked={
-                                                    selectedOption ===
-                                                    "Delivery"
-                                                }
-                                                onChange={handleOptionChange}
-                                            />
-                                            <span>Delivery</span>
-                                        </label>
-                                        <label>
-                                            <input
-                                                value="Pick up"
-                                                name="value-radio"
-                                                id="value-1"
-                                                type="radio"
-                                                checked={
-                                                    selectedOption === "Pick up"
-                                                }
-                                                onChange={handleOptionChange}
-                                            />
-                                            <span>Pick up</span>
-                                        </label>
-                                        <span class="selection"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <hr />
-
                         {cartItems && cartItems.length >= 1 ? (
                             <div className="row">
-                                {selectedOption === "Delivery" ? (
+                                {selectedOption === "Company" ? (
                                     <div className="col-lg-7">
                                         <div className="billing-info-wrap">
+                                            <div className="container">
+                                                <div className="row align-items-center">
+                                                    <div className="col-lg-4 col-md-4">
+                                                        <h4 className="mt-2">Company/Personal</h4>
+                                                    </div>
+                                                    <div className="col-lg-6 col-md-6">
+                                                        <div className="radio-input d-flex gap-3 w-100">
+                                                            <label className="d-flex align-items-center">
+                                                                <input type="radio" name="buyerType" value="Company" checked={selectedOption === "Company"} onChange={handleOptionChange} className="form-check-input me-2" />
+                                                                <span className={`btn btn-${selectedOption === "Company" ? "primary" : "secondary"}`}>Company</span>
+                                                            </label>
+                                                            <label className="d-flex align-items-center">
+                                                                <input type="radio" name="buyerType" value="Personal" checked={selectedOption === "Personal"} onChange={handleOptionChange} className="form-check-input me-2" />
+                                                                <span className={`btn btn-${selectedOption === "Personal" ? "primary" : "secondary"}`}>Personal</span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <hr className="mt-3" />
+                                            </div>
                                             <h3>Billing Details</h3>
-                                            <div className="row">
-                                                <div className="col-lg-6 col-md-6">
-                                                    <div className="billing-info mb-20">
-                                                        <label>
-                                                            First Name
-                                                        </label>
-                                                        <input type="text" />
-                                                    </div>
-                                                </div>
-                                                <div className="col-lg-6 col-md-6">
-                                                    <div className="billing-info mb-20">
-                                                        <label>Last Name</label>
-                                                        <input type="text" />
-                                                    </div>
-                                                </div>
-                                                <div className="col-lg-12">
-                                                    <div className="billing-info mb-20">
-                                                        <label>
-                                                            Company Name
-                                                        </label>
-                                                        <input type="text" />
-                                                    </div>
-                                                </div>
-                                                <div className="col-lg-12">
-                                                    <div className="billing-select mb-20">
-                                                        <label>* Country</label>
-                                                        <select>
-                                                            <option selected>
-                                                                Saudi Arabia
-                                                            </option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div className="col-lg-12">
-                                                    <div className="billing-select mb-20">
-                                                        <label>
-                                                            * Region / State
-                                                        </label>
-                                                        <select
-                                                            value={
-                                                                selectedRegion
-                                                            }
-                                                            onChange={
-                                                                handleRegionChange
-                                                            }
-                                                        >
-                                                            {Object.keys(
-                                                                regionsData
-                                                            ).map(
-                                                                (regionKey) => (
-                                                                    <option
-                                                                        key={
-                                                                            regionKey
-                                                                        }
-                                                                        value={
-                                                                            regionKey
-                                                                        }
-                                                                    >
-                                                                        {regionKey
-                                                                            .charAt(
-                                                                                0
-                                                                            )
-                                                                            .toUpperCase() +
-                                                                            regionKey
-                                                                                .slice(
-                                                                                    1
-                                                                                )
-                                                                                .replace(
-                                                                                    "_",
-                                                                                    " "
-                                                                                )}
-                                                                    </option>
-                                                                )
-                                                            )}
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div className="col-lg-12">
-                                                    <div className="billing-info mb-20">
-                                                        <label>
-                                                            Street Address
-                                                        </label>
-                                                        <input
-                                                            className="billing-address"
-                                                            placeholder="House number and street name"
-                                                            type="text"
-                                                        />
-                                                        <input
-                                                            placeholder="Apartment, suite, unit etc."
-                                                            type="text"
-                                                        />
-                                                    </div>
-                                                </div>
-                                                {/* <div className="col-lg-12">
-                                                    <div className="billing-info mb-20">
-                                                        <label>
-                                                            Town / City
-                                                        </label>
-                                                        <input type="text" />
-                                                    </div>
-                                                </div> */}
-                                                {/* <div className="col-lg-6 col-md-6">
-                                                    <div className="billing-info mb-20">
-                                                        <label>
-                                                            State / County
-                                                        </label>
-                                                        <input type="text" />
-                                                    </div>
-                                                </div> */}
-                                                <div className="col-lg-6 col-md-6">
-                                                    <div className="billing-info mb-20">
-                                                        <label>
-                                                            Postcode / ZIP
-                                                        </label>
-                                                        <input type="text" />
-                                                    </div>
-                                                </div>
-                                                <div className="col-lg-6 col-md-6">
-                                                    <div className="billing-info mb-20">
-                                                        <label>Phone</label>
-                                                        <input type="text" />
-                                                    </div>
-                                                </div>
-                                                <div className="col-lg-6 col-md-6">
-                                                    <div className="billing-info mb-20">
-                                                        <label>
-                                                            Email Address
-                                                        </label>
-                                                        <input type="text" />
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="additional-info-wrap">
-                                                <h4>Additional information</h4>
-                                                <div className="additional-info">
-                                                    <label>Order notes</label>
-                                                    <textarea
-                                                        placeholder="Notes about your order, e.g. special notes for delivery. "
-                                                        name="message"
-                                                        defaultValue={""}
-                                                    />
-                                                </div>
-                                            </div>
+                                            <CompanyForm info={companyInfo} setInfo={setCompanyInfo} />
                                         </div>
                                     </div>
                                 ) : (
                                     <div className="col-lg-7">
                                         <div className="billing-info-wrap">
-                                            <h3>Billing Details</h3>
-                                            <div className="row">
-                                                <div className="col-lg-6 col-md-6">
-                                                    <div className="billing-info mb-20">
-                                                        <label>
-                                                            First Name
-                                                        </label>
-                                                        <input type="text" />
+                                            <div className="container">
+                                                <div className="row align-items-center">
+                                                    <div className="col-lg-4 col-md-4">
+                                                        <h4 className="mt-2">Company/Personal</h4>
+                                                    </div>
+                                                    <div className="col-lg-6 col-md-6">
+                                                        <div className="radio-input d-flex gap-3 w-100">
+                                                            <label className="d-flex align-items-center">
+                                                                <input type="radio" value="Company" name="value-radio" checked={selectedOption === "Company"} onChange={handleOptionChange} className="form-check-input me-2" />
+                                                                <span className={`btn btn-${selectedOption === "Company" ? "primary" : "secondary"}`}>Company</span>
+                                                            </label>
+                                                            <label className="d-flex align-items-center">
+                                                                <input type="radio" value="Personal" name="value-radio" checked={selectedOption === "Personal"} onChange={handleOptionChange} className="form-check-input me-2" />
+                                                                <span className={`btn btn-${selectedOption === "Personal" ? "primary" : "secondary"}`}>Personal</span>
+                                                            </label>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div className="col-lg-6 col-md-6">
-                                                    <div className="billing-info mb-20">
-                                                        <label>Last Name</label>
-                                                        <input type="text" />
-                                                    </div>
-                                                </div>
-                                                <div className="col-lg-12">
-                                                    <div className="billing-info mb-20">
-                                                        <label>
-                                                            Company Name
-                                                        </label>
-                                                        <input type="text" />
-                                                    </div>
-                                                </div>
-                                                <div className="col-lg-12">
-                                                    <div className="billing-select mb-20">
-                                                        <label>Branch</label>
-                                                        <select>
-                                                            <option>
-                                                                Select a Branch
-                                                            </option>
-                                                            <option>
-                                                                riyadh
-                                                            </option>
-                                                            <option>
-                                                                mecca
-                                                            </option>
-                                                            <option>
-                                                                tabuk
-                                                            </option>
-                                                            <option>
-                                                                jizan
-                                                            </option>
-                                                            <option>
-                                                                makkah
-                                                            </option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-
-                                                <div className="col-lg-6 col-md-6">
-                                                    <div className="billing-info mb-20">
-                                                        <label>Phone</label>
-                                                        <input type="text" />
-                                                    </div>
-                                                </div>
-                                                <div className="col-lg-6 col-md-6">
-                                                    <div className="billing-info mb-20">
-                                                        <label>
-                                                            Email Address
-                                                        </label>
-                                                        <input type="text" />
-                                                    </div>
-                                                </div>
+                                                <hr className="mt-3" />
                                             </div>
-
-                                            <div className="additional-info-wrap">
+                                            <h3>Billing Details</h3>
+                                            <PersonalForm info={personalInfo} setInfo={setPersonalInfo} />
+                                            <hr />
+                                            <div className="additional-info-wrap ">
                                                 <h4>Additional information</h4>
                                                 <div className="additional-info">
                                                     <label>Order notes</label>
-                                                    <textarea
-                                                        placeholder="Notes about your order, e.g. special notes for delivery. "
-                                                        name="message"
-                                                        defaultValue={""}
-                                                    />
+                                                    <textarea placeholder="Notes about your order, e.g. special notes for delivery. " name="message" defaultValue={""} />
                                                 </div>
                                             </div>
                                         </div>
@@ -348,133 +282,122 @@ const Checkout = () => {
                                                 <div className="your-order-top">
                                                     <ul>
                                                         <li>Product</li>
+                                                        <li></li>
                                                         <li>Total</li>
                                                     </ul>
                                                 </div>
                                                 <div className="your-order-middle">
                                                     <ul>
-                                                        {cartItems.map(
-                                                            (cartItem, key) => {
-                                                                const discountedPrice =
-                                                                    getDiscountPrice(
-                                                                        cartItem.selectedProductPrice,
-                                                                        cartItem.discount
-                                                                    );
-                                                                const finalProductPrice =
-                                                                    (
-                                                                        cartItem.selectedProductPrice *
-                                                                        currency.currencyRate
-                                                                    ).toFixed(
-                                                                        2
-                                                                    );
-                                                                const finalDiscountedPrice =
-                                                                    (
-                                                                        discountedPrice *
-                                                                        currency.currencyRate
-                                                                    ).toFixed(
-                                                                        2
-                                                                    );
+                                                        {cartItems.map((cartItem, key) => {
+                                                            const discountedPrice = getDiscountPrice(cartItem.selectedProductPrice, cartItem.discount);
+                                                            const finalProductPrice = (cartItem.selectedProductPrice * currency.currencyRate).toFixed(2);
+                                                            const finalDiscountedPrice = (discountedPrice * currency.currencyRate).toFixed(2);
 
-                                                                discountedPrice !=
-                                                                null
-                                                                    ? (cartTotalPrice +=
-                                                                          finalDiscountedPrice *
-                                                                          cartItem.quantity)
-                                                                    : (cartTotalPrice +=
-                                                                          finalProductPrice *
-                                                                          cartItem.quantity);
-                                                                return (
-                                                                    <li
-                                                                        key={
-                                                                            key
-                                                                        }
-                                                                    >
+                                                            discountedPrice != null ? (cartTotalPrice += finalDiscountedPrice * cartItem.quantity) : (cartTotalPrice += finalProductPrice * cartItem.quantity);
+                                                            return (
+                                                                <li key={key} className="row ">
+                                                                    <div className="col-10">
                                                                         <span className="order-middle-left">
-                                                                            {
-                                                                                cartItem.name
-                                                                            }{" "}
-                                                                            X{" "}
-                                                                            {
-                                                                                cartItem.quantity
-                                                                            }
-                                                                        </span>{" "}
-                                                                        <span className="order-price">
-                                                                            {discountedPrice !==
-                                                                            null
-                                                                                ? currency.currencySymbol +
-                                                                                  " " +
-                                                                                  (
-                                                                                      finalDiscountedPrice *
-                                                                                      cartItem.quantity
-                                                                                  ).toFixed(
-                                                                                      2
-                                                                                  )
-                                                                                : currency.currencySymbol +
-                                                                                  " " +
-                                                                                  (
-                                                                                      finalProductPrice *
-                                                                                      cartItem.quantity
-                                                                                  ).toFixed(
-                                                                                      2
-                                                                                  )}
+                                                                            {cartItem.name} X {cartItem.quantity}
+                                                                            {cartItem.selectedProductSize ? (
+                                                                                <div className=" text-muted">
+                                                                                    <span>Size: {cartItem.selectedProductSize}</span>
+                                                                                </div>
+                                                                            ) : (
+                                                                                ""
+                                                                            )}
                                                                         </span>
-                                                                    </li>
-                                                                );
-                                                            }
-                                                        )}
+                                                                    </div>
+                                                                    <div className="order-price col-2">
+                                                                        <img
+                                                                            src={currency.currencySymbol}
+                                                                            className="img-fluid me-2 currency-icon"
+                                                                            alt="Saudi Riyal"
+                                                                            width={15}
+                                                                            style={{
+                                                                                pointerEvents: "auto",
+                                                                            }}
+                                                                        />
+                                                                        <span className="price-text">
+                                                                            {discountedPrice !== null ? " " + (finalDiscountedPrice * cartItem.quantity).toFixed(2) : " " + (finalProductPrice * cartItem.quantity).toFixed(2)}
+                                                                        </span>
+                                                                    </div>
+                                                                </li>
+                                                            );
+                                                        })}
                                                     </ul>
                                                 </div>
-                                                <div className="your-order-bottom mb-2">
+                                                <div className="your-order-bottom mb-1 ">
                                                     <ul>
-                                                        <li className="your-order-shipping">
-                                                            Tax
-                                                        </li>
-                                                        <li>
-                                                            {currency.currencySymbol +
-                                                                " " +
-                                                                taxAmount.toFixed(
-                                                                    2
-                                                                )}
+                                                        <li className="row">
+                                                            <div className="col-10">
+                                                                <span className="order-middle-left">VAT 15%</span>
+                                                            </div>
+
+                                                            <div className="order-price col-2">
+                                                                <img
+                                                                    src={currency.currencySymbol}
+                                                                    className="img-fluid  me-2 currency-icon"
+                                                                    alt="Saudi Riyal"
+                                                                    width={15}
+                                                                    style={{
+                                                                        pointerEvents: "auto",
+                                                                    }}
+                                                                />
+                                                                <span className="price-text">{" " + taxAmount.toFixed(2)}</span>
+                                                            </div>
                                                         </li>
                                                     </ul>
                                                 </div>
-                                                {selectedOption ===
-                                                "Delivery" ? (
+                                                {/* {selectedOption === "Delivery" ? (
                                                     <div className="your-order-bottom">
                                                         <ul>
-                                                            <li className="your-order-shipping">
-                                                                Shipping Cost
-                                                            </li>
+                                                            <li className="your-order-shipping">Shipping Cost</li>
                                                             <li>
-                                                                {currency.currencySymbol +
-                                                                    " " +
-                                                                    shippingCost.toFixed(
-                                                                        2
-                                                                    )}
+                                                                {" "}
+                                                                <img
+                                                                    src={currency.currencySymbol}
+                                                                    className="img-fluid  item"
+                                                                    alt="Saudi Riyal"
+                                                                    width={15}
+                                                                    style={{
+                                                                        pointerEvents: "auto",
+                                                                    }}
+                                                                />{" "}
+                                                                {" " + shippingCost.toFixed(2)}
                                                             </li>
                                                         </ul>
                                                     </div>
-                                                ) : null}
+                                                ) : null} */}
 
                                                 <div className="your-order-total">
                                                     <ul>
-                                                        <li className="order-total">
-                                                            Total
-                                                        </li>
-                                                        <li>
-                                                            {currency.currencySymbol +
-                                                                " " +
-                                                                estimatedTotal.toFixed(
-                                                                    2
-                                                                )}
+                                                        <li className="row">
+                                                            <div className=" col-10">
+                                                                <span className="order-total">Total</span>
+                                                            </div>
+                                                            <div className="order-price col-2">
+                                                                {" "}
+                                                                <img
+                                                                    src={currency.currencySymbol}
+                                                                    className="img-fluid  currency-icon me-2 "
+                                                                    alt="Saudi Riyal"
+                                                                    width={15}
+                                                                    style={{
+                                                                        pointerEvents: "auto",
+                                                                    }}
+                                                                />{" "}
+                                                                <span className="price-text">{" " + estimatedTotal.toFixed(2)} </span>
+                                                            </div>
                                                         </li>
                                                     </ul>
                                                 </div>
                                             </div>
                                             <div className="payment-method"></div>
                                         </div>
+
                                         <div className="place-order mt-25">
-                                            <button className="btn-hover">
+                                            <button className="btn-hover" onClick={handlePlaceOrder}>
                                                 Place Order
                                             </button>
                                         </div>
@@ -489,16 +412,7 @@ const Checkout = () => {
                                             <i className="pe-7s-cash"></i>
                                         </div>
                                         <div className="item-empty-area__text">
-                                            No items found in cart to checkout{" "}
-                                            <br />{" "}
-                                            <Link
-                                                to={
-                                                    process.env.PUBLIC_URL +
-                                                    "/shop-grid-standard"
-                                                }
-                                            >
-                                                Shop Now
-                                            </Link>
+                                            No items found in cart to checkout <br /> <Link to={process.env.PUBLIC_URL + "/shop-grid-standard"}>Shop Now</Link>
                                         </div>
                                     </div>
                                 </div>

@@ -5,21 +5,12 @@ import BannerEighteenSingle from "../../components/banner/BannerEighteenSingle.j
 
 const BannerEighteen = ({ spaceTopClass, spaceBottomClass }) => {
     return (
-        <div
-            className={clsx(
-                "banner-area banner-area-2 container mt-2",
-                spaceTopClass,
-                spaceBottomClass
-            )}
-        >
+        <div className={clsx("banner-area banner-area-2 container mt-5", spaceTopClass, spaceBottomClass)}>
             <div className="container-fluid">
                 <div className="custom-row-2">
                     {bannerData?.map((single, key) => (
                         <div className="col-xl-4 col-md-6" key={key}>
-                            <BannerEighteenSingle
-                                spaceBottomClass="mb-10"
-                                data={single}
-                            />
+                            <BannerEighteenSingle spaceBottomClass="mb-5" data={single} />
                         </div>
                     ))}
                 </div>

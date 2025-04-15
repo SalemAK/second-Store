@@ -5,6 +5,7 @@ import BannerEighteen from "../../wrappers/banner/BannerEighteen";
 import Category from "../../wrappers/category/Category";
 import BrandLogoSliderThree from "../../wrappers/brand-logo/BrandLogoSliderThree";
 import CategoryProductsHome from "../../wrappers/category/CategoryProductsHome";
+import ResponsiveBanner from "../../wrappers/banner/BannerImage";
 
 const HomePage = () => {
     return (
@@ -12,7 +13,9 @@ const HomePage = () => {
             <SEO titleTemplate="Home" description="retail store home page" />
             <LayoutOne headerTop="visible">
                 {/* banner */}
-                <BannerEighteen spaceBottomClass="pb-85" />
+                <BannerEighteen spaceBottomClass="" />
+                {/* home banner */}
+                <ResponsiveBanner />
                 {/* <Categories /> */}
                 <Category spaceBottomClass="pb-85" />
                 {/* OUR Clients */}

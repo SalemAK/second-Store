@@ -12,7 +12,9 @@ const LanguageCurrencyChanger = ({ currency }) => {
     };
 
     const setCurrencyTrigger = (e) => {
-        const currencyName = e.target.value;
+        const currencyName = e.currentTarget.value;
+        console.log(currencyName);
+
         dispatch(setCurrency(currencyName));
     };
 
@@ -50,9 +52,16 @@ const LanguageCurrencyChanger = ({ currency }) => {
             </div>
             <div className="same-language-currency use-style">
                 <span>
-                    {currency.currencyName} <i className="fa fa-angle-down" />
+                    <img
+                        src={currency.currencySymbol}
+                        className="img-fluid  item"
+                        alt="Saudi Riyal"
+                        width={20}
+                        style={{ pointerEvents: "auto" }}
+                    />
+                    {/* <i className="fa fa-angle-down" /> */}
                 </span>
-                <div className="lang-car-dropdown">
+                {/* <div className="lang-car-dropdown">
                     <ul>
                         <li>
                             <button
@@ -63,15 +72,17 @@ const LanguageCurrencyChanger = ({ currency }) => {
                             </button>
                         </li>
                         <li>
-                            <button
-                                value="SAR"
-                                onClick={(e) => setCurrencyTrigger(e)}
-                            >
-                                SAR
+                            <button value="SAR" onClick={setCurrencyTrigger}>
+                                <img
+                                    src={currency.currencySymbol}
+                                    className="img-fluid w-25 item"
+                                    alt="Saudi Riyal"
+                                    style={{ pointerEvents: "auto" }}
+                                />
                             </button>
                         </li>
                     </ul>
-                </div>
+                </div> */}
             </div>
             <div className="same-language-currency">
                 <p>Call Us 3965410</p>

@@ -37,7 +37,7 @@ const ShopSidebar = ({
                 getSortParams={getSortParams}
             />
             {/* filter by price */}
-            <ProductPriceFilter getSortPrice={getSortPrice} />
+            {/* <ProductPriceFilter getSortPrice={getSortPrice} /> */}
 
             {/* filter by color */}
             {/* <ShopColor colors={uniqueColors} getSortParams={getSortParams} /> */}

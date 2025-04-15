@@ -35,6 +35,7 @@
 @import "video-popup";
 @import "priceRange";
 @import "popup";
+@import "invoice";
 
 /* Category section styling */
 .container {
@@ -127,9 +128,11 @@
         width: calc(50%); /* Two items per row on smaller screens */
     }
 
-    .my-brand-image {
+    .d-block .my-brand-image {
         height: 300px;
         width: 100%;
+        position: static;
+        margin: 1px;
     }
 
     .block_img_cat a img {
@@ -145,9 +148,12 @@
     }
 
     .product-item {
-        width: calc(
-            50%
-        ); /* Two items per row for smaller screens, adjusting for padding */
+        width: calc(50%); /* Two items per row for smaller screens, adjusting for padding */
+    }
+}
+@media (max-width: 767.98px) {
+    .product-item {
+        width: calc(50%); /* Two items per row on smaller screens */
     }
 }
 
@@ -184,7 +190,11 @@
 .section-title__full::after {
     width: 100%;
 }
-
+@media (max-width: 767.98px) {
+    .row .product-item {
+        width: calc(50%); /* Two items per row on smaller screens */
+    }
+}
 .product-item {
     border-bottom: 1px solid #eaeaea;
     position: relative;
@@ -193,6 +203,36 @@
     padding-right: 10px; /* Add padding to each item */
     width: 20%; /* Adjust for 5 items per row, account for padding */
     box-sizing: border-box; /* Ensures padding is included in width calculation */
+    @media #{$xl-layout} {
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+    @media #{$lg-layout} {
+        flex: 0 0 33.333%;
+
+        max-width: 33.333%;
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+    @media #{$md-layout} {
+        flex: 0 0 50%;
+
+        max-width: 50%;
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+    @media #{$xs-layout} {
+        flex: 0 0 100%;
+
+        max-width: 50%;
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+    @media #{$sm-layout} {
+        flex: 0 0 50%;
+
+        max-width: 50%;
+    }
 }
 
 .product-item img {
@@ -301,7 +341,7 @@
 }
 
 .radio-input {
-    --container_width: 300px;
+    --container_width: 200px;
     position: relative;
     display: flex;
     align-items: center;
@@ -352,4 +392,93 @@
 
 .radio-input label:nth-child(2):has(input:checked) ~ .selection {
     transform: translateX(calc(var(--container_width) * 1 / 2));
+}
+
+.logo-style {
+    width: 300px;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.test {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Ensures text is centered under the image */
+    justify-content: flex-start; /* Ensures text starts from the top */
+    text-align: center;
+    min-height: 100px; /* Adjust as needed to maintain uniform height */
+}
+.test2 {
+    display: flex;
+    align-items: flex-start; /* Aligns items at the top */
+    justify-content: center;
+    gap: 20px; /* Space between items */
+}
+
+.product-title {
+    min-height: 60px; /* Ensures all titles have the same height */
+
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+.input-container-checkout {
+    position: relative;
+    width: 355px;
+    margin: 0px 0px 30px 0px;
+    input {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        outline: none;
+    }
+    label {
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: gray;
+        transition: 0.3s ease-out;
+        background: white;
+        padding: 0 5px;
+    }
+    input:focus + label,
+    input:not(:placeholder-shown) + label {
+        top: 0;
+        font-size: 12px;
+        color: black;
+    }
+    select {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        outline: none;
+        background: transparent;
+    }
+    .billing-select label {
+        top: 0;
+        font-size: 12px;
+        color: black;
+    }
+}
+.location-card {
+    height: 220px;
+
+    object-position: center;
+    object-fit: cover;
+}
+.invoice-watermark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300px;
+    opacity: 0.05;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 0;
 }

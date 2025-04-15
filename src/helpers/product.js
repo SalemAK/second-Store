@@ -1,11 +1,6 @@
 // get products
 export const getProducts = (products, category, type, limit) => {
-    const finalProducts = category
-        ? products.filter(
-              (product) =>
-                  product.category.filter((single) => single === category)[0]
-          )
-        : products;
+    const finalProducts = category ? products.filter((product) => product.category.filter((single) => single === category)[0]) : products;
 
     if (type && type === "new") {
         const newProducts = finalProducts.filter((single) => single.new);
@@ -19,9 +14,7 @@ export const getProducts = (products, category, type, limit) => {
             .slice(0, limit ? limit : finalProducts.length);
     }
     if (type && type === "saleItems") {
-        const saleItems = finalProducts.filter(
-            (single) => single.discount && single.discount > 0
-        );
+        const saleItems = finalProducts.filter((single) => single.discount && single.discount > 0);
         return saleItems.slice(0, limit ? limit : saleItems.length);
     }
     return finalProducts.slice(0, limit ? limit : finalProducts.length);
@@ -34,40 +27,23 @@ export const getDiscountPrice = (price, discount) => {
 
 // get product cart quantity
 export const getProductCartQuantity = (cartItems, product, color, size) => {
-    let productInCart = cartItems.find(
-        (single) =>
-            single.id === product.id &&
-            (single.selectedProductColor
-                ? single.selectedProductColor === color
-                : true) &&
-            (single.selectedProductSize
-                ? single.selectedProductSize === size
-                : true)
-    );
+    let productInCart = cartItems.find((single) => single.id === product.id && (single.selectedProductColor ? single.selectedProductColor === color : true) && (single.selectedProductSize ? single.selectedProductSize === size : true));
     if (cartItems.length >= 1 && productInCart) {
         if (product.variation) {
-            return cartItems.find(
-                (single) =>
-                    single.id === product.id &&
-                    single.selectedProductColor === color &&
-                    single.selectedProductSize === size
-            ).quantity;
+            return cartItems.find((single) => single.id === product.id && single.selectedProductColor === color && single.selectedProductSize === size).quantity;
         } else {
-            return cartItems.find((single) => product.id === single.id)
-                .quantity;
+            return cartItems.find((single) => product.id === single.id).quantity;
         }
     } else {
         return 0;
     }
 };
 
-export const cartItemStock = (item, color, size) => {
+export const cartItemStock = (item, size) => {
     if (item.stock) {
         return item.stock;
     } else {
-        return item.variation
-            .filter((single) => single.color === color)[0]
-            .size.filter((single) => single.name === size)[0].stock;
+        return item.variation[0].size.filter((single) => single.name === size)[0].stock;
     }
 };
 
@@ -78,21 +54,13 @@ export const getSortedProducts = (products, sortType, sortValue, max) => {
     const getEffectivePrice = (product) => {
         const basePrice = product?.variation?.[0]?.size?.[0]?.price ?? 0;
         const discount = product?.discount ?? 0;
-        return discount > 0
-            ? basePrice - (basePrice * discount) / 100
-            : basePrice;
+        return discount > 0 ? basePrice - (basePrice * discount) / 100 : basePrice;
     };
 
     // Filter by Category
     if (sortType === "category" && sortValue) {
-        const selectedCategories = Array.isArray(sortValue)
-            ? sortValue
-            : sortValue.split(","); // Handle array or string
-        return products.filter((product) =>
-            selectedCategories.some((category) =>
-                product.category.includes(category)
-            )
-        );
+        const selectedCategories = Array.isArray(sortValue) ? sortValue : sortValue.split(","); // Handle array or string
+        return products.filter((product) => selectedCategories.some((category) => product.category.includes(category)));
     }
 
     // Filter by Tag
@@ -102,20 +70,12 @@ export const getSortedProducts = (products, sortType, sortValue, max) => {
 
     // Filter by Color
     if (sortType === "color" && sortValue) {
-        return products.filter((product) =>
-            product.variation?.some(
-                (variation) => variation.color === sortValue
-            )
-        );
+        return products.filter((product) => product.variation?.some((variation) => variation.color === sortValue));
     }
 
     // Filter by Size
     if (sortType === "size" && sortValue) {
-        return products.filter((product) =>
-            product.variation?.some((variation) =>
-                variation.size?.some((size) => size.name === sortValue)
-            )
-        );
+        return products.filter((product) => product.variation?.some((variation) => variation.size?.some((size) => size.name === sortValue)));
     }
 
     // Sorting Products based on price or new arrivals
@@ -127,33 +87,21 @@ export const getSortedProducts = (products, sortType, sortValue, max) => {
         }
 
         if (sortValue === "priceHighToLow") {
-            return sortedProducts.sort(
-                (a, b) => getEffectivePrice(b) - getEffectivePrice(a)
-            );
+            return sortedProducts.sort((a, b) => getEffectivePrice(b) - getEffectivePrice(a));
         }
 
         if (sortValue === "priceLowToHigh") {
-            return sortedProducts.sort(
-                (a, b) => getEffectivePrice(a) - getEffectivePrice(b)
-            );
+            return sortedProducts.sort((a, b) => getEffectivePrice(a) - getEffectivePrice(b));
         }
 
         if (sortValue === "NewestArrivals") {
-            return sortedProducts.sort(
-                (a, b) => new Date(b.createdDate) - new Date(a.createdDate)
-            );
+            return sortedProducts.sort((a, b) => new Date(b.createdDate) - new Date(a.createdDate));
         }
     }
 
     // Search Filter
     if (sortType === "search" && sortValue) {
-        return products.filter(
-            (product) =>
-                product.name.toLowerCase().includes(sortValue.toLowerCase()) ||
-                product.category.some((cat) =>
-                    cat.toLowerCase().includes(sortValue.toLowerCase())
-                )
-        );
+        return products.filter((product) => product.name.toLowerCase().includes(sortValue.toLowerCase()) || product.category.some((cat) => cat.toLowerCase().includes(sortValue.toLowerCase())));
     }
 
     // Price Range Filter
@@ -194,8 +142,7 @@ export const getIndividualCategories = (products) => {
                 })
             );
         });
-    const individualProductCategories =
-        getIndividualItemArray(productCategories);
+    const individualProductCategories = getIndividualItemArray(productCategories);
     return individualProductCategories;
 };
 
@@ -267,9 +214,7 @@ export const getIndividualSizes = (product) => {
 
 export const setActiveSort = (e, getSortParams, newSearchParams, navigate) => {
     const allCategoriesButton = document.querySelector(".all-categories");
-    const filterButtons = document.querySelectorAll(
-        ".sidebar-widget-list-left button, .sidebar-widget-tag button, .product-filter button"
-    );
+    const filterButtons = document.querySelectorAll(".sidebar-widget-list-left button, .sidebar-widget-tag button, .product-filter button");
 
     // If the clicked button is "All Categories" and already active, do nothing
     if (e.currentTarget.classList.contains("all-categories")) {
@@ -317,15 +262,12 @@ export const setActiveLayout = (e) => {
 };
 
 export const toggleShopTopFilter = (e) => {
-    const shopTopFilterWrapper = document.querySelector(
-        "#product-filter-wrapper"
-    );
+    const shopTopFilterWrapper = document.querySelector("#product-filter-wrapper");
     shopTopFilterWrapper.classList.toggle("active");
     if (shopTopFilterWrapper.style.height) {
         shopTopFilterWrapper.style.height = null;
     } else {
-        shopTopFilterWrapper.style.height =
-            shopTopFilterWrapper.scrollHeight + "px";
+        shopTopFilterWrapper.style.height = shopTopFilterWrapper.scrollHeight + "px";
     }
     e.currentTarget.classList.toggle("active");
 };

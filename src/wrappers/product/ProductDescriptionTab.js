@@ -2,8 +2,15 @@ import PropTypes from "prop-types";
 import clsx from "clsx";
 import Tab from "react-bootstrap/Tab";
 import Nav from "react-bootstrap/Nav";
+import ProductTable from "./ProductTable";
 
-const ProductDescriptionTab = ({ spaceBottomClass, productFullDesc }) => {
+const ProductDescriptionTab = ({
+    spaceBottomClass,
+    productFullDesc,
+    product,
+}) => {
+    console.log(product);
+
     return (
         <div className={clsx("description-review-area", spaceBottomClass)}>
             <div className="container">
@@ -32,7 +39,7 @@ const ProductDescriptionTab = ({ spaceBottomClass, productFullDesc }) => {
                         <Tab.Content className="description-review-bottom">
                             <Tab.Pane eventKey="additionalInfo">
                                 <div className="product-anotherinfo-wrapper">
-                                    <ul>
+                                    {/* <ul>
                                         <li>
                                             <span>Weight</span> 400 g
                                         </li>
@@ -49,7 +56,9 @@ const ProductDescriptionTab = ({ spaceBottomClass, productFullDesc }) => {
                                             heirloom jean shorts pug seitan
                                             letterpress
                                         </li>
-                                    </ul>
+                                    </ul> */}
+
+                                    <ProductTable data={product.additionData} />
                                 </div>
                             </Tab.Pane>
                             <Tab.Pane eventKey="productDescription">

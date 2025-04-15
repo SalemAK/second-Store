@@ -13,7 +13,7 @@ const ProductGridList = ({ products, spaceBottomClass }) => {
         <Fragment>
             {products?.map((product) => {
                 return (
-                    <div className="col-xl-4 col-sm-6 my" key={product.id}>
+                    <div className="col-xl-4 col-sm-6 my  " key={product.id}>
                         <ProductGridListSingle
                             spaceBottomClass={spaceBottomClass}
                             product={product}

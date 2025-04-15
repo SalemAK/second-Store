@@ -19,10 +19,10 @@ SEO.propTypes = {
     title: PropTypes.string,
     titleTemplate: PropTypes.string,
     description: PropTypes.string,
-}
+};
 
 SEO.defaultProps = {
-    title: "Flone",
+    title: "Iwaco",
     titleTemplate: "Product Page",
     description: "Product page of flone react minimalist eCommerce template.",
 };

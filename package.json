@@ -10,9 +10,11 @@
         "clsx": "^1.2.1",
         "cogo-toast": "https://github.com/hasanm95/cogo-toast",
         "google-map-react": "^2.2.0",
+        "html2canvas": "^1.4.1",
         "i18next": "^22.0.4",
         "i18next-browser-languagedetector": "^7.0.0",
         "i18next-http-backend": "^2.0.1",
+        "jspdf": "^3.0.1",
         "prop-types": "^15.8.1",
         "react": "^18.2.0",
         "react-bootstrap": "^2.5.0",
@@ -28,9 +30,11 @@
         "react-redux": "^8.0.4",
         "react-router-dom": "^6.4.3",
         "react-scripts": "^5.0.1",
+        "react-to-print": "^2.14.13",
         "react-visibility-sensor": "^5.1.1",
         "redux": "^4.2.0",
         "redux-persist": "^6.0.0",
+        "sass-loader": "^16.0.5",
         "swiper": "^8.4.4",
         "uuid": "^9.0.0",
         "yet-another-react-lightbox": "^2.2.0"
@@ -60,7 +64,7 @@
     },
     "devDependencies": {
         "redux-devtools-extension": "^2.13.8",
-        "sass": "^1.29.0"
+        "sass": "^1.85.0"
     },
     "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }

@@ -3,8 +3,8 @@ const { createSlice } = require("@reduxjs/toolkit");
 const currencySlice = createSlice({
     name: "currency",
     initialState: {
-        currencySymbol: "SAR",
-        currencyName: "﷼",
+        currencySymbol: "/assets/img/Saudi_Riyal_Symbol-1.png",
+        currencyName: "SAR",
         currencyRate: 1,
     },
     reducers: {
@@ -20,7 +20,7 @@ const currencySlice = createSlice({
             }
             if (currencyName === "SAR") {
                 return (state = {
-                    currencySymbol: "﷼",
+                    currencySymbol: "/assets/img/Saudi_Riyal_Symbol-1.png",
                     currencyRate: 1,
                     currencyName,
                 });

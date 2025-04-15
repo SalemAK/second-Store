@@ -4,11 +4,7 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getProductCartQuantity } from "../../helpers/product";
 import Rating from "./sub-components/ProductRating";
-import {
-    addToCart,
-    deleteFromCart,
-    removeFromCart,
-} from "../../store/slices/cart-slice";
+import { addToCart, deleteFromCart, removeFromCart } from "../../store/slices/cart-slice";
 import { addToWishlist } from "../../store/slices/wishlist-slice";
 import { addToCompare } from "../../store/slices/compare-slice";
 import { getDiscountPrice } from "../../helpers/product";
@@ -28,49 +24,34 @@ const ProductDescriptionInfo = ({
 }) => {
     const [addToCartButton, setAddToCartButton] = useState(false);
     const dispatch = useDispatch();
-    const [selectedProductPrice, setSelectedProductPrice] = useState(
-        product.variation ? product.variation[0].size[0].price : ""
-    );
+    const [selectedProductPrice, setSelectedProductPrice] = useState(product.variation ? product.variation[0].size[0].price : "");
 
-    const discountedPrice = getDiscountPrice(
-        selectedProductPrice,
-        product.discount
-    );
+    const discountedPrice = getDiscountPrice(selectedProductPrice, product.discount);
 
-    const finalProductPrice = +(
-        selectedProductPrice * currency.currencyRate
-    ).toFixed(2);
+    const finalProductPrice = +(selectedProductPrice * currency.currencyRate).toFixed(2);
 
-    const finalDiscountedPrice = +(
-        discountedPrice * currency.currencyRate
-    ).toFixed(2);
-    const [selectedProductColor, setSelectedProductColor] = useState(
-        product.variation ? product.variation[0].color : ""
-    );
-    const [selectedProductSize, setSelectedProductSize] = useState(
-        product.variation ? product.variation[0].size[0].name : ""
-    );
-    const [productStock, setProductStock] = useState(
-        product.variation ? product.variation[0].size[0].stock : product.stock
-    );
+    const finalDiscountedPrice = +(discountedPrice * currency.currencyRate).toFixed(2);
+    const [selectedProductColor, setSelectedProductColor] = useState(product.variation ? product.variation[0].color : "");
+    const [selectedProductSize, setSelectedProductSize] = useState(product.variation ? product.variation[0].size[0].name : "");
+    const [productStock, setProductStock] = useState(product.variation ? product.variation[0].size[0].stock : product.stock);
     const [quantityCount, setQuantityCount] = useState(1);
 
-    const productCartQty = getProductCartQuantity(
-        cartItems,
-        product,
-        selectedProductColor,
-        selectedProductSize
-    );
+    const productCartQty = getProductCartQuantity(cartItems, product, selectedProductColor, selectedProductSize);
 
     useEffect(() => {
-        const isInCart = cartItems.some(
-            (item) =>
-                item.id === product.id &&
-                item.selectedProductColor === selectedProductColor &&
-                item.selectedProductSize === selectedProductSize
-        );
+        const isInCart = cartItems.some((item) => item.id === product.id && item.selectedProductColor === selectedProductColor && item.selectedProductSize === selectedProductSize);
         setAddToCartButton(isInCart);
     }, [cartItems, selectedProductColor, selectedProductSize, product.id]);
+
+    useEffect(() => {
+        if (product.variation && product.variation.length > 0) {
+            setSelectedProductSize(product.variation[0].size[0].name);
+            setSelectedProductPrice(product.variation[0].size[0].price);
+            setProductStock(product.variation[0].size[0].stock);
+        } else {
+            setSelectedProductPrice(product.price);
+        }
+    }, [product]);
 
     const [showPopup, setShowPopup] = useState(false);
     const [productToRemove, setProductToRemove] = useState(null);
@@ -100,18 +81,43 @@ const ProductDescriptionInfo = ({
                 {discountedPrice !== null ? (
                     <Fragment>
                         <span>
-                            {currency.currencySymbol +
-                                " " +
-                                finalDiscountedPrice}
+                            <img
+                                src={currency.currencySymbol}
+                                className="img-fluid  item"
+                                alt="Saudi Riyal"
+                                width={15}
+                                style={{
+                                    pointerEvents: "auto",
+                                }}
+                            />
+                            {" " + finalDiscountedPrice}
                         </span>
                         <span className="fw-bold">{"-"}</span>
                         <span className="old">
-                            {currency.currencySymbol + " " + finalProductPrice}
+                            <img
+                                src={currency.currencySymbol}
+                                className="img-fluid  item"
+                                alt="Saudi Riyal"
+                                width={15}
+                                style={{
+                                    pointerEvents: "auto",
+                                }}
+                            />
+                            {" " + finalProductPrice}
                         </span>
                     </Fragment>
                 ) : (
                     <span>
-                        {currency.currencySymbol + " " + finalProductPrice}{" "}
+                        <img
+                            src={currency.currencySymbol}
+                            className="img-fluid  item"
+                            alt="Saudi Riyal"
+                            width={15}
+                            style={{
+                                pointerEvents: "auto",
+                            }}
+                        />{" "}
+                        {" " + finalProductPrice}{" "}
                     </span>
                 )}
             </div>
@@ -129,7 +135,8 @@ const ProductDescriptionInfo = ({
             </div>
             {product.variation ? (
                 <div className="pro-details-size-color">
-                    <div className="pro-details-color-wrap">
+                    {/* color */}
+                    {/* <div className="pro-details-color-wrap">
                         <span>Color</span>
                         <div className="pro-details-color-content">
                             {product.variation.map((single, key) => {
@@ -169,7 +176,7 @@ const ProductDescriptionInfo = ({
                                 );
                             })}
                         </div>
-                    </div>
+                    </div> */}
                     <div className="pro-details-size">
                         <span>Size</span>
                         <div className="pro-details-size-content">
@@ -178,39 +185,19 @@ const ProductDescriptionInfo = ({
                                     return single.color === selectedProductColor
                                         ? single.size.map((singleSize, key) => {
                                               return (
-                                                  <label
-                                                      className={`pro-details-size-content--single`}
-                                                      key={key}
-                                                  >
+                                                  <label className={`pro-details-size-content--single`} key={key}>
                                                       <input
                                                           type="radio"
-                                                          value={
-                                                              singleSize.name
-                                                          }
-                                                          checked={
-                                                              singleSize.name ===
-                                                              selectedProductSize
-                                                                  ? "checked"
-                                                                  : ""
-                                                          }
+                                                          value={singleSize.name}
+                                                          checked={singleSize.name === selectedProductSize ? "checked" : ""}
                                                           onChange={() => {
-                                                              setSelectedProductSize(
-                                                                  singleSize.name
-                                                              );
-                                                              setProductStock(
-                                                                  singleSize.stock
-                                                              );
-                                                              setSelectedProductPrice(
-                                                                  singleSize.price
-                                                              );
-                                                              setQuantityCount(
-                                                                  1
-                                                              );
+                                                              setSelectedProductSize(singleSize.name);
+                                                              setProductStock(singleSize.stock);
+                                                              setSelectedProductPrice(singleSize.price);
+                                                              setQuantityCount(1);
                                                           }}
                                                       />
-                                                      <span className="size-name">
-                                                          {singleSize.name}
-                                                      </span>
+                                                      <span className="size-name">{singleSize.name}</span>
                                                   </label>
                                               );
                                           })
@@ -237,19 +224,15 @@ const ProductDescriptionInfo = ({
             ) : ( */}
             <div className="pro-details-quality">
                 {addToCartButton ? (
-                    <div className="pro-details-cart btn-hover ">
-                        <button
-                            className="bg-danger rounded"
-                            onClick={handleRemoveClick}
-                        >
+                    <div className="pro-details-cart btn-hover m-0">
+                        <button className="bg-danger rounded" onClick={handleRemoveClick}>
                             Remove from Cart
                         </button>
 
                         <button
                             className="bg-success rounded"
                             onClick={() => {
-                                window.location.href =
-                                    process.env.PUBLIC_URL + "/cart";
+                                window.location.href = process.env.PUBLIC_URL + "/cart";
                             }}
                         >
                             Go to Cart
@@ -258,35 +241,11 @@ const ProductDescriptionInfo = ({
                 ) : (
                     <>
                         <div className="cart-plus-minus">
-                            <button
-                                onClick={() =>
-                                    setQuantityCount(
-                                        quantityCount > 1
-                                            ? quantityCount - 1
-                                            : 1
-                                    )
-                                }
-                                className="dec qtybutton"
-                            >
+                            <button onClick={() => setQuantityCount(quantityCount > 1 ? quantityCount - 1 : 1)} className="dec qtybutton">
                                 -
                             </button>
-                            <input
-                                className="cart-plus-minus-box"
-                                type="text"
-                                value={quantityCount}
-                                readOnly
-                            />
-                            <button
-                                onClick={() =>
-                                    setQuantityCount(
-                                        quantityCount <
-                                            productStock - productCartQty
-                                            ? quantityCount + 1
-                                            : quantityCount
-                                    )
-                                }
-                                className="inc qtybutton"
-                            >
+                            <input className="cart-plus-minus-box" type="text" value={quantityCount} readOnly />
+                            <button onClick={() => setQuantityCount(quantityCount < productStock - productCartQty ? quantityCount + 1 : quantityCount)} className="inc qtybutton">
                                 +
                             </button>
                         </div>
@@ -317,23 +276,10 @@ const ProductDescriptionInfo = ({
                                                 //         : product.selectedProductPrice
                                                 //         ? product.selectedProductPrice
                                                 //         : null,
-                                                quantity: 1,
+                                                quantity: quantityCount,
                                                 selectedProductColor,
                                                 selectedProductSize,
-                                                selectedProductPrice:
-                                                    product.variation
-                                                        ? product.variation
-                                                              .find(
-                                                                  (v) =>
-                                                                      v.color ===
-                                                                      selectedProductColor
-                                                              )
-                                                              .size.find(
-                                                                  (s) =>
-                                                                      s.name ===
-                                                                      selectedProductSize
-                                                              ).price
-                                                        : product.price,
+                                                selectedProductPrice: product.variation ? product.variation.find((v) => v.color === selectedProductColor).size.find((s) => s.name === selectedProductSize).price : product.price,
                                             })
                                         );
                                     }}
@@ -343,39 +289,20 @@ const ProductDescriptionInfo = ({
                                     Add To Cart{" "}
                                 </button>
                             ) : (
-                                <button
-                                    className="bg-secondary rounded"
-                                    disabled
-                                >
+                                <button className="bg-secondary rounded" disabled>
                                     Out of Stock
                                 </button>
                             )}
                         </div>
                     </>
                 )}
-                <div className="pro-details-wishlist">
-                    <button
-                        className={wishlistItem !== undefined ? "active" : ""}
-                        title={
-                            wishlistItem !== undefined
-                                ? "Remove from wishlist"
-                                : "Add to wishlist"
-                        }
-                        onClick={() => dispatch(addToWishlist(product))}
-                    >
+
+                <div className=" d-flex gap-2 justify-content-center align-items-center  ">
+                    <button className={`btn btn-sm  p-3 ${wishlistItem ? "btn-danger" : "btn-outline-secondary"}`} onClick={() => dispatch(addToWishlist(product))}>
                         <FaHeart />
                     </button>
-                </div>
-                <div className="pro-details-compare">
-                    <button
-                        className={compareItem !== undefined ? "active" : ""}
-                        title={
-                            compareItem !== undefined
-                                ? "Remove from compare"
-                                : "Add to compare"
-                        }
-                        onClick={() => dispatch(addToCompare(product))}
-                    >
+
+                    <button className={`btn btn-sm p-3 ${compareItem ? "btn-primary" : "btn-outline-secondary"}`} onClick={() => dispatch(addToCompare(product))}>
                         <FaCodeCompare />
                     </button>
                 </div>
@@ -388,11 +315,7 @@ const ProductDescriptionInfo = ({
                         {product.category.map((single, key) => {
                             return (
                                 <li key={key}>
-                                    <Link
-                                        to={`/shop-grid-standard?category=${single}`}
-                                    >
-                                        {single}
-                                    </Link>
+                                    <Link to={`/shop-grid-standard?category=${single}`}>{single}</Link>
                                 </li>
                             );
                         })}
@@ -453,13 +376,7 @@ const ProductDescriptionInfo = ({
                     </li>
                 </ul>
             </div> */}
-            {showPopup && (
-                <ConfirmationPopup
-                    message="Are you sure you want to remove this item from cart ?"
-                    onConfirm={confirmDelete}
-                    onCancel={cancelDelete}
-                />
-            )}
+            {showPopup && <ConfirmationPopup message="Are you sure you want to remove this item from cart ?" onConfirm={confirmDelete} onCancel={cancelDelete} />}
         </div>
     );
 };

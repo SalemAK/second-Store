@@ -1,0 +1,42 @@
+
+       summary               unimported v1.31.0 (node)
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+       entry file          : src/index.js
+
+       unresolved imports  : 0
+       unused dependencies : 7
+       unimported files    : 12
+
+
+─────┬──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+     │ 7 unused dependencies
+─────┼──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+   1 │ bootstrap
+   2 │ react-countup
+   3 │ react-fullpage
+   4 │ react-modal-video
+   5 │ react-scripts
+   6 │ react-visibility-sensor
+   7 │ sass-loader
+─────┴──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+─────┬──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+     │ 12 unimported files
+─────┼──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+   1 │ /home/salemek/second retail/client/src/components/banner/BannerEightSingle.js
+   2 │ /home/salemek/second retail/client/src/components/blog-featured/BlogFeaturedFiveSingle.js
+   3 │ /home/salemek/second retail/client/src/components/blog-featured/BlogFeaturedSingle.js
+   4 │ /home/salemek/second retail/client/src/components/blog-featured/BlogFeaturedThreeSingle.js
+   5 │ /home/salemek/second retail/client/src/pages/other/Checkout1.js
+   6 │ /home/salemek/second retail/client/src/pages/other/LoginRegister.js
+   7 │ /home/salemek/second retail/client/src/pages/other/MyAccount.js
+   8 │ /home/salemek/second retail/client/src/wrappers/blog-featured/BlogFeatured.js
+   9 │ /home/salemek/second retail/client/src/wrappers/blog-featured/BlogFeaturedFive.js
+  10 │ /home/salemek/second retail/client/src/wrappers/blog-featured/BlogFeaturedFour.js
+  11 │ /home/salemek/second retail/client/src/wrappers/blog-featured/BlogFeaturedThree.js
+  12 │ /home/salemek/second retail/client/src/wrappers/blog-featured/BlogFeaturedTwo.js
+─────┴──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+       Inspect the results and run npx unimported -u to update ignore lists

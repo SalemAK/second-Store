@@ -7,7 +7,7 @@ const Category = ({ spaceBottomClass }) => {
         <div className={clsx("cat", spaceBottomClass)}>
             <div className="container">
                 <div className="row">
-                    <div className="box p-1 pr-2">
+                    <div className="box p-4">
                         <h2 className="text-uppercase">
                             Hello Welcome to our website
                         </h2>

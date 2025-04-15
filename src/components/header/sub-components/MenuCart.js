@@ -34,94 +34,48 @@ const MenuCart = () => {
                 <Fragment>
                     <ul>
                         {cartItems.map((item) => {
-                            const discountedPrice = getDiscountPrice(
-                                item.selectedProductPrice,
-                                item.discount
-                            );
-                            const finalProductPrice = (
-                                item.selectedProductPrice *
-                                currency.currencyRate
-                            ).toFixed(2);
-                            const finalDiscountedPrice = (
-                                discountedPrice * currency.currencyRate
-                            ).toFixed(2);
+                            const discountedPrice = getDiscountPrice(item.selectedProductPrice, item.discount);
+                            const finalProductPrice = (item.selectedProductPrice * currency.currencyRate).toFixed(2);
+                            const finalDiscountedPrice = (discountedPrice * currency.currencyRate).toFixed(2);
 
-                            discountedPrice != null
-                                ? (cartTotalPrice +=
-                                      finalDiscountedPrice * item.quantity)
-                                : (cartTotalPrice +=
-                                      finalProductPrice * item.quantity);
+                            discountedPrice != null ? (cartTotalPrice += finalDiscountedPrice * item.quantity) : (cartTotalPrice += finalProductPrice * item.quantity);
 
                             return (
-                                <li
-                                    className="single-shopping-cart"
-                                    key={item.cartItemId}
-                                >
+                                <li className="single-shopping-cart" key={item.cartItemId}>
                                     <div className="shopping-cart-img">
-                                        <Link
-                                            to={
-                                                process.env.PUBLIC_URL +
-                                                "/product/" +
-                                                item.id
-                                            }
-                                        >
-                                            <img
-                                                alt=""
-                                                src={
-                                                    process.env.PUBLIC_URL +
-                                                    item.image[0]
-                                                }
-                                                className="img-fluid"
-                                            />
+                                        <Link to={process.env.PUBLIC_URL + "/product/" + item.id}>
+                                            <img alt="" src={process.env.PUBLIC_URL + item.image[0]} className="img-fluid" />
                                         </Link>
                                     </div>
                                     <div className="shopping-cart-title">
                                         <h4>
-                                            <Link
-                                                to={
-                                                    process.env.PUBLIC_URL +
-                                                    "/product/" +
-                                                    item.id
-                                                }
-                                            >
-                                                {" "}
-                                                {item.name}{" "}
-                                            </Link>
+                                            <Link to={process.env.PUBLIC_URL + "/product/" + item.id}> {item.name} </Link>
                                         </h4>
-                                        <h6>Qty: {item.quantity}</h6>
-                                        <span>
-                                            {discountedPrice !== null
-                                                ? currency.currencySymbol +
-                                                  " " +
-                                                  finalDiscountedPrice
-                                                : currency.currencySymbol +
-                                                  " " +
-                                                  finalProductPrice}
-                                        </span>
-                                        {item.selectedProductColor &&
-                                        item.selectedProductSize ? (
-                                            <div className="cart-item-variation">
-                                                <span>
-                                                    Color:{" "}
-                                                    {item.selectedProductColor}
-                                                </span>
-                                                <span>
-                                                    Size:{" "}
-                                                    {item.selectedProductSize}
-                                                </span>
+                                        {item.selectedProductSize ? (
+                                            <div className="cart-item-variation mt-0 text-muted">
+                                                <span>Size: {item.selectedProductSize}</span>
                                             </div>
                                         ) : (
                                             ""
                                         )}
+                                        <h6>Qty: {item.quantity}</h6>
+
+                                        <span>
+                                            {" "}
+                                            <img
+                                                src={currency.currencySymbol}
+                                                className="img-fluid  item"
+                                                alt="Saudi Riyal"
+                                                width={15}
+                                                style={{
+                                                    pointerEvents: "auto",
+                                                }}
+                                            />
+                                            {discountedPrice !== null ? " " + finalDiscountedPrice : " " + finalProductPrice}
+                                        </span>
                                     </div>
                                     <div className="shopping-cart-delete">
-                                        <button
-                                            onClick={() =>
-                                                handleDeleteClick(
-                                                    item.cartItemId
-                                                )
-                                            }
-                                        >
+                                        <button onClick={() => handleDeleteClick(item.cartItemId)}>
                                             <i className="fa fa-times-circle" />
                                         </button>
                                     </div>
@@ -133,23 +87,25 @@ const MenuCart = () => {
                         <h4>
                             Total :{" "}
                             <span className="shop-total">
-                                {currency.currencySymbol +
-                                    " " +
-                                    cartTotalPrice.toFixed(2)}
+                                {" "}
+                                <img
+                                    src={currency.currencySymbol}
+                                    className="img-fluid  item"
+                                    alt="Saudi Riyal"
+                                    width={15}
+                                    style={{
+                                        pointerEvents: "auto",
+                                    }}
+                                />
+                                {" " + cartTotalPrice.toFixed(2)}
                             </span>
                         </h4>
                     </div>
                     <div className="shopping-cart-btn btn-hover text-center">
-                        <Link
-                            className="default-btn"
-                            to={process.env.PUBLIC_URL + "/cart"}
-                        >
+                        <Link className="default-btn" to={process.env.PUBLIC_URL + "/cart"}>
                             view cart
                         </Link>
-                        <Link
-                            className="default-btn"
-                            to={process.env.PUBLIC_URL + "/checkout"}
-                        >
+                        <Link className="default-btn" to={process.env.PUBLIC_URL + "/checkout"}>
                             checkout
                         </Link>
                     </div>
@@ -157,13 +113,7 @@ const MenuCart = () => {
             ) : (
                 <p className="text-center">No items added to cart</p>
             )}
-            {showPopup && (
-                <ConfirmationPopup
-                    message="Are you sure you want to remove this item ?"
-                    onConfirm={confirmDelete}
-                    onCancel={cancelDelete}
-                />
-            )}
+            {showPopup && <ConfirmationPopup message="Are you sure you want to remove this item ?" onConfirm={confirmDelete} onCancel={cancelDelete} />}
         </div>
     );
 };

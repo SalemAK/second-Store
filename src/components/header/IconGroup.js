@@ -34,7 +34,7 @@ const IconGroup = ({ iconWhiteClass }) => {
           </form>
         </div>
       </div> */}
-            <div className="same-style account-setting d-none d-lg-block">
+            {/* <div className="same-style account-setting d-none d-lg-block">
                 <button
                     className="account-setting-active"
                     onClick={(e) => handleClick(e)}
@@ -64,8 +64,8 @@ const IconGroup = ({ iconWhiteClass }) => {
                         </li>
                     </ul>
                 </div>
-            </div>
-            <div className="same-style header-compare">
+            </div> */}
+            {/* <div className="same-style header-compare">
                 <Link to={process.env.PUBLIC_URL + "/compare"}>
                     <i className="pe-7s-shuffle" />
                     <span className="count-style">
@@ -84,7 +84,7 @@ const IconGroup = ({ iconWhiteClass }) => {
                             : 0}
                     </span>
                 </Link>
-            </div>
+            </div> */}
             <div className="same-style cart-wrap d-none d-lg-block">
                 <button className="icon-cart" onClick={(e) => handleClick(e)}>
                     <i className="pe-7s-shopbag" />

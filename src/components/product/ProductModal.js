@@ -29,39 +29,19 @@ function ProductModal({
     const dispatch = useDispatch();
     const { cartItems } = useSelector((state) => state.cart);
 
-    const [selectedProductPrice, setSelectedProductPrice] = useState(
-        product.variation ? product.variation[0].size[0].price : ""
-    );
+    const [selectedProductPrice, setSelectedProductPrice] = useState(product.variation ? product.variation[0].size[0].price : "");
 
-    const discountedPrice = getDiscountPrice(
-        selectedProductPrice,
-        product.discount
-    );
+    const discountedPrice = getDiscountPrice(selectedProductPrice, product.discount);
 
-    const finalProductPrice = +(
-        selectedProductPrice * currency.currencyRate
-    ).toFixed(2);
+    const finalProductPrice = +(selectedProductPrice * currency.currencyRate).toFixed(2);
 
-    const finalDiscountedPrice = +(
-        discountedPrice * currency.currencyRate
-    ).toFixed(2);
+    const finalDiscountedPrice = +(discountedPrice * currency.currencyRate).toFixed(2);
 
-    const [selectedProductColor, setSelectedProductColor] = useState(
-        product.variation ? product.variation[0].color : ""
-    );
-    const [selectedProductSize, setSelectedProductSize] = useState(
-        product.variation ? product.variation[0].size[0].name : ""
-    );
-    const [productStock, setProductStock] = useState(
-        product.variation ? product.variation[0].size[0].stock : product.stock
-    );
+    const [selectedProductColor, setSelectedProductColor] = useState(product.variation ? product.variation[0].color : "");
+    const [selectedProductSize, setSelectedProductSize] = useState(product.variation ? product.variation[0].size[0].name : "");
+    const [productStock, setProductStock] = useState(product.variation ? product.variation[0].size[0].stock : product.stock);
     const [quantityCount, setQuantityCount] = useState(1);
-    const productCartQty = getProductCartQuantity(
-        cartItems,
-        product,
-        selectedProductColor,
-        selectedProductSize
-    );
+    const productCartQty = getProductCartQuantity(cartItems, product, selectedProductColor, selectedProductSize);
 
     const gallerySwiperParams = {
         spaceBetween: 10,
@@ -93,12 +73,7 @@ function ProductModal({
     const [addToCartButton, setAddToCartButton] = useState(false);
 
     useEffect(() => {
-        const isInCart = cartItems.some(
-            (item) =>
-                item.id === product.id &&
-                item.selectedProductColor === selectedProductColor &&
-                item.selectedProductSize === selectedProductSize
-        );
+        const isInCart = cartItems.some((item) => item.id === product.id && item.selectedProductColor === selectedProductColor && item.selectedProductSize === selectedProductSize);
         setAddToCartButton(isInCart);
     }, [cartItems, selectedProductColor, selectedProductSize, product.id]);
 
@@ -124,11 +99,7 @@ function ProductModal({
         setProductToRemove(null);
     };
     return (
-        <Modal
-            show={show}
-            onHide={onCloseModal}
-            className="product-quickview-modal-wrapper"
-        >
+        <Modal show={show} onHide={onCloseModal} className="product-quickview-modal-wrapper">
             <Modal.Header closeButton></Modal.Header>
 
             <div className="modal-body">
@@ -141,15 +112,7 @@ function ProductModal({
                                         return (
                                             <SwiperSlide key={i}>
                                                 <div className="single-image">
-                                                    <img
-                                                        src={
-                                                            process.env
-                                                                .PUBLIC_URL +
-                                                            img
-                                                        }
-                                                        className="img-fluid"
-                                                        alt="Product"
-                                                    />
+                                                    <img src={process.env.PUBLIC_URL + img} className="img-fluid" alt="Product" />
                                                 </div>
                                             </SwiperSlide>
                                         );
@@ -163,15 +126,7 @@ function ProductModal({
                                         return (
                                             <SwiperSlide key={i}>
                                                 <div className="single-image">
-                                                    <img
-                                                        src={
-                                                            process.env
-                                                                .PUBLIC_URL +
-                                                            img
-                                                        }
-                                                        className="img-fluid"
-                                                        alt=""
-                                                    />
+                                                    <img src={process.env.PUBLIC_URL + img} className="img-fluid" alt="" />
                                                 </div>
                                             </SwiperSlide>
                                         );
@@ -186,22 +141,33 @@ function ProductModal({
                                 {discountedPrice !== null ? (
                                     <Fragment>
                                         <span>
-                                            {currency.currencySymbol +
-                                                " " +
-                                                finalDiscountedPrice}
+                                            <img
+                                                src={currency.currencySymbol}
+                                                className="img-fluid  item"
+                                                alt="Saudi Riyal"
+                                                width={15}
+                                                style={{
+                                                    pointerEvents: "auto",
+                                                }}
+                                            />
+
+                                            {" " + finalDiscountedPrice}
                                         </span>
-                                        <span className="fw-bold">{"-"}</span>
-                                        <span className="old">
-                                            {currency.currencySymbol +
-                                                " " +
-                                                finalProductPrice}
-                                        </span>
+                                        {/* <span className="fw-bold">{"-"}</span> */}
+                                        <span className="old">{finalProductPrice}</span>
                                     </Fragment>
                                 ) : (
                                     <span>
-                                        {currency.currencySymbol +
-                                            " " +
-                                            finalProductPrice}{" "}
+                                        <img
+                                            src={currency.currencySymbol}
+                                            className="img-fluid  item"
+                                            alt="Saudi Riyal"
+                                            width={15}
+                                            style={{
+                                                pointerEvents: "auto",
+                                            }}
+                                        />
+                                        {" " + finalProductPrice}{" "}
                                     </span>
                                 )}
                             </div>
@@ -220,7 +186,7 @@ function ProductModal({
 
                             {product.variation ? (
                                 <div className="pro-details-size-color">
-                                    <div className="pro-details-color-wrap">
+                                    {/* <div className="pro-details-color-wrap">
                                         <span>Color</span>
                                         <div className="pro-details-color-content">
                                             {product.variation.map(
@@ -272,65 +238,33 @@ function ProductModal({
                                                 }
                                             )}
                                         </div>
-                                    </div>
+                                    </div> */}
                                     <div className="pro-details-size">
                                         <span>Size</span>
                                         <div className="pro-details-size-content">
                                             {product.variation &&
-                                                product.variation.map(
-                                                    (single) => {
-                                                        return single.color ===
-                                                            selectedProductColor
-                                                            ? single.size.map(
-                                                                  (
-                                                                      singleSize,
-                                                                      key
-                                                                  ) => {
-                                                                      return (
-                                                                          <label
-                                                                              className={`pro-details-size-content--single`}
-                                                                              key={
-                                                                                  key
-                                                                              }
-                                                                          >
-                                                                              <input
-                                                                                  type="radio"
-                                                                                  value={
-                                                                                      singleSize.name
-                                                                                  }
-                                                                                  checked={
-                                                                                      singleSize.name ===
-                                                                                      selectedProductSize
-                                                                                          ? "checked"
-                                                                                          : ""
-                                                                                  }
-                                                                                  onChange={() => {
-                                                                                      setSelectedProductSize(
-                                                                                          singleSize.name
-                                                                                      );
-                                                                                      setProductStock(
-                                                                                          singleSize.stock
-                                                                                      );
-                                                                                      setQuantityCount(
-                                                                                          1
-                                                                                      );
-                                                                                      setSelectedProductPrice(
-                                                                                          singleSize.price
-                                                                                      );
-                                                                                  }}
-                                                                              />
-                                                                              <span className="size-name">
-                                                                                  {
-                                                                                      singleSize.name
-                                                                                  }
-                                                                              </span>
-                                                                          </label>
-                                                                      );
-                                                                  }
-                                                              )
-                                                            : "";
-                                                    }
-                                                )}
+                                                product.variation.map((single) => {
+                                                    return single.color === selectedProductColor
+                                                        ? single.size.map((singleSize, key) => {
+                                                              return (
+                                                                  <label className={`pro-details-size-content--single`} key={key}>
+                                                                      <input
+                                                                          type="radio"
+                                                                          value={singleSize.name}
+                                                                          checked={singleSize.name === selectedProductSize ? "checked" : ""}
+                                                                          onChange={() => {
+                                                                              setSelectedProductSize(singleSize.name);
+                                                                              setProductStock(singleSize.stock);
+                                                                              setQuantityCount(1);
+                                                                              setSelectedProductPrice(singleSize.price);
+                                                                          }}
+                                                                      />
+                                                                      <span className="size-name">{singleSize.name}</span>
+                                                                  </label>
+                                                              );
+                                                          })
+                                                        : "";
+                                                })}
                                         </div>
                                     </div>
                                 </div>
@@ -354,19 +288,14 @@ function ProductModal({
                             <div className="pro-details-quality">
                                 {addToCartButton ? (
                                     <div className="pro-details-cart btn-hover ">
-                                        <button
-                                            className="bg-danger rounded"
-                                            onClick={handleRemoveClick}
-                                        >
+                                        <button className="bg-danger rounded" onClick={handleRemoveClick}>
                                             Remove from Cart
                                         </button>
 
                                         <button
                                             className="bg-success rounded"
                                             onClick={() => {
-                                                window.location.href =
-                                                    process.env.PUBLIC_URL +
-                                                    "/cart";
+                                                window.location.href = process.env.PUBLIC_URL + "/cart";
                                             }}
                                         >
                                             Go to Cart
@@ -375,84 +304,56 @@ function ProductModal({
                                 ) : (
                                     <>
                                         <div className="cart-plus-minus">
-                                            <button
-                                                onClick={() =>
-                                                    setQuantityCount(
-                                                        quantityCount > 1
-                                                            ? quantityCount - 1
-                                                            : 1
-                                                    )
-                                                }
-                                                className="dec qtybutton"
-                                            >
+                                            <button onClick={() => setQuantityCount(quantityCount > 1 ? quantityCount - 1 : 1)} className="dec qtybutton">
                                                 -
                                             </button>
-                                            <input
-                                                className="cart-plus-minus-box"
-                                                type="text"
-                                                value={quantityCount}
-                                                readOnly
-                                            />
-                                            <button
-                                                onClick={() =>
-                                                    setQuantityCount(
-                                                        quantityCount <
-                                                            productStock -
-                                                                productCartQty
-                                                            ? quantityCount + 1
-                                                            : quantityCount
-                                                    )
-                                                }
-                                                className="inc qtybutton"
-                                            >
+                                            <input className="cart-plus-minus-box" type="text" value={quantityCount} readOnly />
+                                            <button onClick={() => setQuantityCount(quantityCount < productStock - productCartQty ? quantityCount + 1 : quantityCount)} className="inc qtybutton">
                                                 +
                                             </button>
                                         </div>
                                         <div className="pro-details-cart btn-hover">
-                                            {productStock &&
-                                            productStock > 0 ? (
+                                            {productStock && productStock > 0 ? (
                                                 <button
                                                     className="bg-dark rounded"
                                                     onClick={() => {
                                                         dispatch(
                                                             addToCart({
                                                                 ...product,
-                                                                quantity:
-                                                                    quantityCount,
-                                                                selectedProductColor:
-                                                                    selectedProductColor
-                                                                        ? selectedProductColor
-                                                                        : product.selectedProductColor
-                                                                        ? product.selectedProductColor
-                                                                        : null,
-                                                                selectedProductSize:
-                                                                    selectedProductSize
-                                                                        ? selectedProductSize
-                                                                        : product.selectedProductSize
-                                                                        ? product.selectedProductSize
-                                                                        : null,
-                                                                selectedProductPrice:
-                                                                    selectedProductPrice
-                                                                        ? selectedProductPrice
-                                                                        : product.selectedProductPrice
-                                                                        ? product.selectedProductPrice
-                                                                        : null,
+                                                                // quantity:
+                                                                //     quantityCount,
+                                                                // selectedProductColor:
+                                                                //     selectedProductColor
+                                                                //         ? selectedProductColor
+                                                                //         : product.selectedProductColor
+                                                                //         ? product.selectedProductColor
+                                                                //         : null,
+                                                                // selectedProductSize:
+                                                                //     selectedProductSize
+                                                                //         ? selectedProductSize
+                                                                //         : product.selectedProductSize
+                                                                //         ? product.selectedProductSize
+                                                                //         : null,
+                                                                // selectedProductPrice:
+                                                                //     selectedProductPrice
+                                                                //         ? selectedProductPrice
+                                                                //         : product.selectedProductPrice
+                                                                //         ? product.selectedProductPrice
+                                                                //             : null,
+                                                                quantity: quantityCount,
+                                                                selectedProductColor,
+                                                                selectedProductSize,
+                                                                selectedProductPrice: product.variation ? product.variation.find((v) => v.color === selectedProductColor).size.find((s) => s.name === selectedProductSize).price : product.price,
                                                             })
                                                         );
                                                     }}
-                                                    disabled={
-                                                        productCartQty >=
-                                                        productStock
-                                                    }
+                                                    disabled={productCartQty >= productStock}
                                                 >
                                                     {" "}
                                                     Add To Cart{" "}
                                                 </button>
                                             ) : (
-                                                <button
-                                                    className="bg-secondary"
-                                                    disabled
-                                                >
+                                                <button className="bg-secondary" disabled>
                                                     Out of Stock
                                                 </button>
                                             )}
@@ -460,40 +361,12 @@ function ProductModal({
                                     </>
                                 )}
                                 <div className="pro-details-wishlist">
-                                    <button
-                                        className={
-                                            wishlistItem !== undefined
-                                                ? "active"
-                                                : ""
-                                        }
-                                        title={
-                                            wishlistItem !== undefined
-                                                ? "Remove from wishlist"
-                                                : "Add to wishlist"
-                                        }
-                                        onClick={() =>
-                                            dispatch(addToWishlist(product))
-                                        }
-                                    >
+                                    <button className={wishlistItem !== undefined ? "active" : ""} title={wishlistItem !== undefined ? "Remove from wishlist" : "Add to wishlist"} onClick={() => dispatch(addToWishlist(product))}>
                                         <FaHeart />
                                     </button>
                                 </div>
                                 <div className="pro-details-compare">
-                                    <button
-                                        className={
-                                            compareItem !== undefined
-                                                ? "active"
-                                                : ""
-                                        }
-                                        title={
-                                            compareItem !== undefined
-                                                ? "Remove from compare"
-                                                : "Add to compare"
-                                        }
-                                        onClick={() =>
-                                            dispatch(addToCompare(product))
-                                        }
-                                    >
+                                    <button className={compareItem !== undefined ? "active" : ""} title={compareItem !== undefined ? "Remove from compare" : "Add to compare"} onClick={() => dispatch(addToCompare(product))}>
                                         <FaCodeCompare />
                                     </button>
                                 </div>
@@ -503,13 +376,7 @@ function ProductModal({
                     </div>
                 </div>
             </div>
-            {showPopup && (
-                <ConfirmationPopup
-                    message="Are you sure you want to remove this item from cart ?"
-                    onConfirm={confirmDelete}
-                    onCancel={cancelDelete}
-                />
-            )}
+            {showPopup && <ConfirmationPopup message="Are you sure you want to remove this item from cart ?" onConfirm={confirmDelete} onCancel={cancelDelete} />}
         </Modal>
     );
 }

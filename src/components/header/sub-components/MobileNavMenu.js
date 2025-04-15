@@ -431,11 +431,9 @@ const MobileNavMenu = () => {
                     </ul>
                 </li> */}
                 <li>
-                    <Link to={process.env.PUBLIC_URL + "/shop-grid-standard"}>
-                        {t("collection")}
-                    </Link>
+                    <Link to={process.env.PUBLIC_URL + "/shop-grid-standard"}>{t("collection")}</Link>
                 </li>
-                <li className="menu-item-has-children">
+                {/* <li className="menu-item-has-children">
                     <Link to={process.env.PUBLIC_URL + "/"}>{t("pages")}</Link>
                     <ul className="sub-menu">
                         <li>
@@ -486,52 +484,26 @@ const MobileNavMenu = () => {
                             </Link>
                         </li>
                     </ul>
-                </li>
-                <li className="menu-item-has-children">
-                    <Link to={process.env.PUBLIC_URL + "/blog-standard"}>
-                        {t("blog")}
-                    </Link>
+                </li> */}
+                {/* <li className="menu-item-has-children">
+                    <Link to={process.env.PUBLIC_URL + "/blog-standard"}>{t("blog")}</Link>
                     <ul className="sub-menu">
                         <li>
-                            <Link
-                                to={process.env.PUBLIC_URL + "/blog-standard"}
-                            >
-                                {t("blog_standard")}
-                            </Link>
+                            <Link to={process.env.PUBLIC_URL + "/blog-standard"}>{t("blog_standard")}</Link>
                         </li>
                         <li>
-                            <Link
-                                to={process.env.PUBLIC_URL + "/blog-no-sidebar"}
-                            >
-                                {t("blog_no_sidebar")}
-                            </Link>
+                            <Link to={process.env.PUBLIC_URL + "/blog-no-sidebar"}>{t("blog_no_sidebar")}</Link>
                         </li>
                         <li>
-                            <Link
-                                to={
-                                    process.env.PUBLIC_URL +
-                                    "/blog-right-sidebar"
-                                }
-                            >
-                                {t("blog_right_sidebar")}
-                            </Link>
+                            <Link to={process.env.PUBLIC_URL + "/blog-right-sidebar"}>{t("blog_right_sidebar")}</Link>
                         </li>
                         <li>
-                            <Link
-                                to={
-                                    process.env.PUBLIC_URL +
-                                    "/blog-details-standard"
-                                }
-                            >
-                                {t("blog_details_standard")}
-                            </Link>
+                            <Link to={process.env.PUBLIC_URL + "/blog-details-standard"}>{t("blog_details_standard")}</Link>
                         </li>
                     </ul>
-                </li>
+                </li> */}
                 <li>
-                    <Link to={process.env.PUBLIC_URL + "/contact"}>
-                        {t("contact_us")}
-                    </Link>
+                    <Link to={process.env.PUBLIC_URL + "/contact"}>{t("contact_us")}</Link>
                 </li>
             </ul>
         </nav>

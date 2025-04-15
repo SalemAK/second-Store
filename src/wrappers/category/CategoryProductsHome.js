@@ -32,7 +32,7 @@ const CategoryProductsHome = ({ spaceBottomClass }) => {
                                     <MdKeyboardDoubleArrowRight />
                                 </Link>
                             </div>
-                            <div className="row rtl">
+                            {/* <div className="row rtl">
                                 <div className="col-12 col-md-2 ">
                                     <Link
                                         to={`/shop-grid-standard?category=${category.name}`}
@@ -52,6 +52,39 @@ const CategoryProductsHome = ({ spaceBottomClass }) => {
                                             return (
                                                 <li
                                                     className="col-6 col-md-2 col-xl-2 product-item"
+                                                    key={single.id}
+                                                >
+                                                    <CategoryProductsHomeShow
+                                                        data={single}
+                                                    />
+                                                </li>
+                                            );
+                                        })}
+                                    </ul>
+                                </div>
+                            </div> */}
+                            <div className="row rtl">
+                                {/* صورة الفئة */}
+                                <div className="col-12 col-md-2 mb-3 mb-md-0 ">
+                                    <Link
+                                        to={`/shop-grid-standard?category=${category.name}`}
+                                        className="d-block"
+                                    >
+                                        <img
+                                            src={category.image}
+                                            alt={category.name}
+                                            className="img-fluid my-brand-image rounded"
+                                        />
+                                    </Link>
+                                </div>
+
+                                {/* قائمة المنتجات */}
+                                <div className="col-12 col-md-10">
+                                    <ul className="row list-unstyled products-group g-3">
+                                        {filteredItems?.map((single) => {
+                                            return (
+                                                <li
+                                                    className="col-6 col-sm-4 col-md-6 col-lg-2 product-item"
                                                     key={single.id}
                                                 >
                                                     <CategoryProductsHomeShow
