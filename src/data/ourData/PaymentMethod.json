@@ -1,0 +1,31 @@
+[
+    {
+        "id": 1,
+        "method": "Bank",
+        "name-en": "Saudi National Bank",
+        "name-ar": "البنك الأهلي السعودي",
+        "iban": "SA00 0000 0000 0000 0000 0000",
+        "account_name": "Irrigation World Agr. Co",
+        "icon": "credit_card",
+        "description": "Pay with your credit card securely."
+    },
+    {
+        "id": 2,
+        "method": "sadad",
+        "name-en": "Saddad",
+        "name-ar": "سداد",
+        "iban": "123444555566667778888",
+        "account_name": "Irrigation World Agr. Co",
+        "icon": "saddad",
+        "description": "Use your saddad account for quick payments."
+    },
+    {
+        "id": 3,
+        "method": "pickup",
+        "name-en": "On Pick Up",
+        "name-ar": "عند الاستلام",
+        "icon": "pickup",
+        "iban": "123444555566667778888",
+        "description": "Transfer money directly from your bank account."
+    }
+]

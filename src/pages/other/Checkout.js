@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { getDiscountPrice } from "../../helpers/product";
 import SEO from "../../components/seo";
@@ -9,6 +9,8 @@ import regionsData from "../../data/ourData/regionsData.json";
 // import { convertToWords } from "../../utils/numberToWords";
 import CompanyForm from "../../components/forms/companyForm";
 import PersonalForm from "../../components/forms/PersonalForm";
+import { useTranslation } from "react-i18next";
+import PaymentMethodSelector from "../../wrappers/checkout/PaymentMethodSelector";
 
 const Checkout = () => {
     let cartTotalPrice = 0;
@@ -23,6 +25,7 @@ const Checkout = () => {
         setSelectedRegion(event.target.value); // Update selected region
     };
     //saving customer info
+    const [selectedMethod, setSelectedMethod] = useState("sadad");
     const navigate = useNavigate();
     const [personalInfo, setPersonalInfo] = useState({
         firstName: "",
@@ -55,6 +58,8 @@ const Checkout = () => {
     const handleOptionChange = (event) => {
         setSelectedOption(event.target.value);
     };
+    const { t } = useTranslation();
+    const { lang } = useParams();
     const [shippingCost, setShippingCost] = useState(0);
     const [taxAmount, setTaxAmount] = useState(0.15);
     const [estimatedTotal, setEstimatedTotal] = useState(cartTotalPrice);
@@ -73,24 +78,6 @@ const Checkout = () => {
             setEstimatedTotal(total); // Recalculate estimated total
         }
     }, [selectedRegion, cartTotalPrice, selectedOption]); // Recalculate when either selectedRegion or cartTotalPrice changes
-
-    // const handlePlaceOrder = () => {
-    //     const buyerType = selectedOption;
-    //     const customer = buyerType === "Company" ? companyInfo : personalInfo;
-
-    //     const orderData = {
-    //         buyerType,
-    //         customer,
-    //         cartItems,
-    //         taxAmount: taxAmount,
-    //         estimatedTotal,
-    //         shippingCost: 0,
-    //         invoiceNumber: "INV-" + Math.floor(Math.random() * 100000),
-    //         date: new Date().toLocaleDateString(),
-    //     };
-
-    //     navigate("/invoice", { state: orderData });
-    // };
 
     const validateCompanyForm = () => {
         const fields = {
@@ -185,12 +172,14 @@ const Checkout = () => {
             vat: taxAmount.toFixed(2),
             netTotal: estimatedTotal.toFixed(2),
             // amountInWords: convertToWords(estimatedTotal), // implement this function
+            paymentMethod: selectedMethod,
             salesman: "Online Store", // or get from system
         };
         console.log(orderData);
 
-        navigate("/placeOrder", { state: orderData });
+        navigate(`/${lang}/placeOrder`, { state: orderData });
     };
+
     return (
         <Fragment>
             <SEO titleTemplate="Checkout" description="Checkout page of flone react minimalist eCommerce template." />
@@ -198,11 +187,11 @@ const Checkout = () => {
                 {/* breadcrumb */}
                 <Breadcrumb
                     pages={[
-                        { label: "Home", path: process.env.PUBLIC_URL + "/" },
-                        { label: "Cart", path: process.env.PUBLIC_URL + "/cart" },
+                        { label: t("home"), path: `/${lang}/` },
+                        { label: t("cart.title"), path: `/${lang}/cart` },
                         {
-                            label: "Checkout",
-                            path: process.env.PUBLIC_URL + pathname,
+                            label: t("checkout.title"),
+                            path: `${lang}${pathname}`,
                         },
                     ]}
                 />
@@ -216,24 +205,26 @@ const Checkout = () => {
                                             <div className="container">
                                                 <div className="row align-items-center">
                                                     <div className="col-lg-4 col-md-4">
-                                                        <h4 className="mt-2">Company/Personal</h4>
+                                                        <h4 className="mt-2">
+                                                            {t("checkout.company")}/{t("checkout.personal")}
+                                                        </h4>
                                                     </div>
                                                     <div className="col-lg-6 col-md-6">
                                                         <div className="radio-input d-flex gap-3 w-100">
                                                             <label className="d-flex align-items-center">
                                                                 <input type="radio" name="buyerType" value="Company" checked={selectedOption === "Company"} onChange={handleOptionChange} className="form-check-input me-2" />
-                                                                <span className={`btn btn-${selectedOption === "Company" ? "primary" : "secondary"}`}>Company</span>
+                                                                <span className={`btn btn-${selectedOption === "Company" ? "primary" : "secondary"}`}>{t("checkout.company")}</span>
                                                             </label>
                                                             <label className="d-flex align-items-center">
                                                                 <input type="radio" name="buyerType" value="Personal" checked={selectedOption === "Personal"} onChange={handleOptionChange} className="form-check-input me-2" />
-                                                                <span className={`btn btn-${selectedOption === "Personal" ? "primary" : "secondary"}`}>Personal</span>
+                                                                <span className={`btn btn-${selectedOption === "Personal" ? "primary" : "secondary"}`}>{t("checkout.personal")}</span>
                                                             </label>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <hr className="mt-3" />
                                             </div>
-                                            <h3>Billing Details</h3>
+                                            <h3>{t("checkout.billing_details")}</h3>
                                             <CompanyForm info={companyInfo} setInfo={setCompanyInfo} />
                                         </div>
                                     </div>
@@ -243,31 +234,33 @@ const Checkout = () => {
                                             <div className="container">
                                                 <div className="row align-items-center">
                                                     <div className="col-lg-4 col-md-4">
-                                                        <h4 className="mt-2">Company/Personal</h4>
+                                                        <h4 className="mt-2">
+                                                            {t("checkout.company")}/{t("checkout.personal")}
+                                                        </h4>
                                                     </div>
                                                     <div className="col-lg-6 col-md-6">
                                                         <div className="radio-input d-flex gap-3 w-100">
                                                             <label className="d-flex align-items-center">
                                                                 <input type="radio" value="Company" name="value-radio" checked={selectedOption === "Company"} onChange={handleOptionChange} className="form-check-input me-2" />
-                                                                <span className={`btn btn-${selectedOption === "Company" ? "primary" : "secondary"}`}>Company</span>
+                                                                <span className={`btn btn-${selectedOption === "Company" ? "primary" : "secondary"}`}>{t("checkout.company")}</span>
                                                             </label>
                                                             <label className="d-flex align-items-center">
                                                                 <input type="radio" value="Personal" name="value-radio" checked={selectedOption === "Personal"} onChange={handleOptionChange} className="form-check-input me-2" />
-                                                                <span className={`btn btn-${selectedOption === "Personal" ? "primary" : "secondary"}`}>Personal</span>
+                                                                <span className={`btn btn-${selectedOption === "Personal" ? "primary" : "secondary"}`}>{t("checkout.personal")}</span>
                                                             </label>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <hr className="mt-3" />
                                             </div>
-                                            <h3>Billing Details</h3>
+                                            <h3>{t("checkout.billing_details")}</h3>
                                             <PersonalForm info={personalInfo} setInfo={setPersonalInfo} />
                                             <hr />
                                             <div className="additional-info-wrap ">
-                                                <h4>Additional information</h4>
+                                                <h4>{t("checkout.additional_information")}</h4>
                                                 <div className="additional-info">
-                                                    <label>Order notes</label>
-                                                    <textarea placeholder="Notes about your order, e.g. special notes for delivery. " name="message" defaultValue={""} />
+                                                    <label>{t("checkout.order_notes")}</label>
+                                                    <textarea placeholder={t("checkout.order_notes_placeholder")} name="message" defaultValue={""} />
                                                 </div>
                                             </div>
                                         </div>
@@ -276,14 +269,14 @@ const Checkout = () => {
 
                                 <div className="col-lg-5">
                                     <div className="your-order-area">
-                                        <h3>Your order</h3>
+                                        <h3>{t("checkout.your_order")}</h3>
                                         <div className="your-order-wrap gray-bg-4">
                                             <div className="your-order-product-info">
                                                 <div className="your-order-top">
                                                     <ul>
-                                                        <li>Product</li>
+                                                        <li>{t("checkout.product")}</li>
                                                         <li></li>
-                                                        <li>Total</li>
+                                                        <li>{t("checkout.total")}</li>
                                                     </ul>
                                                 </div>
                                                 <div className="your-order-middle">
@@ -292,16 +285,25 @@ const Checkout = () => {
                                                             const discountedPrice = getDiscountPrice(cartItem.selectedProductPrice, cartItem.discount);
                                                             const finalProductPrice = (cartItem.selectedProductPrice * currency.currencyRate).toFixed(2);
                                                             const finalDiscountedPrice = (discountedPrice * currency.currencyRate).toFixed(2);
+                                                            const productName = cartItem[`name-${lang}`] || cartItem[`name-en`];
 
                                                             discountedPrice != null ? (cartTotalPrice += finalDiscountedPrice * cartItem.quantity) : (cartTotalPrice += finalProductPrice * cartItem.quantity);
                                                             return (
                                                                 <li key={key} className="row ">
                                                                     <div className="col-10">
                                                                         <span className="order-middle-left">
-                                                                            {cartItem.name} X {cartItem.quantity}
+                                                                            {productName}
                                                                             {cartItem.selectedProductSize ? (
                                                                                 <div className=" text-muted">
-                                                                                    <span>Size: {cartItem.selectedProductSize}</span>
+                                                                                    <div>
+                                                                                        {t("checkout.quantity")}
+                                                                                        {" :"} {cartItem.quantity}
+                                                                                    </div>
+                                                                                    <div>
+                                                                                        {t("checkout.size")}
+                                                                                        {" :"} {cartItem.selectedProductSize}
+                                                                                    </div>
+                                                                                    {key !== cartItems.length - 1 && <hr />}
                                                                                 </div>
                                                                             ) : (
                                                                                 ""
@@ -331,7 +333,7 @@ const Checkout = () => {
                                                     <ul>
                                                         <li className="row">
                                                             <div className="col-10">
-                                                                <span className="order-middle-left">VAT 15%</span>
+                                                                <span className="order-middle-left">{t("checkout.vat")} 15%</span>
                                                             </div>
 
                                                             <div className="order-price col-2">
@@ -374,7 +376,7 @@ const Checkout = () => {
                                                     <ul>
                                                         <li className="row">
                                                             <div className=" col-10">
-                                                                <span className="order-total">Total</span>
+                                                                <span className="order-total">{t("checkout.total")}</span>
                                                             </div>
                                                             <div className="order-price col-2">
                                                                 {" "}
@@ -393,12 +395,14 @@ const Checkout = () => {
                                                     </ul>
                                                 </div>
                                             </div>
-                                            <div className="payment-method"></div>
+                                            <div className="payment-method">
+                                                <PaymentMethodSelector selectedMethod={selectedMethod} setSelectedMethod={setSelectedMethod} />
+                                            </div>
                                         </div>
 
                                         <div className="place-order mt-25">
                                             <button className="btn-hover" onClick={handlePlaceOrder}>
-                                                Place Order
+                                                {t("checkout.place_order")}
                                             </button>
                                         </div>
                                     </div>
@@ -412,7 +416,7 @@ const Checkout = () => {
                                             <i className="pe-7s-cash"></i>
                                         </div>
                                         <div className="item-empty-area__text">
-                                            No items found in cart to checkout <br /> <Link to={process.env.PUBLIC_URL + "/shop-grid-standard"}>Shop Now</Link>
+                                            {t("checkout.no_item_checkout")} <br /> <Link to={`/${lang}/shop-grid-standard`}>{t("checkout.shop_now")}</Link>
                                         </div>
                                     </div>
                                 </div>

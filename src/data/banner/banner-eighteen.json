@@ -2,22 +2,28 @@
     {
         "id": 1,
         "image": "/assets/img/our-pages/bannar-home-1.jpg",
-        "title": "New Arrivals",
-        "subtitle": "Choose your products here",
+        "title-en": "New Arrivals",
+        "title-ar": "وصل حديثا",
+        "subtitle-en": "Choose your products here",
+        "subtitle-ar": "اختر منتجاتك هنا",
         "link": "/shop-grid-standard"
     },
     {
         "id": 2,
         "image": "/assets/img/our-pages/bannar-home-2.jpg",
-        "title": "Featured Products",
-        "subtitle": "Choose your products here",
+        "title-en": "Featured Products",
+        "title-ar": "المنتجات المميزة",
+        "subtitle-en": "Choose your products here",
+        "subtitle-ar": "اختر منتجاتك هنا",
         "link": "/shop-grid-standard"
     },
     {
         "id": 3,
         "image": "/assets/img/our-pages/bannar-home-3.jpg",
-        "title": "Best Seller",
-        "subtitle": "Choose your products here",
+        "title-en": "Best Seller",
+        "title-ar": "الأكثر مبيعًا",
+        "subtitle-en": "Choose your products here",
+        "subtitle-ar": "اختر منتجاتك هنا",
         "link": "/shop-grid-standard"
     }
 ]

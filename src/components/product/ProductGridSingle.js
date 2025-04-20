@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import Rating from "./sub-components/ProductRating";
 import { getDiscountPrice } from "../../helpers/product";
@@ -11,6 +11,7 @@ import { addToWishlist } from "../../store/slices/wishlist-slice";
 import { addToCompare } from "../../store/slices/compare-slice";
 import { FaCodeCompare } from "react-icons/fa6";
 import { FaHeart } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 const ProductGridSingle = ({ product, currency, cartItem, wishlistItem, compareItem, spaceBottomClass }) => {
     const [modalShow, setModalShow] = useState(false);
@@ -19,6 +20,9 @@ const ProductGridSingle = ({ product, currency, cartItem, wishlistItem, compareI
     const finalProductPrice = +(selectedProductPrice * currency.currencyRate).toFixed(2);
     const finalDiscountedPrice = +(discountedPrice * currency.currencyRate).toFixed(2);
     const dispatch = useDispatch();
+    const { lang } = useParams();
+    const { t } = useTranslation();
+    const productName = product[`name-${lang}`] || product["name-en"];
 
     return (
         <Fragment>
@@ -26,7 +30,7 @@ const ProductGridSingle = ({ product, currency, cartItem, wishlistItem, compareI
             <div className={clsx("product-wrap h-100 card p-3 shadow-sm  ", spaceBottomClass)}>
                 <div className="">
                     <div className="product-img position-relative">
-                        <Link to={process.env.PUBLIC_URL + "/product/" + product.id}>
+                        <Link to={`/${lang}/product/${product.id}`}>
                             <img className="default-img rounded" src={process.env.PUBLIC_URL + product.image[0]} alt="" />
                             {product.image.length > 1 ? <img className="hover-img img-fluid rounded position-absolute  w-100 h-100 hover-opacity" src={process.env.PUBLIC_URL + product.image[1]} alt={product.name} /> : ""}
                         </Link>
@@ -34,7 +38,7 @@ const ProductGridSingle = ({ product, currency, cartItem, wishlistItem, compareI
                         {product.discount || product.new ? (
                             <div className="product-img-badges">
                                 {product.discount ? <span className="pink">-{product.discount}%</span> : ""}
-                                {product.new ? <span className="purple">New</span> : ""}
+                                {product.new ? <span className="purple">{t("product.badge.new")}</span> : ""}
                             </div>
                         ) : (
                             ""
@@ -45,7 +49,7 @@ const ProductGridSingle = ({ product, currency, cartItem, wishlistItem, compareI
                                 <FaHeart />
                             </button>
                             <button className="btn btn-sm btn-outline-secondary" onClick={() => setModalShow(true)}>
-                                Quick View
+                                {t("product.quick_view")}
                             </button>
                             <button className={`btn btn-sm ${compareItem ? "btn-primary" : "btn-outline-secondary"}`} onClick={() => dispatch(addToCompare(product))}>
                                 <FaCodeCompare />
@@ -55,7 +59,7 @@ const ProductGridSingle = ({ product, currency, cartItem, wishlistItem, compareI
                     </div>
                     <div className="product-content text-top ">
                         <h3 className="fw-bold product-title">
-                            <Link to={process.env.PUBLIC_URL + "/product/" + product.id}>{product.name}</Link>
+                            <Link to={`/${lang}/product/${product.id}`}>{productName}</Link>
                         </h3>
 
                         {/* {product.rating && product.rating > 0 ? (
@@ -69,7 +73,7 @@ const ProductGridSingle = ({ product, currency, cartItem, wishlistItem, compareI
                             {discountedPrice !== null ? (
                                 <Fragment>
                                     <span className="fw-bold text-primary me-1">
-                                        <h4 className="fs-6 text-muted"> From </h4>
+                                        <h4 className="fs-6 text-muted"> {t("product.price.from")} </h4>
                                         <img src={currency.currencySymbol} className="img-fluid " alt="Saudi Riyal" width={15} style={{ pointerEvents: "auto" }} />
                                         {" " + finalDiscountedPrice}
                                     </span>
@@ -78,7 +82,7 @@ const ProductGridSingle = ({ product, currency, cartItem, wishlistItem, compareI
                                 </Fragment>
                             ) : (
                                 <span>
-                                    <h4 className="fs-6 text-muted"> From </h4>
+                                    <h4 className="fs-6 text-muted"> {t("product.price.from")} </h4>
                                     <img src={currency.currencySymbol} className="img-fluid  item" alt="Saudi Riyal" width={15} style={{ pointerEvents: "auto" }} />
                                     {" " + finalProductPrice}
                                 </span>
@@ -87,11 +91,11 @@ const ProductGridSingle = ({ product, currency, cartItem, wishlistItem, compareI
                         {/* Add to Cart */}
                         {product.variation[0].size.some((s) => s.stock > 0) ? (
                             <button className="btn btn-primary w-100 mt-1">
-                                <Link to={`${process.env.PUBLIC_URL}/product/${product.id}`}>Select Option</Link>
+                                <Link to={`/${lang}/product/${product.id}`}>{t("product.select_option")}</Link>
                             </button>
                         ) : (
                             <button className="btn btn-secondary w-100 mt-1">
-                                <Link to={`${process.env.PUBLIC_URL}/product/${product.id}`}>Out of Stock</Link>
+                                <Link to={`/${lang}/product/${product.id}`}>{t("product.out_of_stock")}</Link>
                             </button>
                         )}
                     </div>

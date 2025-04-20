@@ -1,0 +1,30 @@
+[
+    {
+        "title-en": "HDPE technologies & system",
+        "title-ar": "تقنيات وأنظمة HDPE",
+        "image": "assets/img/HDPE.jpg",
+        "description-en": "High-density polyethylene (HDPE) is a polyethylene thermoplastic made from petroleum.",
+        "description-ar": "البولي إيثيلين عالي الكثافة (HDPE) هو مادة لدنة حرارية مصنوعة من البترول."
+    },
+    {
+        "title-en": "Fogging Systems",
+        "title-ar": "أنظمة التبخير",
+        "image": "assets/img/calcool.png",
+        "description-en": "Calcool fog system & Schaefer ventilation.",
+        "description-ar": "نظام كالكول للتبخير وتهوية شيفر."
+    },
+    {
+        "title-en": "Fountain Systems",
+        "title-ar": "أنظمة النوافير",
+        "image": "assets/img/Fountain Systems.png",
+        "description-en": "IWACO specializes in the design, manufacture, and commercialization of architectural fountains.",
+        "description-ar": "تتخصص IWACO في تصميم وتصنيع وتسويق النوافير المعمارية."
+    },
+    {
+        "title-en": "Filtration Systems & Irrigation Systems",
+        "title-ar": "أنظمة الترشيح والري",
+        "image": "assets/img/Irrigation Systems.png",
+        "description-en": "IWACO is a pioneer in filtration and irrigation systems, specializing in hydroponic cultivation.",
+        "description-ar": "تعد IWACO رائدة في أنظمة الترشيح والري، متخصصة في الزراعة المائية."
+    }
+]

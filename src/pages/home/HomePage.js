@@ -6,11 +6,13 @@ import Category from "../../wrappers/category/Category";
 import BrandLogoSliderThree from "../../wrappers/brand-logo/BrandLogoSliderThree";
 import CategoryProductsHome from "../../wrappers/category/CategoryProductsHome";
 import ResponsiveBanner from "../../wrappers/banner/BannerImage";
+import { useTranslation } from "react-i18next";
 
 const HomePage = () => {
+    const { t } = useTranslation();
     return (
         <Fragment>
-            <SEO titleTemplate="Home" description="retail store home page" />
+            <SEO titleTemplate={t("home_page.seo_title")} description={t("home_page.seo_description")} />
             <LayoutOne headerTop="visible">
                 {/* banner */}
                 <BannerEighteen spaceBottomClass="" />

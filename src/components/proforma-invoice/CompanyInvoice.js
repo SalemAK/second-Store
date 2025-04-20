@@ -3,12 +3,14 @@
 import React, { forwardRef } from "react";
 import { convertToWordsEn, convertToWordsAr } from "../../utils/numberToWords";
 import { Link } from "react-router-dom";
+import PaymentDetails from "../../wrappers/paymentInvoice/PaymentDetails";
 
 const CompanyInvoice = forwardRef(({ orderData, lang }, ref) => {
     const { invoiceNumber, date, customer, items, subtotal, vat, netTotal, paymentMethod, deliveryMethod, discount } = orderData;
 
     const isArabic = lang === "ar";
     const amountInWords = isArabic ? convertToWordsAr(Number(netTotal)) : convertToWordsEn(Number(netTotal));
+    console.log(paymentMethod);
 
     return (
         <div ref={ref} className="bg-white p-4 border shadow invoice-container" dir={isArabic ? "rtl" : "ltr"}>
@@ -100,9 +102,9 @@ const CompanyInvoice = forwardRef(({ orderData, lang }, ref) => {
                         <p>
                             <strong>{isArabic ? "طريقة الدفع:" : "Payment Method:"}</strong> {paymentMethod}
                         </p>
-                        <p>
+                        {/* <p>
                             <strong>{isArabic ? "طريقة التوصيل:" : "Delivery Method:"}</strong> {deliveryMethod}
-                        </p>
+                        </p> */}
                     </div>
                     <div className="col-md-6 text-end">
                         <table className="table table-bordered">
@@ -136,12 +138,7 @@ const CompanyInvoice = forwardRef(({ orderData, lang }, ref) => {
                 <div className="mt-5 pt-3 border-top">
                     <div className="row">
                         <div className="col-md-6">
-                            <p>
-                                <strong>{isArabic ? "تفاصيل البنك:" : "Bank Details:"}</strong>
-                            </p>
-                            <p>{isArabic ? "اسم البنك: البنك الأهلي السعودي" : "Bank Name: Saudi National Bank"}</p>
-                            <p>{isArabic ? "الآيبان: SA00 0000 0000 0000 0000 0000" : "IBAN: SA00 0000 0000 0000 0000 0000"}</p>
-                            <p>{isArabic ? "اسم الحساب: شركة عالم الري الزراعية" : "Account Name: Irrigation World Agr. Co"}</p>
+                            <PaymentDetails paymentMethod={paymentMethod} isArabic={isArabic} customer={customer} />
                         </div>
                         <div className="col-md-6 text-end">
                             <p>_________________________</p>

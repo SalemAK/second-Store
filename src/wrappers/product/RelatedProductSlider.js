@@ -5,6 +5,7 @@ import Swiper, { SwiperSlide } from "../../components/swiper";
 import SectionTitle from "../../components/section-title/SectionTitle";
 import ProductGridSingle from "../../components/product/ProductGridSingle";
 import { getProducts } from "../../helpers/product";
+import { t } from "i18next";
 
 const settings = {
     navigation: true,
@@ -39,11 +40,7 @@ const RelatedProductSlider = ({ spaceBottomClass, category }) => {
     return (
         <div className={clsx("related-product-area", spaceBottomClass)}>
             <div className="container">
-                <SectionTitle
-                    titleText="Related Products"
-                    positionClass="text-center"
-                    spaceClass="mb-50"
-                />
+                <SectionTitle titleText={t("related_products.title")} positionClass="text-center" spaceClass="mb-50" />
                 <div className="product-small-image-wrapper mt-3">
                     {prods?.length ? (
                         <Swiper options={settings}>
@@ -52,18 +49,9 @@ const RelatedProductSlider = ({ spaceBottomClass, category }) => {
                                     <ProductGridSingle
                                         product={product}
                                         currency={currency}
-                                        cartItem={cartItems.find(
-                                            (cartItem) =>
-                                                cartItem.id === product.id
-                                        )}
-                                        wishlistItem={wishlistItems.find(
-                                            (wishlistItem) =>
-                                                wishlistItem.id === product.id
-                                        )}
-                                        compareItem={compareItems.find(
-                                            (compareItem) =>
-                                                compareItem.id === product.id
-                                        )}
+                                        cartItem={cartItems.find((cartItem) => cartItem.id === product.id)}
+                                        wishlistItem={wishlistItems.find((wishlistItem) => wishlistItem.id === product.id)}
+                                        compareItem={compareItems.find((compareItem) => compareItem.id === product.id)}
                                     />
                                 </SwiperSlide>
                             ))}

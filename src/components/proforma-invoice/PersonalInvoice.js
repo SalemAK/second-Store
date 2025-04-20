@@ -2,6 +2,7 @@
 
 import React, { forwardRef } from "react";
 import { convertToWordsEn, convertToWordsAr } from "../../utils/numberToWords";
+import PaymentDetails from "../../wrappers/paymentInvoice/PaymentDetails";
 
 const PersonalInvoice = forwardRef(({ orderData, lang }, ref) => {
     const { invoiceNumber, date, customer, items, subtotal, vat, netTotal, paymentMethod, deliveryMethod, discount } = orderData;
@@ -67,9 +68,9 @@ const PersonalInvoice = forwardRef(({ orderData, lang }, ref) => {
                     <p>
                         <strong>{isArabic ? "طريقة الدفع:" : "Payment Method:"}</strong> {paymentMethod}
                     </p>
-                    <p>
+                    {/* <p>
                         <strong>{isArabic ? "طريقة التوصيل:" : "Delivery Method:"}</strong> {deliveryMethod}
-                    </p>
+                    </p> */}
                 </div>
                 <div className="col-md-6 text-end">
                     <table className="table table-bordered">
@@ -97,6 +98,17 @@ const PersonalInvoice = forwardRef(({ orderData, lang }, ref) => {
                     <p className="text-muted">
                         <strong>{isArabic ? "المبلغ كتابة:" : "Amount in Words:"}</strong> {amountInWords}
                     </p>
+                </div>
+            </div>
+            <div className="mt-5 pt-3 border-top">
+                <div className="row">
+                    <div className="col-md-6">
+                        <PaymentDetails paymentMethod={paymentMethod} isArabic={isArabic} customer={customer} />
+                    </div>
+                    <div className="col-md-6 text-end">
+                        <p>_________________________</p>
+                        <p>{isArabic ? "التوقيع المعتمد" : "Authorized Signature"}</p>
+                    </div>
                 </div>
             </div>
         </div>

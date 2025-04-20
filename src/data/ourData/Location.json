@@ -1,8 +1,8 @@
 [
-    { "name": "IWACO Irrigation World Agri", "phone": "+996 0114648499", "location": "Riyadh, Salmanya", "mapLink": "https://maps.app.goo.gl/BLm6X3pEWtN1bgdi6", "image": "/assets/img/salmnya.png" },
-    { "name": "IWACO Irrigation World Agri", "phone": "+996 0114648599", "location": "Riyadh, Malaz", "mapLink": "https://maps.app.goo.gl/XJac6fzMpxLhY4dZ7", "image": "/assets/img/warhouse.jpeg" },
-    { "name": "IWACO Irrigation World Agri", "phone": "+996 0114117764", "location": "Riyadh, Salam", "mapLink": "https://maps.app.goo.gl/k9viQZ3ff9qcErwY8", "image": "/assets/img/salam.png" },
-    { "name": "IWACO Irrigation World Agri", "phone": "+996 0138544068", "location": "Jaddeh, Azazia", "mapLink": "https://maps.app.goo.gl/zhfkADCm6cQCnExD8", "image": "/assets/img/azazia.png" },
-    { "name": "IWACO Irrigation World Agri", "phone": "+996 0138544068", "location": "Jaddeh, Baladya street", "mapLink": "https://maps.app.goo.gl/HScbDRmgdmZzf2d16", "image": "/assets/img/warhouse.jpeg" },
-    { "name": "IWACO Irrigation World Agri", "phone": "+996 0138544068", "location": "Dammam, Jloia", "mapLink": "https://maps.app.goo.gl/BLm6X3pEWtN1bgdi6", "image": "/assets/img/warhouse.jpeg" }
+    { "name-en": "Riyadh - Sulimaniyah", "name-ar": "الرياض - السليمانية", "phone": "+996 0114648499", "location": "Riyadh, Salmanya", "mapLink": "https://maps.app.goo.gl/BLm6X3pEWtN1bgdi6", "image": "/assets/img/salmnya.png" },
+    { "name-en": "Riyadh - Al Malaz", "name-ar": "الرياض - الملز", "phone": "+996 0114648599", "location": "Riyadh, Malaz", "mapLink": "https://maps.app.goo.gl/XJac6fzMpxLhY4dZ7", "image": "/assets/img/warhouse.jpeg" },
+    { "name-en": "Riyadh - Al Salam", "name-ar": "الرياض - السلام", "phone": "+996 0114117764", "location": "Riyadh, Salam", "mapLink": "https://maps.app.goo.gl/k9viQZ3ff9qcErwY8", "image": "/assets/img/salam.png" },
+    { "name-en": "Jeddah - Aziziyah", "name-ar": "جدة - العزازية", "phone": "+996 0138544068", "location": "Jaddeh, Azazia", "mapLink": "https://maps.app.goo.gl/zhfkADCm6cQCnExD8", "image": "/assets/img/azazia.png" },
+    { "name-en": "Jeddah - Baladiya street", "name-ar": "جدة - شارع البلدية", "phone": "+996 0138544068", "location": "Jaddeh, Baladya street", "mapLink": "https://maps.app.goo.gl/HScbDRmgdmZzf2d16", "image": "/assets/img/warhouse.jpeg" },
+    { "name-en": "Dammam - Al Athir", "name-ar": "دمام - الاثير ", "phone": "+996 0138544068", "location": "Dammam, Jloia", "mapLink": "https://maps.app.goo.gl/BLm6X3pEWtN1bgdi6", "image": "/assets/img/warhouse.jpeg" }
 ]

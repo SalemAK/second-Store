@@ -6,6 +6,7 @@ import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import Fullscreen from "yet-another-react-lightbox/plugins/fullscreen";
 import Swiper, { SwiperSlide } from "../../components/swiper";
+import { useTranslation } from "react-i18next";
 
 const ProductImageGallery = ({ product }) => {
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
@@ -37,18 +38,14 @@ const ProductImageGallery = ({ product }) => {
         slideToClickedSlide: true,
         navigation: true,
     };
-
+    const { t } = useTranslation();
     return (
         <Fragment>
             <div className="product-large-image-wrapper">
                 {product.discount || product.new ? (
                     <div className="product-img-badges">
-                        {product.discount ? (
-                            <span className="pink">-{product.discount}%</span>
-                        ) : (
-                            ""
-                        )}
-                        {product.new ? <span className="purple">New</span> : ""}
+                        {product.discount ? <span className="pink">-{product.discount}%</span> : ""}
+                        {product.new ? <span className="purple">{t("product.badge.new")}</span> : ""}
                     </div>
                 ) : (
                     ""
@@ -58,27 +55,14 @@ const ProductImageGallery = ({ product }) => {
                     <Swiper options={gallerySwiperParams}>
                         {product.image.map((single, key) => (
                             <SwiperSlide key={key}>
-                                <button
-                                    className="lightgallery-button"
-                                    onClick={() => setIndex(key)}
-                                >
+                                <button className="lightgallery-button" onClick={() => setIndex(key)}>
                                     <i className="pe-7s-expand1"></i>
                                 </button>
-                                <img
-                                    src={process.env.PUBLIC_URL + single}
-                                    className=" img-fluid "
-                                    alt=""
-                                />
+                                <img src={process.env.PUBLIC_URL + single} className=" img-fluid " alt="" />
                                 <div className="single-image"></div>
                             </SwiperSlide>
                         ))}
-                        <AnotherLightbox
-                            open={index >= 0}
-                            index={index}
-                            close={() => setIndex(-1)}
-                            slides={slides}
-                            plugins={[Thumbnails, Zoom, Fullscreen]}
-                        />
+                        <AnotherLightbox open={index >= 0} index={index} close={() => setIndex(-1)} slides={slides} plugins={[Thumbnails, Zoom, Fullscreen]} />
                     </Swiper>
                 ) : null}
             </div>
@@ -88,11 +72,7 @@ const ProductImageGallery = ({ product }) => {
                         {product.image.map((single, key) => (
                             <SwiperSlide key={key}>
                                 <div className="single-image">
-                                    <img
-                                        src={process.env.PUBLIC_URL + single}
-                                        className="img-fluid"
-                                        alt=""
-                                    />
+                                    <img src={process.env.PUBLIC_URL + single} className="img-fluid" alt="" />
                                 </div>
                             </SwiperSlide>
                         ))}

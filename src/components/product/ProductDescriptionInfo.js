@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import React, { Fragment, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getProductCartQuantity } from "../../helpers/product";
 import Rating from "./sub-components/ProductRating";
@@ -11,6 +11,8 @@ import { getDiscountPrice } from "../../helpers/product";
 import { FaCodeCompare } from "react-icons/fa6";
 import { FaHeart } from "react-icons/fa";
 import ConfirmationPopup from "../ConfirmationPopup";
+import { t } from "i18next";
+import categoryData from "../../data/ourData/Category.json";
 
 const ProductDescriptionInfo = ({
     product,
@@ -74,9 +76,13 @@ const ProductDescriptionInfo = ({
         setShowPopup(false);
         setProductToRemove(null);
     };
+    const { lang } = useParams();
+    const productName = product[`name-${lang}`] || product["name-en"];
+    const category = categoryData.find((cat) => cat.categoryCode === product.categoryCode);
+    const categoryNameLocalized = category ? category[`name-${lang}`] || category["name-en"] : "Unknown";
     return (
         <div className="product-details-content ml-70">
-            <h2>{product.name}</h2>
+            <h2>{productName}</h2>
             <div className="product-details-price">
                 {discountedPrice !== null ? (
                     <Fragment>
@@ -131,7 +137,9 @@ const ProductDescriptionInfo = ({
                 ""
             )} */}
             <div className="pro-details-list">
-                <p>{product.shortDescription}</p>
+                <div dir="ltr">
+                    <p>{product.shortDescription}</p>
+                </div>
             </div>
             {product.variation ? (
                 <div className="pro-details-size-color">
@@ -178,7 +186,7 @@ const ProductDescriptionInfo = ({
                         </div>
                     </div> */}
                     <div className="pro-details-size">
-                        <span>Size</span>
+                        <span>{t("size")}</span>
                         <div className="pro-details-size-content">
                             {product.variation &&
                                 product.variation.map((single) => {
@@ -226,16 +234,17 @@ const ProductDescriptionInfo = ({
                 {addToCartButton ? (
                     <div className="pro-details-cart btn-hover m-0">
                         <button className="bg-danger rounded" onClick={handleRemoveClick}>
-                            Remove from Cart
+                            {t("product.remove_from_cart")}
                         </button>
 
                         <button
                             className="bg-success rounded"
                             onClick={() => {
-                                window.location.href = process.env.PUBLIC_URL + "/cart";
+                                // window.location.href = process.env.PUBLIC_URL + "/cart";
+                                window.location.href = `/${lang}/cart`;
                             }}
                         >
-                            Go to Cart
+                            {t("product.go_to_cart")}
                         </button>
                     </div>
                 ) : (
@@ -285,12 +294,11 @@ const ProductDescriptionInfo = ({
                                     }}
                                     disabled={productCartQty >= productStock}
                                 >
-                                    {" "}
-                                    Add To Cart{" "}
+                                    {t("product.add_to_cart")}
                                 </button>
                             ) : (
                                 <button className="bg-secondary rounded" disabled>
-                                    Out of Stock
+                                    {t("product.out_of_stock")}
                                 </button>
                             )}
                         </div>
@@ -310,12 +318,12 @@ const ProductDescriptionInfo = ({
             {/* )} */}
             {product.category ? (
                 <div className="pro-details-meta">
-                    <span>Categories :</span>
+                    <span>{t("categories")} :</span>
                     <ul>
                         {product.category.map((single, key) => {
                             return (
                                 <li key={key}>
-                                    <Link to={`/shop-grid-standard?category=${single}`}>{single}</Link>
+                                    <Link to={`/${lang}/shop-grid-standard?category=${single}`}>{categoryNameLocalized}</Link>
                                 </li>
                             );
                         })}
@@ -376,7 +384,7 @@ const ProductDescriptionInfo = ({
                     </li>
                 </ul>
             </div> */}
-            {showPopup && <ConfirmationPopup message="Are you sure you want to remove this item from cart ?" onConfirm={confirmDelete} onCancel={cancelDelete} />}
+            {showPopup && <ConfirmationPopup message={t("product.confirm_remove")} onConfirm={confirmDelete} onCancel={cancelDelete} />}
         </div>
     );
 };

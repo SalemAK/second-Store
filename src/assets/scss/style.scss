@@ -86,7 +86,7 @@
     height: 100%;
     object-fit: cover;
     position: relative;
-    opacity: 0.5;
+    opacity: 0.8;
 }
 
 .cat .container .box a:hover img {
@@ -97,7 +97,7 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    color: #fff;
+    color: #ffffff;
     width: 100%;
     padding: 30px;
     justify-content: space-between;
@@ -115,7 +115,7 @@
     text-transform: uppercase;
     font-weight: 700;
     font-size: 24px;
-    color: #fff;
+    color: #0098fd;
 }
 
 .fa-plus:before {
@@ -173,7 +173,6 @@
 }
 
 .section-title::after {
-    content: " ";
     height: 2px;
     width: 114px;
     display: block;
@@ -481,4 +480,17 @@
     transform: translate(-50%, -50%);
     pointer-events: none;
     z-index: 0;
+}
+html[dir="rtl"] {
+    body {
+        direction: rtl;
+        text-align: right;
+
+        .product-card {
+            text-align: right;
+            .price {
+                float: none;
+            }
+        }
+    }
 }

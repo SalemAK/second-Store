@@ -1,7 +1,7 @@
 import { Fragment, useState, useEffect } from "react";
 import Paginator from "react-hooks-paginator";
 import { useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { getSortedProducts } from "../../helpers/product";
 import SEO from "../../components/seo";
 import LayoutOne from "../../layouts/LayoutOne";
@@ -9,8 +9,10 @@ import Breadcrumb from "../../wrappers/breadcrumb/Breadcrumb";
 import ShopSidebar from "../../wrappers/product/ShopSidebar";
 import ShopTopbar from "../../wrappers/product/ShopTopbar";
 import ShopProducts from "../../wrappers/product/ShopProducts";
+import { useTranslation } from "react-i18next";
 
 const ShopGridStandard = () => {
+    const { t } = useTranslation();
     const [layout, setLayout] = useState("grid three-column");
     const [sortType, setSortType] = useState("");
     const [sortValue, setSortValue] = useState("");
@@ -60,51 +62,19 @@ const ShopGridStandard = () => {
     useEffect(() => {
         let updatedProducts = [...products]; // Start with all products
         // Step 1: Sort by the selected type and value
-        updatedProducts = getSortedProducts(
-            products,
-            sortType,
-            sortValue,
-            sortMax
-        );
+        updatedProducts = getSortedProducts(products, sortType, sortValue, sortMax);
 
         // Step 2: Sort by price if a price filter is applied
-        updatedProducts = getSortedProducts(
-            updatedProducts,
-            priceSortType,
-            priceSortValue,
-            sortMax
-        );
+        updatedProducts = getSortedProducts(updatedProducts, priceSortType, priceSortValue, sortMax);
 
         // Step 3: Apply additional filter sorting if necessary
-        updatedProducts = getSortedProducts(
-            updatedProducts,
-            filterSortType,
-            filterSortValue,
-            sortMax
-        );
-        updatedProducts = getSortedProducts(
-            updatedProducts,
-            searchSortType,
-            searchSortValue,
-            sortMax
-        );
+        updatedProducts = getSortedProducts(updatedProducts, filterSortType, filterSortValue, sortMax);
+        updatedProducts = getSortedProducts(updatedProducts, searchSortType, searchSortValue, sortMax);
 
         // Step 4: Update the sorted products and current data
         setSortedProducts(updatedProducts);
         setCurrentData(updatedProducts.slice(offset, offset + pageLimit));
-    }, [
-        offset,
-        products,
-        sortType,
-        sortValue,
-        sortMax,
-        filterSortType,
-        filterSortValue,
-        priceSortType,
-        priceSortValue,
-        searchSortType,
-        searchSortValue,
-    ]);
+    }, [offset, products, sortType, sortValue, sortMax, filterSortType, filterSortValue, priceSortType, priceSortValue, searchSortType, searchSortValue]);
     const location = useLocation();
 
     useEffect(() => {
@@ -113,22 +83,17 @@ const ShopGridStandard = () => {
             setCurrentData(products.slice(offset, offset + pageLimit));
         }
     }, [location.search, products]); // Depend on location.search and products
+    const { lang } = useParams();
     return (
         <Fragment>
-            <SEO
-                titleTemplate="Shop Page"
-                description="Shop page of flone react minimalist eCommerce template."
-            />
+            <SEO titleTemplate="Shop Page" description="Shop page of flone react minimalist eCommerce template." />
 
             <LayoutOne headerTop="visible">
                 {/* breadcrumb */}
                 <Breadcrumb
                     pages={[
-                        { label: "Home", path: process.env.PUBLIC_URL + "/" },
-                        {
-                            label: "Shop",
-                            path: process.env.PUBLIC_URL + pathname,
-                        },
+                        { label: t("breadcrumb.home"), path: `/${lang}/` },
+                        { label: t("breadcrumb.shop"), path: `/${lang}${pathname}` },
                     ]}
                 />
 
@@ -137,28 +102,14 @@ const ShopGridStandard = () => {
                         <div className="row">
                             <div className="col-lg-3 order-2 order-lg-1">
                                 {/* shop sidebar */}
-                                <ShopSidebar
-                                    products={products}
-                                    getSortParams={getSortParams}
-                                    getSortPrice={getSortPrice}
-                                    getSearchSortParams={getSearchSortParams}
-                                    sideSpaceClass="mr-30"
-                                />
+                                <ShopSidebar products={products} getSortParams={getSortParams} getSortPrice={getSortPrice} getSearchSortParams={getSearchSortParams} sideSpaceClass="mr-30" />
                             </div>
                             <div className="col-lg-9 order-1 order-lg-2">
                                 {/* shop topbar default */}
-                                <ShopTopbar
-                                    getLayout={getLayout}
-                                    getFilterSortParams={getFilterSortParams}
-                                    productCount={products.length}
-                                    sortedProductCount={currentData.length}
-                                />
+                                <ShopTopbar getLayout={getLayout} getFilterSortParams={getFilterSortParams} productCount={products.length} sortedProductCount={currentData.length} />
 
                                 {/* shop page content default */}
-                                <ShopProducts
-                                    layout={layout}
-                                    products={currentData}
-                                />
+                                <ShopProducts layout={layout} products={currentData} />
 
                                 {/* shop product pagination */}
                                 <div className="pro-pagination-style text-center mt-30">

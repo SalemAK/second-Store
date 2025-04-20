@@ -1,13 +1,10 @@
 import PropTypes from "prop-types";
 import { setActiveLayout } from "../../helpers/product";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
-const ShopTopAction = ({
-    getLayout,
-    getFilterSortParams,
-    productCount,
-    sortedProductCount,
-}) => {
+const ShopTopAction = ({ getLayout, getFilterSortParams, productCount, sortedProductCount }) => {
+    const { t } = useTranslation();
     const location = useLocation();
     const navigate = useNavigate();
     const searchParams = new URLSearchParams(location.search);
@@ -28,22 +25,15 @@ const ShopTopAction = ({
         <div className="shop-top-bar mb-35">
             <div className="select-shoing-wrap">
                 <div className="shop-select">
-                    <select
-                        value={activeFilter}
-                        onChange={(e) => handleFilter(e.target.value)}
-                    >
-                        <option value="default">Default</option>
-                        <option value="priceHighToLow">
-                            Price - High to Low
-                        </option>
-                        <option value="priceLowToHigh">
-                            Price - Low to High
-                        </option>
-                        <option value="NewestArrivals">Newest Arrivals</option>
+                    <select value={activeFilter} onChange={(e) => handleFilter(e.target.value)}>
+                        <option value="default">{t("shop_top.filter_default")}</option>
+                        <option value="priceHighToLow">{t("shop_top.price_high_to_low")}</option>
+                        <option value="priceLowToHigh">{t("shop_top.price_low_to_high")}</option>
+                        <option value="NewestArrivals">{t("shop_top.newest_arrivals")}</option>
                     </select>
                 </div>
                 <p>
-                    Showing {sortedProductCount} of {productCount} result
+                    {t("shop_top.showing")} {sortedProductCount} {t("shop_top.of")} {productCount} {t("shop_top.result")}
                 </p>
             </div>
 

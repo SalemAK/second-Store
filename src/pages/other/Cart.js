@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import SEO from "../../components/seo";
 import { getDiscountPrice } from "../../helpers/product";
 import LayoutOne from "../../layouts/LayoutOne";
@@ -12,6 +12,7 @@ import ConfirmationPopup from "../../components/ConfirmationPopup";
 import { CgProductHunt } from "react-icons/cg";
 import { TbTrashX } from "react-icons/tb";
 import CartItemInput from "./CartItemUnput";
+import { useTranslation } from "react-i18next";
 
 const Cart = () => {
     // let cartTotalPrice = 0;
@@ -75,6 +76,8 @@ const Cart = () => {
         setShowPopup(false);
         setItemToDelete(null);
     };
+    const { t } = useTranslation();
+    const { lang } = useParams();
 
     return (
         <Fragment>
@@ -84,10 +87,10 @@ const Cart = () => {
                 {/* breadcrumb */}
                 <Breadcrumb
                     pages={[
-                        { label: "Home", path: process.env.PUBLIC_URL + "/" },
+                        { label: t("home"), path: `/${lang}/` },
                         {
-                            label: "Cart",
-                            path: process.env.PUBLIC_URL + pathname,
+                            label: t("cart_name"),
+                            path: `/${lang}${pathname}`,
                         },
                     ]}
                 />
@@ -95,7 +98,7 @@ const Cart = () => {
                     <div className="container">
                         {cartItems && cartItems.length >= 1 ? (
                             <Fragment>
-                                <h3 className="cart-page-title">Your cart items</h3>
+                                <h3 className="cart-page-title">{t("cart.title")}</h3>
                                 <div className="row">
                                     <div className="col-12">
                                         {/* Table Layout (Visible on Larger Screens) */}
@@ -103,12 +106,12 @@ const Cart = () => {
                                             <table className="table ">
                                                 <thead>
                                                     <tr>
-                                                        <th style={{ width: "100px" }}>Image</th>
-                                                        <th style={{ width: "200px" }}>Product Name</th>
-                                                        <th style={{ width: "100px" }}>Unit Price</th>
-                                                        <th style={{ width: "100px" }}>Qty</th>
-                                                        <th style={{ width: "120px" }}>Subtotal</th>
-                                                        <th style={{ width: "80px" }}>Action</th>
+                                                        <th style={{ width: "100px" }}>{t("cart.item.image")}</th>
+                                                        <th style={{ width: "200px" }}>{t("cart.item.product_name")}</th>
+                                                        <th style={{ width: "100px" }}>{t("cart.item.price")}</th>
+                                                        <th style={{ width: "100px" }}>{t("cart.item.qty")}</th>
+                                                        <th style={{ width: "120px" }}>{t("cart.subtotal")}</th>
+                                                        <th style={{ width: "80px" }}>{t("cart.action")}</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -116,16 +119,21 @@ const Cart = () => {
                                                         const discountedPrice = getDiscountPrice(cartItem.selectedProductPrice, cartItem.discount);
                                                         const finalProductPrice = (cartItem.selectedProductPrice * currency.currencyRate).toFixed(2);
                                                         const finalDiscountedPrice = (discountedPrice * currency.currencyRate).toFixed(2);
+                                                        const productName = cartItem[`name-${lang}`] || cartItem["name-en"];
+
                                                         return (
                                                             <tr key={key} style={{ minHeight: "60px" }}>
                                                                 <td>
                                                                     <img className="img-fluid rounded" src={cartItem.image[0]} alt="" width="100" />
                                                                 </td>
                                                                 <td className="product-name">
-                                                                    <Link to={process.env.PUBLIC_URL + "/product/" + cartItem.id}>{cartItem.name}</Link>
+                                                                    <Link to={`/${lang}/product/${cartItem.id}`}>{productName}</Link>
                                                                     {cartItem.selectedProductSize ? (
                                                                         <div className="cart-item-variation">
-                                                                            <span>Size: {cartItem.selectedProductSize}</span>
+                                                                            <span>
+                                                                                {t("size")}
+                                                                                {" :"} {cartItem.selectedProductSize}
+                                                                            </span>
                                                                         </div>
                                                                     ) : (
                                                                         ""
@@ -197,7 +205,7 @@ const Cart = () => {
                                                                 </td>
                                                                 <td>
                                                                     <button className="btn btn-danger btn-sm" onClick={() => handleDeleteClick(cartItem.cartItemId)}>
-                                                                        Remove
+                                                                        {t("cart.remove")}
                                                                     </button>
                                                                 </td>
                                                             </tr>
@@ -213,16 +221,20 @@ const Cart = () => {
                                                 const discountedPrice = getDiscountPrice(cartItem.selectedProductPrice, cartItem.discount);
                                                 const finalProductPrice = (cartItem.selectedProductPrice * currency.currencyRate).toFixed(2);
                                                 const finalDiscountedPrice = (discountedPrice * currency.currencyRate).toFixed(2);
+                                                const productName = cartItem[`name-${lang}`] || cartItem["name-en"];
                                                 return (
                                                     <div key={key} className="card mb-3 p-2" style={{ minHeight: "120px" }}>
                                                         <div className="d-flex align-items-center">
                                                             <img className="img-fluid rounded me-3" src={cartItem.image[0]} alt="" width="80" />
                                                             <div>
                                                                 <h6 className="mb-1 fw-bold">
-                                                                    {cartItem.name}
+                                                                    {productName}
                                                                     {cartItem.selectedProductSize ? (
                                                                         <div className="cart-item-variation">
-                                                                            <span>Size: {cartItem.selectedProductSize}</span>
+                                                                            <span>
+                                                                                {t("size")}
+                                                                                {" :"} {cartItem.selectedProductSize}
+                                                                            </span>
                                                                         </div>
                                                                     ) : (
                                                                         ""
@@ -263,10 +275,10 @@ const Cart = () => {
                                                         </div>
                                                         <div className="d-flex justify-content-between mt-2">
                                                             <p className="mb-0">
-                                                                Subtotal: <strong>{(cartItem.selectedProductPrice * cartItem.quantity).toFixed(2)}</strong>
+                                                                {t("cart.subtotal")} <strong>{(discountedPrice * cartItem.quantity).toFixed(2)}</strong>
                                                             </p>
                                                             <button className="btn btn-danger btn-sm" onClick={() => handleDeleteClick(cartItem.cartItemId)}>
-                                                                Remove
+                                                                {t("cart.remove")}
                                                             </button>
                                                         </div>
                                                     </div>
@@ -279,13 +291,13 @@ const Cart = () => {
                                     <div className="col-lg-12">
                                         <div className="cart-shiping-update-wrapper px-4 px-md-0 ">
                                             <div className="cart-shiping-update px-sm-2">
-                                                <Link to={process.env.PUBLIC_URL + "/shop-grid-standard"} className="w-100 mt-2 text-center ">
-                                                    Continue Shopping
+                                                <Link to={`/${lang}/shop-grid-standard`} className="w-100 mt-2 text-center ">
+                                                    {t("cart.continue_shopping")}
                                                 </Link>
                                             </div>
                                             <div className="cart-clear">
                                                 <button className="btn btn-danger btn-sm w-100 mt-2" onClick={() => dispatch(deleteAllFromCart())}>
-                                                    Clear Shopping Cart
+                                                    {t("cart.clear_cart")}
                                                 </button>
                                             </div>
                                         </div>
@@ -349,17 +361,18 @@ const Cart = () => {
                                     <div className="col-lg-12 col-md-12">
                                         <div className="grand-totall">
                                             <div className="title-wrap">
-                                                <h4 className="cart-bottom-title section-bg-gary-cart">Cart Total</h4>
+                                                <h4 className="cart-bottom-title section-bg-gary-cart">{t("cart.total")}</h4>
                                             </div>
                                             <h5>
-                                                Subtotal:{" "}
+                                                {t("cart.subtotal")}:
                                                 <span>
                                                     <img src={currency.currencySymbol} className="img-fluid " alt="Saudi Riyal" width={15} style={{ pointerEvents: "auto" }} />
                                                     {" " + cartTotalPrice.toFixed(2)}
                                                 </span>
                                             </h5>
                                             <h5>
-                                                VAT 15%:{" "}
+                                                {t("cart.vat")}
+                                                {" :"}
                                                 <span>
                                                     <img src={currency.currencySymbol} className="img-fluid " alt="Saudi Riyal" width={15} style={{ pointerEvents: "auto" }} />
                                                     {" " + taxAmount.toFixed(2)}
@@ -375,13 +388,14 @@ const Cart = () => {
 
                                             <hr />
                                             <h4 className="grand-totall-title">
-                                                Estimated Total:{" "}
+                                                {t("cart.estimated_total")}
+                                                {" :"}
                                                 <span>
                                                     <img src={currency.currencySymbol} className="img-fluid " alt="Saudi Riyal" width={15} style={{ pointerEvents: "auto" }} />
                                                     {" " + estimatedTotal.toFixed(2)}
                                                 </span>
                                             </h4>
-                                            <Link to={process.env.PUBLIC_URL + "/checkout"}>Proceed to Checkout</Link>
+                                            <Link to={`/${lang}/checkout`}>{t("cart.proceed_to_checkout")}</Link>
                                         </div>
                                     </div>
                                 </div>
@@ -394,13 +408,13 @@ const Cart = () => {
                                             <i className="pe-7s-cart"></i>
                                         </div>
                                         <div className="item-empty-area__text">
-                                            No items found in cart <br /> <Link to={process.env.PUBLIC_URL + "/shop-grid-standard"}>Shop Now</Link>
+                                            {t("cart.no_items_found_in_cart")} <br /> <Link to={process.env.PUBLIC_URL + "/shop-grid-standard"}>{t("cart.shop_now")}</Link>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         )}
-                        {showPopup && <ConfirmationPopup message="Are you sure you want to remove this item ?" onConfirm={confirmDelete} onCancel={cancelDelete} />}
+                        {showPopup && <ConfirmationPopup message={t("remove_item_confirm")} onConfirm={confirmDelete} onCancel={cancelDelete} />}
                     </div>
                 </div>
             </LayoutOne>

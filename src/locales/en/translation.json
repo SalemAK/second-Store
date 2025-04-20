@@ -1,0 +1,322 @@
+{
+    "Yes": "Yes",
+    "No": "No",
+    "home": "Home",
+    "collection": "Collection",
+    "blog": "Blog",
+    "blog_standard": "Blog Standard",
+    "blog_no_sidebar": "Blog No Sidebar",
+    "blog_right_sidebar": "Blog Right Sidebar",
+    "blog_details_standard": "Blog Details Standard",
+    "pages": "Pages",
+
+    "wishlist": "Wishlist",
+    "compare": "Compare",
+    "my_account": "My Account",
+    "login_register": "Login / Register",
+    "404_page": "404 Page",
+
+    "choose_language": "Choose Language",
+    "language": "Language",
+    "callUs": "Call Us",
+
+    "topProducts": "Top Products",
+    "welcome": "Welcome to the store",
+
+    "size": "Size",
+    "qty": "Qty",
+    "total": "Total",
+    "view_cart": "View Cart",
+
+    "no_items_in_cart": "No items added to cart",
+    "remove_item_confirm": "Are you sure you want to remove this item?",
+
+    "footer": {
+        "about_title": "ABOUT US",
+        "about_us": "About us",
+        "store_location": "Stores location",
+        "contact": "Contact",
+        "catalogs": "Catalogs",
+        "certificates": "Certificates",
+        "links_title": "USEFUL LINKS",
+        "returns": "Returns",
+        "support_policy": "Support Policy",
+        "size_guide": "Size guide",
+        "faqs": "FAQs",
+        "follow_us": "FOLLOW US",
+        "subscribe_title": "SUBSCRIBE",
+        "subscribe_text": "Get E-mail updates about our latest shop and special offers."
+    },
+
+    "subscribe": {
+        "placeholder": "Enter your email address...",
+        "button": "SUBSCRIBE",
+        "sending": "Sending..."
+    },
+
+    "home_page": {
+        "seo_title": "Home",
+        "seo_description": "Retail store home page"
+    },
+    "responsive_banner": {
+        "title": "Irrigation World",
+        "description": "IWACO Irrigation World Agri. Co. A pioneer in HDPE network, specialized in fittings for HDPE networks: Welding Machines, Tools, Accessories... etc. HDPE PIPE SDR11, SDR17, SDR26, electrofusion fittings, butt welding fittings, socket fusion fittings, compression fittings, drainage fitting, PVC fitting.",
+        "button": "Contact Us"
+    },
+
+    "category": {
+        "title": "Explore Our Premium Product Categories",
+        "description": "Discover a wide range of high-quality categories. We hope you enjoy browsing and find exactly what you're looking for."
+    },
+    "brand_slider": {
+        "title": "Our Clients"
+    },
+    "category_products": {
+        "go_to_all": "Go to ALL PRODUCTS"
+    },
+    "breadcrumb": {
+        "home": "Home",
+        "shop": "Shop",
+        "collection": "Collection",
+        "product": "Product",
+        "contact_us": "Contact Us"
+    },
+
+    "shop": {
+        "search": "Search",
+        "search_placeholder": "Search here..."
+    },
+    "shop_top": {
+        "filter_default": "Default",
+        "price_high_to_low": "Price - High to Low",
+        "price_low_to_high": "Price - Low to High",
+        "newest_arrivals": "Newest Arrivals",
+        "showing": "Showing",
+        "of": "of",
+        "result": "result"
+    },
+
+    "product": {
+        "badge": {
+            "new": "New"
+        },
+        "price": {
+            "from": "From"
+        },
+        "add_to_cart": "Add to Cart",
+        "remove_from_cart": "Remove from Cart",
+        "go_to_cart": "Go to Cart",
+        "out_of_stock": "Out of Stock",
+        "add_to_wishlist": "Add to wishlist",
+        "remove_from_wishlist": "Remove from wishlist",
+        "add_to_compare": "Add to compare",
+        "remove_from_compare": "Remove from compare",
+        "confirm_remove": "Are you sure you want to remove this product from cart?",
+        "quick_view": "Quick View",
+        "select_option": "Select Option",
+        "out_of_stock": "Out of Stock",
+        "confirm_remove": "Are you sure you want to remove this item from cart?",
+        "additional_information": "Additional Information",
+        "description": "Description",
+        "wishlist": {
+            "add": "Add to wishlist",
+            "added": "Added to wishlist"
+        },
+        "compare": {
+            "add": "Add to compare",
+            "added": "Added to compare"
+        }
+    },
+    "modal": {
+        "size": "Size",
+        "add_to_cart": "Add To Cart",
+        "remove_from_cart": "Remove from Cart",
+        "go_to_cart": "Go to Cart",
+        "out_of_stock": "Out of Stock",
+        "add_to_wishlist": "Add to wishlist",
+        "remove_from_wishlist": "Remove from wishlist",
+        "add_to_compare": "Add to compare",
+        "remove_from_compare": "Remove from compare",
+        "confirm_remove": "Are you sure you want to remove this item from cart?"
+    },
+    "product_page": {
+        "seo_title": "Product",
+        "seo_description": "Retail store product page"
+    },
+    "related_products": {
+        "title": "Related Products",
+        "description": "You may also like these products"
+    },
+    "cart": {
+        "title": "Shopping Cart",
+        "empty": "Your cart is empty",
+        "continue_shopping": "Continue Shopping",
+        "checkout": "Checkout",
+        "item": {
+            "image": "Image",
+            "product_name": "Product Name",
+            "qty": "Qty",
+            "remove": "Remove",
+            "quantity": "Quantity",
+            "price": "Unit Price",
+            "total": "Total"
+        },
+        "subtotal": "Subtotal",
+        "shipping": "Shipping",
+        "taxes": "Taxes",
+        "total": "Total",
+        "remove": "Remove",
+        "action": "Action",
+        "clear_cart": "Clear Cart",
+        "vat": "VAT",
+        "estimated_total": "Estimated Total",
+        "proceed_to_checkout": "Proceed to Checkout",
+        "no_items_found_in_cart": "No items found in cart",
+        "shop_now": "Shop Now"
+    },
+    "checkout": {
+        "title": "Checkout",
+        "billing_details": "Billing Details",
+        "shipping_details": "Shipping Details",
+        "order_summary": "Order Summary",
+        "payment_method": "Payment Method",
+        "place_order": "Place Order",
+        "order_notes": "Order Notes",
+        "order_notes_placeholder": "Notes about your order, e.g. special notes for delivery.",
+        "company": "Company",
+        "personal": "Personal",
+        "additional_information": "Additional Information",
+        "your_order": "Your Order",
+        "product": "Product",
+        "total": "Total",
+        "size": "Size",
+        "vat": "VAT",
+        "sadad": "Sadad",
+        "sadad_info": "You will be redirected to the Sadad payment page.",
+        "bank_transfer": "Bank Transfer",
+        "bank_info": "Please transfer the amount to IBAN: SA00000000000000000000.",
+        "on_pickup": "Pay on Pick Up",
+        "pickup_info": "Pay when collecting the order from the branch.",
+        "no_items_checkout": "No items found in cart to checkout",
+        "shop_now": "Shop Now"
+    },
+    "billing_address": {
+        "first_name": "First Name",
+        "last_name": "Last Name",
+        "company_name": "Company Name",
+        "vat_number": "Company VAT Number",
+        "address": "Address",
+        "street": "Street Name",
+        "building": "Building No.",
+        "postcode": "Postcode / ZIP",
+        "id_type": "ID Type",
+        "select_id_type": "Select an ID Type",
+        "id_number": "ID Number",
+        "branch": "Pick Up Branch",
+        "select_branch": "Select a Branch",
+        "phone_number": "Phone Number",
+        "email": "Email Address",
+        "additional_information": "Additional Information",
+        "order_notes": "Order Notes",
+        "order_notes_placeholder": "Notes about your order, e.g. special notes for delivery.",
+        "700_number": "700 Number",
+        "commercial_registration_number": "Commercial Registration Number",
+        "gcc_id": "GCC ID",
+        "iqama_number": "Iqama Number",
+        "mhrsd_license": "MHRSD License",
+        "national_id": "National ID",
+        "passport_id": "Passport ID",
+        "misa_license": "MISA License",
+        "tax_identification_number": "Tax Identification Number",
+        "other_id": "Other ID",
+        "riyadh_salmanya": "Riyadh - Salmanya",
+        "riyadh_malaz": "Riyadh - Malaz",
+        "riyadh_salam": "Riyadh - Salam",
+        "jeddah": "Jeddah",
+        "dammam": "Dammam"
+    },
+
+    "shipping_address": {
+        "first_name": "First Name",
+        "last_name": "Last Name",
+        "company_name": "Company Name",
+        "country": "Country",
+        "street_address": "Street Address",
+        "apartment_suite_floor": "Apartment, suite, unit, etc.",
+        "city": "City",
+        "state": "State / County",
+        "zip_postal_code": "ZIP / Postal Code"
+    },
+    "contact_us": {
+        "title": "Contact Us",
+        "description": "We would love to hear from you! Please fill out the form below and we will get back to you as soon as possible.",
+        "name": "Name",
+        "email": "Email",
+        "message": "Message",
+        "send_message": "Send Message",
+        "success_message": "Your message has been sent successfully!",
+        "error_message": "There was an error sending your message. Please try again later.",
+        "get_in_touch": "Get in Touch",
+
+        "subject": "Subject:",
+        "your_message": "Your Message:",
+        "send": "Send"
+    },
+    "our_branches": {
+        "title": "Our Branches",
+        "description": "We offer a wide range of products and services at all our branches. Visit us today!",
+        "phone": "Phone",
+        "address": "Address",
+        "call": "Call branch",
+        "open_google_map": "Open in Google Maps"
+    },
+    "about_us": {
+        "title": "About Us",
+        "description": "We are a leading company in the field of agricultural irrigation, providing a wide range of products and services to meet our customers' needs. We are committed to delivering the highest levels of quality and innovation in everything we do.",
+        "vision": "Our Vision",
+        "mission": "Our Mission",
+        "values": "Our Values",
+        "vision_description": "To be the leading company in agricultural irrigation in the region, focusing on innovation and quality.",
+        "mission_description": "To provide innovative and effective irrigation solutions that meet our customers' needs and contribute to improving agricultural productivity.",
+        "values_description": "Innovation, Quality, Customer Service, Sustainability.",
+        "seo_description": "We are a leading company in the field of agricultural irrigation, providing a wide range of products and services to meet our customers' needs. We are committed to delivering the highest levels of quality and innovation in everything we do.",
+        "seo_title": "About Us"
+    },
+
+    "about": {
+        "title": "About IWACO",
+
+        "subtitle": "A pioneer in water network technology with a global presence | Saudia Arabia",
+        "intro1": "IWACO is the Middle East market leader in water networks technology with a global presence. Since its establishment, the company has consistently set new trends with comprehensive system solutions.",
+
+        "intro2": "Innovative ideas, dedicated employees, and elaborate working processes make IWACO a pioneer in the Middle East. We are committed to using natural resources responsibly to protect the environment",
+        "services_core": "IWACO Services & Core Values",
+        "services": {
+            "title": "Our Services",
+            "description1": "IWACO specializes in water supply systems, drainage networks, HDPE piping, fittings, geomembranes, and chemical isolation sheets for buildings, lakes, tanks, and more—serving both public and private sectors.",
+            "description2": "We manage a wide range of projects with expert methods in",
+            "description3": "Supply, Design, Installation, Finishing, and Testing"
+        },
+        "coreValues": {
+            "title": "Our Core Values",
+            "Excellence": "Excellence",
+            "excellence_description": "Excellence in all aspects, from reputation to performance.",
+            "quality": "Quality",
+            "quality_description": "Premium solutions and services across the board.",
+            "innovation": "Innovation",
+            "innovation_description": "Leading industry practices and continuously pioneering new solutions.",
+            "respect": "Respect",
+            "respect_description": "Prioritizing our customers, vendors, and employees in every decision.",
+            "honesty": "Honesty & Transparency",
+            "honesty_description": "Integrity in all transactions."
+        },
+        "products": {
+            "title": "Our Products"
+        },
+        "cta": {
+            "title": "Want to learn more or get a quote?",
+            "description": "Contact us today for more information or to request a personalized quote.",
+            "button": "Get in Touch"
+        }
+    }
+}

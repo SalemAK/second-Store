@@ -13,6 +13,7 @@ import { getDiscountPrice } from "../../helpers/product";
 import { FaCodeCompare } from "react-icons/fa6";
 import { FaHeart } from "react-icons/fa";
 import ConfirmationPopup from "../ConfirmationPopup";
+import { useTranslation } from "react-i18next";
 
 function ProductModal({
     product,
@@ -98,6 +99,11 @@ function ProductModal({
         setShowPopup(false);
         setProductToRemove(null);
     };
+
+    const { t, i18n } = useTranslation();
+    const lang = i18n.language;
+    const localizedName = product[`name-${lang}`] || product.name;
+
     return (
         <Modal show={show} onHide={onCloseModal} className="product-quickview-modal-wrapper">
             <Modal.Header closeButton></Modal.Header>
@@ -136,7 +142,7 @@ function ProductModal({
                     </div>
                     <div className="col-md-7 col-sm-12 col-xs-12">
                         <div className="product-details-content quickview-content">
-                            <h2>{product.name}</h2>
+                            <h2>{localizedName}</h2>
                             <div className="product-details-price">
                                 {discountedPrice !== null ? (
                                     <Fragment>
@@ -240,7 +246,7 @@ function ProductModal({
                                         </div>
                                     </div> */}
                                     <div className="pro-details-size">
-                                        <span>Size</span>
+                                        <span>{t("modal.size")}</span>
                                         <div className="pro-details-size-content">
                                             {product.variation &&
                                                 product.variation.map((single) => {
@@ -289,7 +295,7 @@ function ProductModal({
                                 {addToCartButton ? (
                                     <div className="pro-details-cart btn-hover ">
                                         <button className="bg-danger rounded" onClick={handleRemoveClick}>
-                                            Remove from Cart
+                                            {t("modal.remove_from_cart")}
                                         </button>
 
                                         <button
@@ -298,7 +304,7 @@ function ProductModal({
                                                 window.location.href = process.env.PUBLIC_URL + "/cart";
                                             }}
                                         >
-                                            Go to Cart
+                                            {t("modal.go_to_cart")}
                                         </button>
                                     </div>
                                 ) : (
@@ -350,23 +356,23 @@ function ProductModal({
                                                     disabled={productCartQty >= productStock}
                                                 >
                                                     {" "}
-                                                    Add To Cart{" "}
+                                                    {t("modal.add_to_cart")}{" "}
                                                 </button>
                                             ) : (
                                                 <button className="bg-secondary" disabled>
-                                                    Out of Stock
+                                                    {t("modal.out_of_stock")}
                                                 </button>
                                             )}
                                         </div>
                                     </>
                                 )}
                                 <div className="pro-details-wishlist">
-                                    <button className={wishlistItem !== undefined ? "active" : ""} title={wishlistItem !== undefined ? "Remove from wishlist" : "Add to wishlist"} onClick={() => dispatch(addToWishlist(product))}>
+                                    <button className={wishlistItem !== undefined ? "active" : ""} title={t(wishlistItem ? "modal.remove_from_wishlist" : "modal.add_to_wishlist")} onClick={() => dispatch(addToWishlist(product))}>
                                         <FaHeart />
                                     </button>
                                 </div>
                                 <div className="pro-details-compare">
-                                    <button className={compareItem !== undefined ? "active" : ""} title={compareItem !== undefined ? "Remove from compare" : "Add to compare"} onClick={() => dispatch(addToCompare(product))}>
+                                    <button className={compareItem !== undefined ? "active" : ""} title={t(compareItem ? "modal.remove_from_compare" : "modal.add_to_compare")} onClick={() => dispatch(addToCompare(product))}>
                                         <FaCodeCompare />
                                     </button>
                                 </div>
@@ -376,7 +382,7 @@ function ProductModal({
                     </div>
                 </div>
             </div>
-            {showPopup && <ConfirmationPopup message="Are you sure you want to remove this item from cart ?" onConfirm={confirmDelete} onCancel={cancelDelete} />}
+            {showPopup && <ConfirmationPopup message={t("modal.confirm_remove")} onConfirm={confirmDelete} onCancel={cancelDelete} />}
         </Modal>
     );
 }

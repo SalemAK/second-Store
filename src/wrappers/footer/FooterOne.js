@@ -1,10 +1,13 @@
 import PropTypes from "prop-types";
 import clsx from "clsx";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import FooterCopyright from "../../components/footer/FooterCopyright";
 import FooterNewsletter from "../../components/footer/FooterNewsletter";
+import { useTranslation } from "react-i18next";
 
 const FooterOne = ({ backgroundColorClass, spaceTopClass, spaceBottomClass, spaceLeftClass, spaceRightClass, containerClass, extraFooterClass, sideMenu }) => {
+    const { t } = useTranslation();
+    const { lang } = useParams();
     return (
         <footer className={clsx("footer-area", backgroundColorClass, spaceTopClass, spaceBottomClass, extraFooterClass, spaceLeftClass, spaceRightClass)}>
             <div className={`${containerClass ? containerClass : "container"}`}>
@@ -16,21 +19,24 @@ const FooterOne = ({ backgroundColorClass, spaceTopClass, spaceBottomClass, spac
                     <div className={`${sideMenu ? "col-xl-2 col-sm-4" : "col-lg-2 col-sm-4"}`}>
                         <div className="footer-widget mb-30 ml-30">
                             <div className="footer-title">
-                                <h3>ABOUT US</h3>
+                                <h3>{t("footer.about_title")}</h3>
                             </div>
                             <div className="footer-list">
                                 <ul>
                                     <li>
-                                        <Link to={process.env.PUBLIC_URL + "/about"}>About us</Link>
+                                        <Link to={`/${lang}/about`}>{t("footer.about_us")}</Link>
                                     </li>
                                     <li>
-                                        <Link to={process.env.PUBLIC_URL + "#/"}>Store location</Link>
+                                        <Link to={`/${lang}/contact`}>{t("footer.store_location")}</Link>
                                     </li>
                                     <li>
-                                        <Link to={process.env.PUBLIC_URL + "/contact"}>Contact</Link>
+                                        <Link to={`/${lang}/contact`}>{t("footer.contact")}</Link>
                                     </li>
                                     <li>
-                                        <Link to={process.env.PUBLIC_URL + "#/"}>Orders tracking</Link>
+                                        <Link to={`/${lang}/catalogs`}>{t("footer.catalogs")}</Link>
+                                    </li>
+                                    <li>
+                                        <Link to={`/${lang}/certificates`}>{t("footer.certificates")}</Link>
                                     </li>
                                 </ul>
                             </div>
@@ -39,21 +45,21 @@ const FooterOne = ({ backgroundColorClass, spaceTopClass, spaceBottomClass, spac
                     <div className={`${sideMenu ? "col-xl-2 col-sm-4" : "col-lg-2 col-sm-4"}`}>
                         <div className={`${sideMenu ? "footer-widget mb-30 ml-95" : "footer-widget mb-30 ml-50"}`}>
                             <div className="footer-title">
-                                <h3>USEFUL LINKS</h3>
+                                <h3>{t("footer.links_title")}</h3>
                             </div>
                             <div className="footer-list">
                                 <ul>
                                     <li>
-                                        <Link to={process.env.PUBLIC_URL + "#/"}>Returns</Link>
+                                        <Link to={`/${lang}/returns`}>{t("footer.returns")}</Link>
                                     </li>
                                     <li>
-                                        <Link to={process.env.PUBLIC_URL + "#/"}>Support Policy</Link>
+                                        <Link to={`/${lang}/support-policy`}>{t("footer.support_policy")}</Link>
                                     </li>
                                     <li>
-                                        <Link to={process.env.PUBLIC_URL + "#/"}>Size guide</Link>
+                                        <Link to={`/${lang}/blogs`}>{t("footer.blogs")}</Link>
                                     </li>
                                     <li>
-                                        <Link to={process.env.PUBLIC_URL + "#/"}>FAQs</Link>
+                                        <Link to={`/${lang}/faqs`}>{t("footer.faqs")}</Link>
                                     </li>
                                 </ul>
                             </div>
@@ -62,7 +68,7 @@ const FooterOne = ({ backgroundColorClass, spaceTopClass, spaceBottomClass, spac
                     <div className={`${sideMenu ? "col-xl-3 col-sm-4" : "col-lg-2 col-sm-6"}`}>
                         <div className={`${sideMenu ? "footer-widget mb-30 ml-145" : "footer-widget mb-30 ml-75"}`}>
                             <div className="footer-title">
-                                <h3>FOLLOW US</h3>
+                                <h3>{t("footer.follow_us")}</h3>
                             </div>
                             <div className="footer-list">
                                 <ul>

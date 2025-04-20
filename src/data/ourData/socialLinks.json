@@ -1,0 +1,38 @@
+[
+    {
+        "name": "@yourpage",
+        "url": "https://facebook.com/yourpage",
+        "icon": "FaFacebook",
+        "show": true
+    },
+    {
+        "name": "Twitter",
+        "url": "https://twitter.com/yourhandle",
+        "icon": "FaTwitter",
+        "show": true
+    },
+    {
+        "name": "Instagram",
+        "url": "https://instagram.com/yourprofile",
+        "icon": "FaInstagram",
+        "show": true
+    },
+    {
+        "name": "Pinterest",
+        "url": "https://instagram.com/yourprofile",
+        "icon": "FaPinterest",
+        "show": true
+    },
+    {
+        "name": "Snapchat",
+        "url": "https://instagram.com/yourprofile",
+        "icon": "FaSnapchat",
+        "show": true
+    },
+    {
+        "name": "LinkedIn",
+        "url": "https://instagram.com/yourprofile",
+        "icon": "FaLinkedin",
+        "show": true
+    }
+]

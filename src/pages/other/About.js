@@ -2,12 +2,15 @@ import React from "react";
 import { Container, Row, Col, Card, ListGroup, Button } from "react-bootstrap";
 import BrandLogoSliderThree from "../../wrappers/brand-logo/BrandLogoSliderThree";
 import { Fragment } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import SEO from "../../components/seo";
 import LayoutOne from "../../layouts/LayoutOne";
 import Breadcrumb from "../../wrappers/breadcrumb/Breadcrumb";
+import ourProducts from "../../data/ourData/OurProducts.json";
 
 import { FaStar, FaCheckCircle, FaLightbulb, FaHandshake, FaEye } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
+
 const products = [
     {
         title: "HDPE technologies & system",
@@ -33,23 +36,25 @@ const products = [
 
 const About = () => {
     let { pathname } = useLocation();
+    const { t } = useTranslation();
+    const { lang } = useParams();
     return (
         <Fragment>
-            <SEO titleTemplate="About us" description="About page of flone react minimalist eCommerce template." />
+            <SEO titleTemplate={t("about_us.seo_title")} description={t("about_us.seo_description")} />
             <LayoutOne headerTop="visible">
                 {/* breadcrumb */}
                 <Breadcrumb
                     pages={[
-                        { label: "Home", path: process.env.PUBLIC_URL + "/" },
-                        { label: "About us", path: process.env.PUBLIC_URL + pathname },
+                        { label: t("home"), path: `/${lang}/` },
+                        { label: t("about_us.title"), path: process.env.PUBLIC_URL + pathname },
                     ]}
                 />
 
                 <div className="container py-5">
                     {/* Title */}
                     <div className="welcome-content text-center mb-5">
-                        <h1 className="display-4 fw-bold ">About IWACO</h1>
-                        <p className="lead text-muted">Leader in water networks technology with global presence | Saudi Arabia</p>
+                        <h1 className="display-4 fw-bold ">{t("about.title")}</h1>
+                        <p className="lead text-muted">{t("about.subtitle")}</p>
                     </div>
 
                     {/* Intro Section */}
@@ -58,12 +63,8 @@ const About = () => {
                             <img src="assets/img/warhouse.jpeg" alt="IWACO Showroom" className="img-fluid rounded shadow-lg" />
                         </div>
                         <div className="col-12 col-md-6">
-                            <p className="lead text-center fs-5">
-                                <strong>IWACO</strong> is the Middle East market leader in water networks technology with a global presence. Since its establishment, the company has consistently set new trends with comprehensive system solutions.
-                            </p>
-                            <p className="text-muted text-center">
-                                Innovative ideas, dedicated employees, and elaborate working processes make IWACO a pioneer in the Middle East. We are committed to using natural resources responsibly to protect the environment.
-                            </p>
+                            <p className="lead text-center fs-5">{t("about.intro1")}</p>
+                            <p className="text-muted text-center">{t("about.intro2")}</p>
                         </div>
                     </div>
                 </div>
@@ -73,7 +74,7 @@ const About = () => {
                     <Container className="my-5">
                         <Row>
                             <Col>
-                                <h2 className=" fw-bold mb-4 text-center">IWACO Services & Core Values</h2>
+                                <h2 className=" fw-bold mb-4 text-center">{t("about.services_core")}</h2>
                             </Col>
                         </Row>
 
@@ -83,13 +84,11 @@ const About = () => {
                             <Col md={6}>
                                 <Card className="shadow-sm border-0 mb-4">
                                     <Card.Body>
-                                        <Card.Title className="fw-semibold text-secondary">Our Services</Card.Title>
+                                        <Card.Title className="fw-semibold text-secondary">{t("about.services.title")}</Card.Title>
+                                        <Card.Text>{t("about.services.description1")}</Card.Text>
                                         <Card.Text>
-                                            IWACO specializes in water supply systems, drainage networks, HDPE piping, fittings, geomembranes, and chemical isolation sheets for buildings, lakes, tanks, and more—serving both public and private
-                                            sectors.
-                                        </Card.Text>
-                                        <Card.Text>
-                                            We manage a wide range of projects with expert methods in <strong>Supply, Design, Installation, Finishing, and Testing</strong>.
+                                            {t("about.services.description2")}
+                                            <strong>{t("about.services.description3")}</strong>
                                         </Card.Text>
                                     </Card.Body>
                                 </Card>
@@ -99,36 +98,40 @@ const About = () => {
                             <Col md={6}>
                                 <Card className="shadow-sm border-0 mb-4">
                                     <Card.Body>
-                                        <Card.Title className="fw-semibold text-secondary">Our Core Values</Card.Title>
+                                        <Card.Title className="fw-semibold text-secondary">{t("about.coreValues.title")}</Card.Title>
                                         <ListGroup variant="flush">
                                             <ListGroup.Item className="d-flex align-items-center">
                                                 <FaStar className="text-primary me-3" />
                                                 <p>
-                                                    <strong>Excellence: </strong> Excellence in all aspects, from reputation to performance.
+                                                    <strong>
+                                                        {t("about.coreValues.Excellence")}
+                                                        {": "}
+                                                    </strong>
+                                                    {t("about.coreValues.excellence_description")}
                                                 </p>
                                             </ListGroup.Item>
                                             <ListGroup.Item className="d-flex align-items-center">
                                                 <FaCheckCircle className="text-primary me-3" />
                                                 <p>
-                                                    <strong>Quality:</strong> Premium solutions and services across the board.
+                                                    <strong>{t("about.coreValues.quality")}:</strong> {t("about.coreValues.quality_description")}
                                                 </p>
                                             </ListGroup.Item>
                                             <ListGroup.Item className="d-flex align-items-center">
                                                 <FaLightbulb className="text-primary me-3" />
                                                 <p>
-                                                    <strong>Innovation:</strong> Leading industry practices and continuously pioneering new solutions.
+                                                    <strong>{t("about.coreValues.innovation")}:</strong> {t("about.coreValues.innovation_description")}
                                                 </p>
                                             </ListGroup.Item>
                                             <ListGroup.Item className="d-flex align-items-center">
                                                 <FaHandshake className="text-primary me-3" />
                                                 <p>
-                                                    <strong>Respect:</strong> Prioritizing our customers, vendors, and employees in every decision.
+                                                    <strong>{t("about.coreValues.respect")}:</strong> {t("about.coreValues.respect_description")}
                                                 </p>
                                             </ListGroup.Item>
                                             <ListGroup.Item className="d-flex align-items-center">
                                                 <FaEye className="text-primary me-3" />
                                                 <p>
-                                                    <strong>Honesty & Transparency:</strong> Integrity in all transactions.
+                                                    <strong>{t("about.coreValues.honesty")}:</strong> {t("about.coreValues.honesty_description")}
                                                 </p>
                                             </ListGroup.Item>
                                         </ListGroup>
@@ -140,19 +143,23 @@ const About = () => {
                 </div>
                 {/* Products Section */}
                 <div className="container py-5">
-                    <h2 className="text-center mb-4 fw-bold">Our Products</h2>
+                    <h2 className="text-center mb-4 fw-bold">{t("about.products.title")}</h2>
                     <div className="row">
-                        {products.map((product, idx) => (
-                            <div className="col-12 col-md-3 mb-4" key={idx}>
-                                <div className="card h-100 shadow-sm border-light">
-                                    <img src={product.image} className="card-img-top rounded" alt={product.title} />
-                                    <div className="card-body">
-                                        <h5 className="card-title fs-6 fw-bold">{product.title}</h5>
-                                        <p className="card-text text-muted">{product.description}</p>
+                        {ourProducts.map((product, idx) => {
+                            const productTitle = product[`title-${lang}`] || product[`title-en`];
+                            const productDescription = product[`description-${lang}`] || product[`description-en`];
+                            return (
+                                <div className="col-12 col-md-3 mb-4" key={idx}>
+                                    <div className="card h-100 shadow-sm border-light">
+                                        <img src={product.image} className="card-img-top rounded" alt={productTitle} />
+                                        <div className="card-body">
+                                            <h5 className="card-title fs-6 fw-bold">{productTitle}</h5>
+                                            <p className="card-text text-muted">{productDescription}</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        ))}
+                            );
+                        })}
                     </div>
                 </div>
 
@@ -163,10 +170,10 @@ const About = () => {
 
                 {/* Call to Action */}
                 <div className="text-center mb-5">
-                    <h3 className="fw-bold ">Want to learn more or get a quote?</h3>
-                    <p className="text-muted mb-4">Contact us today for more information or to request a personalized quote.</p>
-                    <Button href="/contact" variant="primary" size="lg" className="px-5 py-3 rounded-pill">
-                        Get in Touch
+                    <h3 className="fw-bold ">{t("about.cta.title")}</h3>
+                    <p className="text-muted mb-4">{t("about.cta.description")}</p>
+                    <Button href={`/${lang}/contact`} variant="primary" size="lg" className="px-5 py-3 rounded-pill">
+                        {t("about.cta.button")}
                     </Button>
                 </div>
             </LayoutOne>

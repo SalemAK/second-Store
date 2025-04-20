@@ -3,32 +3,21 @@ import clsx from "clsx";
 import Tab from "react-bootstrap/Tab";
 import Nav from "react-bootstrap/Nav";
 import ProductTable from "./ProductTable";
+import { useTranslation } from "react-i18next";
 
-const ProductDescriptionTab = ({
-    spaceBottomClass,
-    productFullDesc,
-    product,
-}) => {
-    console.log(product);
-
+const ProductDescriptionTab = ({ spaceBottomClass, productFullDesc, product }) => {
+    const { t } = useTranslation();
     return (
         <div className={clsx("description-review-area", spaceBottomClass)}>
             <div className="container">
                 <div className="description-review-wrapper">
                     <Tab.Container defaultActiveKey="productDescription">
-                        <Nav
-                            variant="pills"
-                            className="description-review-topbar"
-                        >
+                        <Nav variant="pills" className="description-review-topbar">
                             <Nav.Item>
-                                <Nav.Link eventKey="additionalInfo">
-                                    Additional Information
-                                </Nav.Link>
+                                <Nav.Link eventKey="additionalInfo">{t("product.additional_information")}</Nav.Link>
                             </Nav.Item>
                             <Nav.Item>
-                                <Nav.Link eventKey="productDescription">
-                                    Description
-                                </Nav.Link>
+                                <Nav.Link eventKey="productDescription">{t("product.description")}</Nav.Link>
                             </Nav.Item>
                             {/* <Nav.Item>
                                 <Nav.Link eventKey="productReviews">
@@ -62,7 +51,9 @@ const ProductDescriptionTab = ({
                                 </div>
                             </Tab.Pane>
                             <Tab.Pane eventKey="productDescription">
-                                {productFullDesc}
+                                <div dir="ltr">
+                                    <p>{productFullDesc}</p>
+                                </div>
                             </Tab.Pane>
                             {/* <Tab.Pane eventKey="productReviews">
                                 <div className="row">

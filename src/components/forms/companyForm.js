@@ -1,4 +1,10 @@
+import { useTranslation } from "react-i18next";
+import locations from "../../data/ourData/Location.json";
+import { useParams } from "react-router-dom";
+
 const CompanyForm = ({ info, setInfo }) => {
+    const { t } = useTranslation();
+    const { lang } = useParams();
     const handleChange = (e) => {
         const { name, value } = e.target;
         setInfo((prev) => ({ ...prev, [name]: value }));
@@ -10,56 +16,56 @@ const CompanyForm = ({ info, setInfo }) => {
                 <div className="input-container-checkout">
                     <input type="text" name="firstName" required onChange={handleChange} value={info.firstName} />
                     <label htmlFor="firstName" className="rounded">
-                        First Name
+                        {t("billing_address.first_name")}
                     </label>
                 </div>
 
                 <div className="input-container-checkout">
                     <input type="text" name="lastName" required onChange={handleChange} value={info.lastName} />
                     <label htmlFor="lastName" className="rounded">
-                        Last Name
+                        {t("billing_address.last_name")}
                     </label>
                 </div>
 
                 <div className="input-container-checkout">
                     <input type="text" name="companyName" required onChange={handleChange} value={info.companyName} />
                     <label htmlFor="companyName" className="rounded">
-                        Company Name
+                        {t("billing_address.company_name")}
                     </label>
                 </div>
 
                 <div className="input-container-checkout">
                     <input type="text" name="vat" required onChange={handleChange} value={info.vat} />
                     <label htmlFor="vat" className="rounded">
-                        Company VAT Number
+                        {t("billing_address.vat_number")}
                     </label>
                 </div>
 
                 <div className="input-container-checkout">
                     <input type="text" name="address" required onChange={handleChange} value={info.address} />
                     <label htmlFor="address" className="rounded">
-                        Address
+                        {t("billing_address.address")}
                     </label>
                 </div>
 
                 <div className="input-container-checkout">
                     <input type="text" name="street" required onChange={handleChange} value={info.street} />
                     <label htmlFor="street" className="rounded">
-                        Street Name
+                        {t("billing_address.street")}
                     </label>
                 </div>
 
                 <div className="input-container-checkout">
                     <input type="text" name="building" required onChange={handleChange} value={info.building} />
                     <label htmlFor="building" className="rounded">
-                        Building No.
+                        {t("billing_address.building")}
                     </label>
                 </div>
 
                 <div className="input-container-checkout">
                     <input type="text" name="postcode" required onChange={handleChange} value={info.postcode} />
                     <label htmlFor="postcode" className="rounded">
-                        Postcode / ZIP
+                        {t("billing_address.postcode")}
                     </label>
                 </div>
 
@@ -67,19 +73,21 @@ const CompanyForm = ({ info, setInfo }) => {
 
                 <div className="input-container-checkout">
                     <div className="billing-select">
-                        <label htmlFor="idType">ID Type</label>
+                        <label htmlFor="idType">{t("billing_address.id_type")}</label>
                         <select name="idType" value={info.idType} onChange={handleChange} required>
-                            <option value="">Select an ID Type</option>
-                            <option>700 Number</option>
-                            <option>Commercial registration number</option>
-                            <option>GCC ID</option>
-                            <option>Iqama Number</option>
-                            <option>MHRSD license</option>
-                            <option>National ID</option>
-                            <option>Passpord ID</option>
-                            <option>MISA license</option>
-                            <option>Tax identification Number</option>
-                            <option>Other ID</option>
+                            <option value="" disabled>
+                                {t("billing_address.select_id_type")}
+                            </option>
+
+                            <option>{t("billing_address.700_number")}</option>
+                            <option>{t("billing_address.commercial_registration_number")}</option>
+                            <option>{t("billing_address.gcc_id")}</option>
+                            <option>{t("billing_address.iqama_number")}</option>
+                            <option>{t("billing_address.mhrsd_license")}</option>
+                            <option>{t("billing_address.national_id")}</option>
+                            <option>{t("billing_address.passport_id")}</option>
+                            <option>{t("billing_address.misa_license")}</option>
+                            <option>{t("billing_address.tax_identification_number")}</option>
                         </select>
                     </div>
                 </div>
@@ -87,20 +95,21 @@ const CompanyForm = ({ info, setInfo }) => {
                 <div className="input-container-checkout">
                     <input type="text" name="idNumber" required onChange={handleChange} value={info.idNumber} />
                     <label htmlFor="idNumber" className="rounded">
-                        ID Number
+                        {t("billing_address.id_number")}
                     </label>
                 </div>
 
                 <div className="input-container-checkout">
                     <div className="billing-select">
-                        <label htmlFor="Branch">Pick Up Branch</label>
+                        <label htmlFor="Branch">{t("billing_address.pick_up_branch")}</label>
                         <select name="Branch" value={info.Branch} onChange={handleChange} required>
-                            <option value="">Select a Branch</option>
-                            <option>Riyadh - Salmanya</option>
-                            <option>Riyadh - Malaz</option>
-                            <option>Riyadh - Salam</option>
-                            <option>Jaddeh</option>
-                            <option>Dammam</option>
+                            <option value="" disabled>
+                                {t("billing_address.pick_branch")}
+                            </option>
+                            {locations.map((location) => {
+                                const BranchName = location[`name-${lang}`] || location[`name-en`];
+                                return <option>{BranchName}</option>;
+                            })}
                         </select>
                     </div>
                 </div>
@@ -111,7 +120,7 @@ const CompanyForm = ({ info, setInfo }) => {
                             <div className="input-group-prepend">
                                 <div className="input-group-text py-2">+966</div>
                             </div>
-                            <input type="text" name="phone" className="form-control" placeholder="Phone Number" value={info.phone} onChange={handleChange} required />
+                            <input type="text" name="phone" className="form-control" placeholder={t("billing_address.phone_number")} value={info.phone} onChange={handleChange} required />
                         </div>
                     </div>
                 </div>
@@ -119,17 +128,17 @@ const CompanyForm = ({ info, setInfo }) => {
                 <div className="input-container-checkout">
                     <input type="email" name="email" id="email" required onChange={handleChange} value={info.email} />
                     <label htmlFor="email" className="rounded">
-                        Email Address
+                        {t("billing_address.email")}
                     </label>
                 </div>
             </div>
 
             <hr />
             <div className="additional-info-wrap">
-                <h4>Additional information</h4>
+                <h4>{t("checkout.additional_information")}</h4>
                 <div className="additional-info">
-                    <label>Order notes</label>
-                    <textarea placeholder="Notes about your order, e.g. special notes for delivery." name="message" defaultValue={""} />
+                    <label>{t("checkout.order_notes")}</label>
+                    <textarea placeholder={t("checkout.order_notes_placeholder")} name="message" defaultValue={""} />
                 </div>
             </div>
         </>

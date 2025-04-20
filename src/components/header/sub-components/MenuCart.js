@@ -1,11 +1,14 @@
 import { Fragment, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getDiscountPrice } from "../../../helpers/product";
 import { deleteFromCart } from "../../../store/slices/cart-slice";
 import ConfirmationPopup from "../../ConfirmationPopup";
+import { useTranslation } from "react-i18next";
 
 const MenuCart = () => {
+    const { t } = useTranslation();
+    const { lang } = useParams(); // Get 'en' or 'ar'
     const dispatch = useDispatch();
     const currency = useSelector((state) => state.currency);
     const { cartItems } = useSelector((state) => state.cart);
@@ -43,22 +46,26 @@ const MenuCart = () => {
                             return (
                                 <li className="single-shopping-cart" key={item.cartItemId}>
                                     <div className="shopping-cart-img">
-                                        <Link to={process.env.PUBLIC_URL + "/product/" + item.id}>
-                                            <img alt="" src={process.env.PUBLIC_URL + item.image[0]} className="img-fluid" />
+                                        <Link to={`/${lang}/product/${item.id}`}>
+                                            <img alt={item.name} src={process.env.PUBLIC_URL + item.image[0]} className="img-fluid" />
                                         </Link>
                                     </div>
                                     <div className="shopping-cart-title">
                                         <h4>
-                                            <Link to={process.env.PUBLIC_URL + "/product/" + item.id}> {item.name} </Link>
+                                            <Link to={`/${lang}/product/${item.id}`}> {item.name} </Link>
                                         </h4>
                                         {item.selectedProductSize ? (
                                             <div className="cart-item-variation mt-0 text-muted">
-                                                <span>Size: {item.selectedProductSize}</span>
+                                                <span>
+                                                    {t("size")}: {item.selectedProductSize}
+                                                </span>
                                             </div>
                                         ) : (
                                             ""
                                         )}
-                                        <h6>Qty: {item.quantity}</h6>
+                                        <h6>
+                                            {t("qty")}: {item.quantity}
+                                        </h6>
 
                                         <span>
                                             {" "}
@@ -85,7 +92,7 @@ const MenuCart = () => {
                     </ul>
                     <div className="shopping-cart-total">
                         <h4>
-                            Total :{" "}
+                            {t("total")}:{" "}
                             <span className="shop-total">
                                 {" "}
                                 <img
@@ -102,16 +109,16 @@ const MenuCart = () => {
                         </h4>
                     </div>
                     <div className="shopping-cart-btn btn-hover text-center">
-                        <Link className="default-btn" to={process.env.PUBLIC_URL + "/cart"}>
-                            view cart
+                        <Link className="default-btn" to={`/${lang}/cart`}>
+                            {t("view_cart")}
                         </Link>
-                        <Link className="default-btn" to={process.env.PUBLIC_URL + "/checkout"}>
-                            checkout
+                        <Link className="default-btn" to={`/${lang}/checkout`}>
+                            {t("checkout")}
                         </Link>
                     </div>
                 </Fragment>
             ) : (
-                <p className="text-center">No items added to cart</p>
+                <p className="text-center">{t("no_items_in_cart")}</p>
             )}
             {showPopup && <ConfirmationPopup message="Are you sure you want to remove this item ?" onConfirm={confirmDelete} onCancel={cancelDelete} />}
         </div>

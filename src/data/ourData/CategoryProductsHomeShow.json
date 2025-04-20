@@ -1,57 +1,69 @@
 [
     {
         "id": 101,
-        "sku": "1100701",
-        "name": "STP COMPRESSION COUPLING",
+        "Code": "701",
+        "name-en": "STP Compression Fittings",
+        "name-ar": "وصلة ضغط STP",
         "discount": 0,
+        "offerStart": "October 1, 2024 12:11:00",
         "offerEnd": "October 5, 2024 12:11:00",
         "new": false,
-        "rating": 4,
         "saleCount": 54,
-        "category": ["STP COMPRESSION FITTINGS"],
+        "category": ["STP Compression Fittings"],
+        "categoryCode": "1100",
         "tag": ["electronics", "smartwatch", "health", "notifications"],
         "variation": [
             {
-                "image": "/assets/img/pipe-compression.jpg",
                 "size": [
                     {
                         "name": "16MM",
                         "stock": 0,
                         "price": 15,
-                        "code": "11007010016"
+                        "code": "0016",
+                        "offerStart": "October 1, 2024 12:11:00",
+                        "offerEnd": "October 5, 2024 12:11:00",
+                        "discount": 5
                     },
                     {
                         "name": "20MM",
                         "stock": 0,
                         "price": 200,
-                        "code": "11007010016"
+                        "code": "0017",
+                        "offerStart": "October 1, 2024 12:11:00",
+                        "offerEnd": "October 5, 2024 12:11:00",
+                        "discount": 5
                     },
                     {
                         "name": "25MM",
                         "stock": 1,
                         "price": 10,
-                        "code": "11007010016"
+                        "code": "0018",
+                        "offerStart": "October 1, 2024 12:11:00",
+                        "offerEnd": "October 5, 2024 12:11:00",
+                        "discount": 20
                     },
                     {
                         "name": "16MM PP",
                         "stock": 0,
                         "price": 1000,
-                        "code": "11007010016"
+                        "code": "0019",
+                        "offerStart": "October 1, 2024 12:11:00",
+                        "offerEnd": "October 5, 2024 12:11:00",
+                        "discount": 5
                     },
                     {
                         "name": "16MM PP",
                         "stock": 0,
                         "price": 20,
-                        "code": "11007010016"
+                        "code": "0020",
+                        "offerStart": "October 1, 2024 12:11:00",
+                        "offerEnd": "October 5, 2024 12:11:00",
+                        "discount": 5
                     }
                 ]
             }
         ],
-        "image": [
-            "/assets/img/Coupling.jpg",
-            "/assets/img/Coupling 2.jpg",
-            "/assets/img/Coupling table.jpg"
-        ],
+        "image": ["/assets/img/Coupling.jpg", "/assets/img/Coupling 2.jpg", "/assets/img/Coupling table.jpg"],
         "shortDescription": "A stylish smartwatch with health tracking and notifications.",
         "fullDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
         "createdDate": "2024-12-1",
@@ -133,13 +145,15 @@
     {
         "id": 102,
         "sku": "1100702",
-        "name": "STP COMPRESSION REDUCING COUPLING",
+        "name-en": "STP COMPRESSION REDUCING COUPLING",
+        "name-ar": "وصلة تقليل الضغط STP",
         "discount": 5,
         "offerEnd": "October 15, 2024 18:00:00",
         "new": true,
         "rating": 4.5,
         "saleCount": 100,
-        "category": ["STP COMPRESSION FITTINGS"],
+        "category": ["STP Compression Fittings"],
+        "categoryCode": "1100",
         "tag": ["electronics", "audio", "earbuds", "noise-canceling"],
         "variation": [
             {
@@ -160,10 +174,7 @@
                 ]
             }
         ],
-        "image": [
-            "/assets/img/Poly_Mechanical_Compression.jpg",
-            "/assets/img/Poly_Mechanical_Compression.jpg"
-        ],
+        "image": ["/assets/img/Poly_Mechanical_Compression.jpg", "/assets/img/Poly_Mechanical_Compression.jpg"],
         "shortDescription": "Noise-canceling earbuds with superior sound quality.",
         "fullDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi.",
         "createdDate": "2024-12-15"
@@ -178,7 +189,7 @@
         "new": true,
         "rating": 4.2,
         "saleCount": 150,
-        "category": ["STP COMPRESSION FITTINGS"],
+        "category": ["STP Compression Fittings"],
         "tag": ["electronics", "portable charger", "power bank"],
         "variation": [
             {
@@ -193,10 +204,7 @@
                 ]
             }
         ],
-        "image": [
-            "/assets/img/premiumplast-compression.jpg",
-            "/assets/img/premiumplast-compression.jpg"
-        ],
+        "image": ["/assets/img/premiumplast-compression.jpg", "/assets/img/premiumplast-compression.jpg"],
         "shortDescription": "Compact power bank with fast charging capabilities.",
         "fullDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.",
         "createdDate": "2024-12-16"
@@ -211,7 +219,7 @@
         "new": false,
         "rating": 4.7,
         "saleCount": 300,
-        "category": ["HYDROFIT COPMRESSION FITTINGS"],
+        "category": ["Hydrofit Compression Fittings"],
         "tag": ["electronics", "speaker", "bass", "waterproof"],
         "variation": [
             {
@@ -338,7 +346,7 @@
         "new": true,
         "rating": 4.3,
         "saleCount": 75,
-        "category": ["HYDROFIT COPMRESSION FITTINGS"],
+        "category": ["Hydrofit Compression Fittings"],
         "tag": ["electronics", "camera", "4K", "action camera"],
         "variation": [
             {
@@ -360,10 +368,7 @@
                 ]
             }
         ],
-        "image": [
-            "/assets/img/COMPRSSION RING.jpg",
-            "/assets/img/COMPRSSION RING.jpg"
-        ],
+        "image": ["/assets/img/COMPRSSION RING.jpg", "/assets/img/COMPRSSION RING.jpg"],
         "shortDescription": "Capture adventures in stunning 4K resolution.",
         "fullDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus faucibus quam ac risus gravida fermentum."
     },
@@ -377,7 +382,7 @@
         "new": true,
         "rating": 5,
         "saleCount": 30,
-        "category": ["HYDROFIT COPMRESSION FITTINGS"],
+        "category": ["Hydrofit Compression Fittings"],
         "tag": ["electronics", "vr headset", "virtual reality"],
         "variation": [
             {
@@ -406,7 +411,7 @@
         "new": true,
         "rating": 4.6,
         "saleCount": 250,
-        "category": ["BRASS COMPRESSION FITTINGS"],
+        "category": ["Brass Compression Fittings"],
         "tag": ["home appliances", "air purifier", "clean air"],
         "variation": [
             {
@@ -434,10 +439,7 @@
                 ]
             }
         ],
-        "image": [
-            "/assets/img/COMPRESSION COUPLING.jpg",
-            "/assets/img/COMPRESSION COUPLING.jpg"
-        ],
+        "image": ["/assets/img/COMPRESSION COUPLING.jpg", "/assets/img/COMPRESSION COUPLING.jpg"],
         "shortDescription": "Advanced filtration system for cleaner air.",
         "fullDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras gravida fermentum massa sit amet cursus."
     },
@@ -451,7 +453,7 @@
         "new": true,
         "rating": 4.5,
         "saleCount": 25,
-        "category": ["BRASS COMPRESSION FITTINGS"],
+        "category": ["Brass Compression Fittings"],
         "tag": ["coffee", "smart", "appliances", "kitchen"],
         "variation": [
             {
@@ -472,10 +474,7 @@
                 ]
             }
         ],
-        "image": [
-            "/assets/img/BRASS COMPRESSION MALE ADAPTER.jpg",
-            "/assets/img/BRASS COMPRESSION MALE ADAPTER.jpg"
-        ],
+        "image": ["/assets/img/BRASS COMPRESSION MALE ADAPTER.jpg", "/assets/img/BRASS COMPRESSION MALE ADAPTER.jpg"],
         "shortDescription": "Brews coffee with app control and scheduling.",
         "fullDescription": "This coffee maker allows you to brew coffee remotely through an app and set up schedules for brewing times. Perfect for busy mornings or coffee lovers who want convenience at their fingertips."
     },
@@ -489,7 +488,7 @@
         "new": false,
         "rating": 4.7,
         "saleCount": 150,
-        "category": ["BRASS COMPRESSION FITTINGS"],
+        "category": ["Brass Compression Fittings"],
         "tag": ["vacuum", "cordless", "suction", "cleaning"],
         "variation": [
             {
@@ -511,10 +510,7 @@
                 ]
             }
         ],
-        "image": [
-            "/assets/img/BRAS COMPRESSION FEMALE ADAPTER.jpg",
-            "/assets/img/BRAS COMPRESSION FEMALE ADAPTER.jpg"
-        ],
+        "image": ["/assets/img/BRAS COMPRESSION FEMALE ADAPTER.jpg", "/assets/img/BRAS COMPRESSION FEMALE ADAPTER.jpg"],
         "shortDescription": "Lightweight vacuum with powerful suction.",
         "fullDescription": "This powerful cordless vacuum cleaner is designed for effortless cleaning with strong suction, long battery life, and a lightweight build perfect for daily use."
     },
@@ -528,7 +524,7 @@
         "new": true,
         "rating": 4.2,
         "saleCount": 75,
-        "category": ["BRASS COMPRESSION FITTINGS"],
+        "category": ["Brass Compression Fittings"],
         "tag": ["kettle", "electric", "kitchen", "temperature"],
         "variation": [
             {
@@ -550,10 +546,7 @@
                 ]
             }
         ],
-        "image": [
-            "/assets/img/BRASS COMPRESSION EQUAL ELBOW.jpg",
-            "/assets/img/BRASS COMPRESSION EQUAL ELBOW.jpg"
-        ],
+        "image": ["/assets/img/BRASS COMPRESSION EQUAL ELBOW.jpg", "/assets/img/BRASS COMPRESSION EQUAL ELBOW.jpg"],
         "shortDescription": "Quick heating kettle with temperature settings.",
         "fullDescription": "This electric kettle offers fast boiling with adjustable temperature settings, perfect for your tea, coffee, or other beverages."
     },
@@ -567,7 +560,7 @@
         "new": true,
         "rating": 4.8,
         "saleCount": 200,
-        "category": ["BRASS COMPRESSION FITTINGS"],
+        "category": ["Brass Compression Fittings"],
         "tag": ["vacuum", "robot", "smart", "cleaning"],
         "variation": [
             {
@@ -576,467 +569,8 @@
                 "size": [{ "name": "One size", "stock": 40 }]
             }
         ],
-        "image": [
-            "/assets/img/BRASS COMPRESSION male ELBOW.jpg",
-            "/assets/img/BRASS COMPRESSION male ELBOW.jpg"
-        ],
+        "image": ["/assets/img/BRASS COMPRESSION male ELBOW.jpg", "/assets/img/BRASS COMPRESSION male ELBOW.jpg"],
         "shortDescription": "Automatic vacuum cleaner with mapping feature.",
         "fullDescription": "This smart robot vacuum uses advanced mapping and sensor technology to automatically clean your floors with minimal intervention, making it perfect for busy households."
-    },
-    {
-        "id": 101,
-        "sku": "1100701",
-        "name": "STP COMPRESSION COUPLING",
-        "discount": 0,
-        "offerEnd": "October 5, 2024 12:11:00",
-        "new": false,
-        "rating": 4,
-        "saleCount": 54,
-        "category": ["STP COMPRESSION FITTINGS"],
-        "tag": ["electronics", "smartwatch", "health", "notifications"],
-        "variation": [
-            {
-                "image": "/assets/img/pipe-compression.jpg",
-                "size": [
-                    {
-                        "name": "16MM",
-                        "stock": 0,
-                        "price": 15,
-                        "code": "11007010016"
-                    },
-                    {
-                        "name": "20MM",
-                        "stock": 0,
-                        "price": 200,
-                        "code": "11007010016"
-                    },
-                    {
-                        "name": "25MM",
-                        "stock": 0,
-                        "price": 10,
-                        "code": "11007010016"
-                    },
-                    {
-                        "name": "16MM PP",
-                        "stock": 0,
-                        "price": 1000,
-                        "code": "11007010016"
-                    },
-                    {
-                        "name": "16MM PP",
-                        "stock": 0,
-                        "price": 20,
-                        "code": "11007010016"
-                    }
-                ]
-            }
-        ],
-        "image": [
-            "/assets/img/pipe-compression.jpg",
-            "/assets/img/Poly_Mechanical_Compression.jpg",
-            "/assets/img/pipe-compression.jpg"
-        ],
-        "shortDescription": "A stylish smartwatch with health tracking and notifications.",
-        "fullDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-        "createdDate": "2024-12-1"
-    },
-    {
-        "id": 101,
-        "sku": "1100701",
-        "name": "STP COMPRESSION COUPLING",
-        "discount": 0,
-        "offerEnd": "October 5, 2024 12:11:00",
-        "new": false,
-        "rating": 4,
-        "saleCount": 54,
-        "category": ["STP COMPRESSION FITTINGS"],
-        "tag": ["electronics", "smartwatch", "health", "notifications"],
-        "variation": [
-            {
-                "image": "/assets/img/pipe-compression.jpg",
-                "size": [
-                    {
-                        "name": "16MM",
-                        "stock": 0,
-                        "price": 15,
-                        "code": "11007010016"
-                    },
-                    {
-                        "name": "20MM",
-                        "stock": 0,
-                        "price": 200,
-                        "code": "11007010016"
-                    },
-                    {
-                        "name": "25MM",
-                        "stock": 0,
-                        "price": 10,
-                        "code": "11007010016"
-                    },
-                    {
-                        "name": "16MM PP",
-                        "stock": 0,
-                        "price": 1000,
-                        "code": "11007010016"
-                    },
-                    {
-                        "name": "16MM PP",
-                        "stock": 0,
-                        "price": 20,
-                        "code": "11007010016"
-                    }
-                ]
-            }
-        ],
-        "image": [
-            "/assets/img/pipe-compression.jpg",
-            "/assets/img/Poly_Mechanical_Compression.jpg",
-            "/assets/img/pipe-compression.jpg"
-        ],
-        "shortDescription": "A stylish smartwatch with health tracking and notifications.",
-        "fullDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-        "createdDate": "2024-12-1"
-    },
-    {
-        "id": 101,
-        "sku": "1100701",
-        "name": "STP COMPRESSION COUPLING",
-        "discount": 0,
-        "offerEnd": "October 5, 2024 12:11:00",
-        "new": false,
-        "rating": 4,
-        "saleCount": 54,
-        "category": ["STP COMPRESSION FITTINGS"],
-        "tag": ["electronics", "smartwatch", "health", "notifications"],
-        "variation": [
-            {
-                "image": "/assets/img/pipe-compression.jpg",
-                "size": [
-                    {
-                        "name": "16MM",
-                        "stock": 0,
-                        "price": 15,
-                        "code": "11007010016"
-                    },
-                    {
-                        "name": "20MM",
-                        "stock": 0,
-                        "price": 200,
-                        "code": "11007010016"
-                    },
-                    {
-                        "name": "25MM",
-                        "stock": 0,
-                        "price": 10,
-                        "code": "11007010016"
-                    },
-                    {
-                        "name": "16MM PP",
-                        "stock": 0,
-                        "price": 1000,
-                        "code": "11007010016"
-                    },
-                    {
-                        "name": "16MM PP",
-                        "stock": 0,
-                        "price": 20,
-                        "code": "11007010016"
-                    }
-                ]
-            }
-        ],
-        "image": [
-            "/assets/img/pipe-compression.jpg",
-            "/assets/img/Poly_Mechanical_Compression.jpg",
-            "/assets/img/pipe-compression.jpg"
-        ],
-        "shortDescription": "A stylish smartwatch with health tracking and notifications.",
-        "fullDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-        "createdDate": "2024-12-1"
-    },
-    {
-        "id": 101,
-        "sku": "1100701",
-        "name": "STP COMPRESSION COUPLING",
-        "discount": 0,
-        "offerEnd": "October 5, 2024 12:11:00",
-        "new": false,
-        "rating": 4,
-        "saleCount": 54,
-        "category": ["STP COMPRESSION FITTINGS"],
-        "tag": ["electronics", "smartwatch", "health", "notifications"],
-        "variation": [
-            {
-                "image": "/assets/img/pipe-compression.jpg",
-                "size": [
-                    {
-                        "name": "16MM",
-                        "stock": 0,
-                        "price": 15,
-                        "code": "11007010016"
-                    },
-                    {
-                        "name": "20MM",
-                        "stock": 0,
-                        "price": 200,
-                        "code": "11007010016"
-                    },
-                    {
-                        "name": "25MM",
-                        "stock": 0,
-                        "price": 10,
-                        "code": "11007010016"
-                    },
-                    {
-                        "name": "16MM PP",
-                        "stock": 0,
-                        "price": 1000,
-                        "code": "11007010016"
-                    },
-                    {
-                        "name": "16MM PP",
-                        "stock": 0,
-                        "price": 20,
-                        "code": "11007010016"
-                    }
-                ]
-            }
-        ],
-        "image": [
-            "/assets/img/pipe-compression.jpg",
-            "/assets/img/Poly_Mechanical_Compression.jpg",
-            "/assets/img/pipe-compression.jpg"
-        ],
-        "shortDescription": "A stylish smartwatch with health tracking and notifications.",
-        "fullDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-        "createdDate": "2024-12-1"
-    },
-    {
-        "id": 101,
-        "sku": "1100701",
-        "name": "STP COMPRESSION COUPLING",
-        "discount": 0,
-        "offerEnd": "October 5, 2024 12:11:00",
-        "new": false,
-        "rating": 4,
-        "saleCount": 54,
-        "category": ["STP COMPRESSION FITTINGS"],
-        "tag": ["electronics", "smartwatch", "health", "notifications"],
-        "variation": [
-            {
-                "image": "/assets/img/pipe-compression.jpg",
-                "size": [
-                    {
-                        "name": "16MM",
-                        "stock": 0,
-                        "price": 15,
-                        "code": "11007010016"
-                    },
-                    {
-                        "name": "20MM",
-                        "stock": 0,
-                        "price": 200,
-                        "code": "11007010016"
-                    },
-                    {
-                        "name": "25MM",
-                        "stock": 0,
-                        "price": 10,
-                        "code": "11007010016"
-                    },
-                    {
-                        "name": "16MM PP",
-                        "stock": 0,
-                        "price": 1000,
-                        "code": "11007010016"
-                    },
-                    {
-                        "name": "16MM PP",
-                        "stock": 0,
-                        "price": 20,
-                        "code": "11007010016"
-                    }
-                ]
-            }
-        ],
-        "image": [
-            "/assets/img/pipe-compression.jpg",
-            "/assets/img/Poly_Mechanical_Compression.jpg",
-            "/assets/img/pipe-compression.jpg"
-        ],
-        "shortDescription": "A stylish smartwatch with health tracking and notifications.",
-        "fullDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-        "createdDate": "2024-12-1"
-    },
-    {
-        "id": 101,
-        "sku": "1100701",
-        "name": "STP COMPRESSION COUPLING",
-        "discount": 0,
-        "offerEnd": "October 5, 2024 12:11:00",
-        "new": false,
-        "rating": 4,
-        "saleCount": 54,
-        "category": ["STP COMPRESSION FITTINGS"],
-        "tag": ["electronics", "smartwatch", "health", "notifications"],
-        "variation": [
-            {
-                "image": "/assets/img/pipe-compression.jpg",
-                "size": [
-                    {
-                        "name": "16MM",
-                        "stock": 0,
-                        "price": 15,
-                        "code": "11007010016"
-                    },
-                    {
-                        "name": "20MM",
-                        "stock": 0,
-                        "price": 200,
-                        "code": "11007010016"
-                    },
-                    {
-                        "name": "25MM",
-                        "stock": 0,
-                        "price": 10,
-                        "code": "11007010016"
-                    },
-                    {
-                        "name": "16MM PP",
-                        "stock": 0,
-                        "price": 1000,
-                        "code": "11007010016"
-                    },
-                    {
-                        "name": "16MM PP",
-                        "stock": 0,
-                        "price": 20,
-                        "code": "11007010016"
-                    }
-                ]
-            }
-        ],
-        "image": [
-            "/assets/img/pipe-compression.jpg",
-            "/assets/img/Poly_Mechanical_Compression.jpg",
-            "/assets/img/pipe-compression.jpg"
-        ],
-        "shortDescription": "A stylish smartwatch with health tracking and notifications.",
-        "fullDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-        "createdDate": "2024-12-1"
-    },
-    {
-        "id": 101,
-        "sku": "1100701",
-        "name": "STP COMPRESSION COUPLING",
-        "discount": 0,
-        "offerEnd": "October 5, 2024 12:11:00",
-        "new": false,
-        "rating": 4,
-        "saleCount": 54,
-        "category": ["STP COMPRESSION FITTINGS"],
-        "tag": ["electronics", "smartwatch", "health", "notifications"],
-        "variation": [
-            {
-                "image": "/assets/img/pipe-compression.jpg",
-                "size": [
-                    {
-                        "name": "16MM",
-                        "stock": 0,
-                        "price": 15,
-                        "code": "11007010016"
-                    },
-                    {
-                        "name": "20MM",
-                        "stock": 0,
-                        "price": 200,
-                        "code": "11007010016"
-                    },
-                    {
-                        "name": "25MM",
-                        "stock": 0,
-                        "price": 10,
-                        "code": "11007010016"
-                    },
-                    {
-                        "name": "16MM PP",
-                        "stock": 0,
-                        "price": 1000,
-                        "code": "11007010016"
-                    },
-                    {
-                        "name": "16MM PP",
-                        "stock": 0,
-                        "price": 20,
-                        "code": "11007010016"
-                    }
-                ]
-            }
-        ],
-        "image": [
-            "/assets/img/pipe-compression.jpg",
-            "/assets/img/Poly_Mechanical_Compression.jpg",
-            "/assets/img/pipe-compression.jpg"
-        ],
-        "shortDescription": "A stylish smartwatch with health tracking and notifications.",
-        "fullDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-        "createdDate": "2024-12-1"
-    },
-    {
-        "id": 101,
-        "sku": "1100701",
-        "name": "STP COMPRESSION COUPLING",
-        "discount": 0,
-        "offerEnd": "October 5, 2024 12:11:00",
-        "new": false,
-        "rating": 4,
-        "saleCount": 54,
-        "category": ["STP COMPRESSION FITTINGS"],
-        "tag": ["electronics", "smartwatch", "health", "notifications"],
-        "variation": [
-            {
-                "image": "/assets/img/pipe-compression.jpg",
-                "size": [
-                    {
-                        "name": "16MM",
-                        "stock": 0,
-                        "price": 15,
-                        "code": "11007010016"
-                    },
-                    {
-                        "name": "20MM",
-                        "stock": 0,
-                        "price": 200,
-                        "code": "11007010016"
-                    },
-                    {
-                        "name": "25MM",
-                        "stock": 0,
-                        "price": 10,
-                        "code": "11007010016"
-                    },
-                    {
-                        "name": "16MM PP",
-                        "stock": 0,
-                        "price": 1000,
-                        "code": "11007010016"
-                    },
-                    {
-                        "name": "16MM PP",
-                        "stock": 0,
-                        "price": 20,
-                        "code": "11007010016"
-                    }
-                ]
-            }
-        ],
-        "image": [
-            "/assets/img/pipe-compression.jpg",
-            "/assets/img/Poly_Mechanical_Compression.jpg",
-            "/assets/img/pipe-compression.jpg"
-        ],
-        "shortDescription": "A stylish smartwatch with health tracking and notifications.",
-        "fullDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-        "createdDate": "2024-12-1"
     }
 ]
